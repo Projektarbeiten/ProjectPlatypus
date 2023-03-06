@@ -2,7 +2,7 @@
 
 	create table if not exists Passwort(
 		pw_id 		int AUTO_INCREMENT
-		,pw_id		VARCHAR(2000)
+		,pw		VARCHAR(2000)
 		,last_login date
 		,PRIMARY KEY(pw_id)
 	);
@@ -20,10 +20,6 @@
 		z_id 		int AUTO_INCREMENT
 		,u_id_ref 	int not null
 		,zi_id_ref 	int not null
-		,FOREIGN KEY(u_id_ref)
-			REFERENCES User (u_id)
-		,FOREIGN KEY(zi_id_ref)
-			REFERENCES zahlungsinformationen (zi_id)
 		,PRIMARY KEY(z_id)
 	);
 
@@ -43,12 +39,26 @@
 		,hausnr			VARCHAR(10)
 		,adresszusatz	VARCHAR(100)
 		,z_id_ref		int not null
-		,FOREIGN KEY(pw_id_ref)
-			REFERENCES passwort (pw_id)
-		,FOREIGN KEY(z_id_ref)
-			REFERENCES zahlungsmethodexuser (z_id)
 		,PRIMARY KEY(u_id)
 	);
+
+	--- Foreign Keys
+		-- Foreing Keys for zahlungsmethodexuser
+			alter table zahlungsmethodexuser
+			add FOREIGN KEY(u_id_ref) REFERENCES User (u_id);
+
+			alter table zahlungsmethodexuser
+			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen (zi_id);
+		--
+
+		-- Foreign Keys for User
+			alter table User
+			add FOREIGN KEY(pw_id_ref) REFERENCES passwort (pw_id);
+
+			alter table User
+			add FOREIGN KEY(z_id_ref) REFERENCES zahlungsmethodexuser (z_id);
+		--
+	---
 ----
 
 --- Produkte - Bilder ---
@@ -57,8 +67,6 @@
 		p_k_id 			int AUTO_INCREMENT
 		,bezeichnung	VARCHAR(100)
 		,p_k_b_id		int DEFAULT 1	-- Info: Sinn: Wenn kein Bild hinterlegt ist, dann soll ein Placeholder genutzt werden
-		,FOREIGN KEY(p_k_b_id)
-			REFERENCES Produkt_Kategorie_Bild(p_k_b_id)
 		,PRIMARY KEY(p_k_id)
 	);
 
@@ -93,14 +101,25 @@
 		,akt_preis		decimal(8,2)
 		,oem_id_ref		int
 		,p_k_id_ref		int
-		,FOREIGN KEY(p_k_id_ref)
-			REFERENCES Produkt_Kategorie(p_k_id)
-		,FOREIGN KEY(oem_id_ref)
-			REFERENCES Hersteller(oem_id)
-		,FOREIGN KEY(p_b_id_ref)
-			REFERENCES Produktbild(p_b_id)
 		,PRIMARY KEY(p_id)
 	);
+	--- Foreign Keys
+		-- Foreign Keys for Produkt_Kategorie
+			alter table Produkt_Kategorie
+			add FOREIGN KEY(p_k_b_id) REFERENCES Produkt_Kategorie_Bild(p_k_b_id);
+		--
+
+		-- Foreign Keys for Produkt
+			alter table Produkt
+			add FOREIGN KEY(p_k_id_ref) REFERENCES Produkt_Kategorie(p_k_id);
+
+			alter table Produkt
+			add FOREIGN KEY(oem_id_ref) REFERENCES Hersteller(oem_id);
+
+			alter table Produkt
+			add FOREIGN KEY(p_b_id_ref) REFERENCES Produktbild(p_b_id);
+		--
+	---
 ----
 
 --- Bestellung ---
@@ -109,12 +128,10 @@
 		b_h_id			int AUTO_INCREMENT
 		,u_id_ref		int not null
 		,b_id_ref		int not null
-		,FOREIGN KEY(u_id_ref)
-			REFERENCES User(u_id)
-		,FOREIGN KEY(b_id_ref)
-			REFERENCES Bestellung(b_id)
 		,PRIMARY KEY(b_h_id)
 	);
+
+
 
 	create table if not exists Bestellposition(
 		b_p_id			int AUTO_INCREMENT
@@ -122,26 +139,46 @@
 		,p_id_ref		int not null
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
 		,menge			int
-		,FOREIGN KEY(b_id_ref)
-			REFERENCES Bestellung(b_id)
-		,FOREIGN KEY(p_id_ref)
-			REFERENCES Produkt(p_id)
 		,PRIMARY KEY(b_p_id)
 	);
+
 
 	create table if not exists Bestellung(
 		b_id 						int AUTO_INCREMENT
 		,b_p_id_ref					int
 		,u_id_ref					int
-		,gesamtkosten				decimal(100,2)
+		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
 		,bestell_datum				date
 		,anzahl_bestellpositionen	int
-		,FOREIGN KEY(zi_id_ref)
-			REFERENCES Zahlungsinformationen(zi_id)
-		,FOREIGN KEY(b_p_id_ref)
-			REFERENCES Bestellposition(b_p_id)
-		,FOREIGN KEY(u_id_ref)
-			REFERENCES User(u_id)
 		,PRIMARY KEY(b_id)
 	);
+	--- Foreign Keys
+		-- Foreign Keys for Bestellung
+			alter table Bestellung
+			add FOREIGN KEY(zi_id_ref) REFERENCES Zahlungsinformationen(zi_id);
+
+			alter table Bestellung
+			add FOREIGN KEY(b_p_id_ref) REFERENCES Bestellposition(b_p_id);
+
+			alter table Bestellung
+			add FOREIGN KEY(u_id_ref) REFERENCES User(u_id);
+		--
+
+		-- Foreign Keys for Bestell_Historie
+			alter table Bestell_Historie
+			add FOREIGN KEY(u_id_ref) REFERENCES User(u_id);
+
+			alter table Bestell_Historie
+			add FOREIGN KEY(b_id_ref) REFERENCES Bestellung(b_id);
+		--
+
+		-- Foreign Keys for Bestellposition
+			alter table Bestellposition
+			add FOREIGN KEY(b_id_ref) REFERENCES Bestellung(b_id);
+
+			alter table Bestellposition
+			add FOREIGN KEY(p_id_ref) REFERENCES Produkt(p_id);
+		--
+	---
+---
