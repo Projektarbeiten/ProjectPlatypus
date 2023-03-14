@@ -7,9 +7,9 @@
 --theme-color-4: #ffcffc; /* Divs (e.g. Produkt und Kategorie auf Main Page) */
 --theme-color-5: #ffe6fc; /* Andere Divs */
 --theme-color-6: #fcf4f4; /* Hintergrundfarbe für Input Felder*/
---font-color: #0c0b0c; /* Schriftfarbe */
---font-color-2: #f0f0f0; /* Schriftfarbe (Header und Footer) */
---font-color-3: #003003; /* Schriftfarbe für große Überschriften (Komplementär)*/
+--font-color: #0c0b0c;    /* Schriftfarbe */
+--font-color-2: #f0f0f0;  /* Schriftfarbe (Header und Footer) */
+--font-color-3: #003003;  /* Schriftfarbe für große Überschriften (Komplementär)*/
 }
 
 html {
