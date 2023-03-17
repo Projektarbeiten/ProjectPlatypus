@@ -13,6 +13,7 @@
 		,land			VARCHAR(100)
 		,BIC			VARCHAR(100)
 		,bezeichnung	VARCHAR(100)
+		,iban			VARCHAR(100)
 		,PRIMARY KEY(zi_id)
 	);
 
