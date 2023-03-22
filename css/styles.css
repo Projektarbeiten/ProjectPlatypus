@@ -218,3 +218,7 @@ margin-top: 50px;
 	border-radius: 3px;
 }
 
+/* === PRODUKT-SEITE === */
+.eigenschaft-row {
+    border-bottom: 2px solid black
+}
