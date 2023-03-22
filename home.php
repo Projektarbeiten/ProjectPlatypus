@@ -110,11 +110,11 @@
 
         </div>
     </main>
-
+    <?php
+    require("footer.php");
+    ?>
     <!-- Footer wird von Markus Blumenstock geschrieben (PHP Import) -->
-    <footer>
-
-    </footer>
+    
 </body>
 
 </html>
