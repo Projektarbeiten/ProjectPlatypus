@@ -9,11 +9,11 @@ echo"
                     <a class='footer-links' href=''>Hilfe</a>
                 </div>
                 <div class='col-1'>
-                    <a href=''> <img src='img/testBild.png'></a>
+                    <a href=''> <img src='img/testBild.png'></a> <!-- Bild von unseren Sponsoren -->
                 </div>
                 <div class='col-3'>
-                    <a href='' style='margin-right: 50px;' ><img src='img/testBild.png'></a>
-                    <a href='' style='margin-right: 50px; float:right;'><img src='img/testBild.png'></a>
+                    <a href='' style='margin-right: 50px;' ><img src='img/testBild.png'></a> <!-- Bild von Zahlungsmethoden -->
+                    <a href='' style='margin-right: 50px; float:right;'><img src='img/testBild.png'></a> <!-- Bild von Trustpilot  -->
                     </div>
                     <div class='col-1-5'>
                         <div style='margin-top:50px ;'>
