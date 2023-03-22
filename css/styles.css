@@ -25,7 +25,7 @@ body {
 }
 
 p {
-    color: var(--font-color); 
+    color: var(--font-color);
 }
 
 button {
@@ -93,7 +93,6 @@ h1 {
     background-color: var(--theme-color-4);
     border: 2px solid black;
     border-radius: 5px;
- 
 }
 
 /* === GRID-SYSTEM === */
@@ -136,3 +135,54 @@ h1 {
 .col-6 {
     width: 100%
 }
+
+/* === Login Page === */
+
+.login-div{
+	text-align: center;
+	border: 2px solid var(--font-color-3);
+	border-radius: 5px;
+	max-width: 250px;
+	min-width: 200px;
+	margin: 0 auto;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+
+	background-color: var(--theme-color-4);
+}
+
+#login-page-link:link{
+	text-decoration: none;
+}
+
+
+#login-button{
+	margin: 10px auto 10px auto;
+	border: 1px solid var(--theme-color-2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+}
+
+#login-button:hover {
+	background-color: #dea2de;
+	transition: ease-in-out .2s;
+}
+
+#login-form{
+	margin: 0 auto;
+}
+
+#login-form > input{
+	max-width: 150px;
+	margin-top: 2%;
+	margin-bottom: 5%;
+	border: 2px solid grey;
+	border-radius: 3px;
+}
+
