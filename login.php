@@ -25,5 +25,12 @@
 				<button type="submit" id="login-button">Registrieren</button>
 		</form>
 	</div>
+	<!-- Footer -->
+	<div id="login-footer">
+	<?php
+    require("footer.php");
+    ?>
+	</div>
+    
 </body>
 </html>

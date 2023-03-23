@@ -10,16 +10,10 @@
 </head>
 
 <body>
-    <!-- Header wird von Kevin Junker implementiert (php import) -->
-    <header>
-        <nav>
-
-        </nav>
-        <img src="" alt="">
-        <nav>
-
-        </nav>
-    </header>
+    <!-- Header -->
+    <?php
+    require("header.php");
+    ?>
     <main id="kategorien-und-produkte">
         <div id="kategorien">
             <div class="container">
@@ -110,10 +104,11 @@
 
         </div>
     </main>
+
+    <!-- Footer -->
     <?php
     require("footer.php");
     ?>
-    <!-- Footer wird von Markus Blumenstock geschrieben (PHP Import) -->
     
 </body>
 
