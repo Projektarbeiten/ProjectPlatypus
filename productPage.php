@@ -42,6 +42,18 @@
                             <td>Eigenschaft 3</td>
                             <td>Wert 3</td>
                         </tr>
+                        <tr class="eigenschaft-row">
+                            <td>Eigenschaft 4</td>
+                            <td>Wert 4</td>
+                        </tr>
+                        <tr class="eigenschaft-row">
+                            <td>Eigenschaft 5</td>
+                            <td>Wert 5</td>
+                        </tr>
+                        <tr class="eigenschaft-row">
+                            <td>Eigenschaft 6</td>
+                            <td>Wert 6</td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col-1-5" style="float:right">
@@ -49,8 +61,8 @@
                         <div id="preis-section">
                             <p>Preiskarte</p>
                             <!-- Preis wird dynamisch hinzugefügt -->
-                            <p>UVP: <strong>20.99€</strong></p>
-                            <p>Unser Preis: <strong>14.99€</strong></p>
+                            <p>Alter Preis: <strong>20.99€</strong></p>
+                            <p>Aktueller Preis: <strong>14.99€</strong></p>
                         </div>
                         <div class="trennlinie"></div>
                         <form action="" method="post" id="bestell-form">
@@ -60,7 +72,7 @@
                                 <p>Ihre Lieferadresse: 74523 Schwäbisch Hall</p>
                             </a>
                             <a href="">
-                                <p>Es sind noch 4 Stück übrig</p>
+                                <p>Es sind noch 4 Stück auf Lager</p>
                             </a>
                             <label for="mengenauswahl">Menge:</label>
                             <select style="width:50px" name="mengenauswahl" id="mengenauswahl">
