@@ -39,6 +39,14 @@ h1 {
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+}
+
+.trennlinie {
+    border-bottom: 2px solid black
+}
+
 
 /* === Mainpage === */
 #kategorien > .container > .row {
@@ -97,6 +105,7 @@ h1 {
 /* === Footer ===*/
 #footer-default
 {
+    margin-top: 150px;
     background-color: var(--theme-color-2);
     color: var(--font-color-2);
 }
@@ -106,7 +115,6 @@ h1 {
 #footer-default a 
 {
     color:var(--font-color-2);
-    text-decoration: none;
 }
 
 .footer-links{
@@ -219,3 +227,56 @@ margin-top: 50px;
 	border-radius: 3px;
 }
 
+/* === PRODUKT-SEITE === */
+#eigenschafts-tabelle {
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+#eigenschafts-tabelle tr {
+    border-bottom: 2px solid black;
+}
+
+#eigenschafts-tabelle td {
+padding-top: 1.5rem;
+}
+
+#produkt-bild {
+    width: 70%;
+    height: auto;
+    float: right;
+    margin-right: 10%;
+}
+
+#preis-section {
+    padding: 10px
+}
+#preis-section p {
+    font-size: 1.3rem;
+}
+
+#bestell-section {
+    border: 2px solid black;
+}
+#bestell-form p, #bestell-form label {
+    width: 60%;
+    padding-left: 10%;
+    margin-bottom: 50px;
+    margin-top: 10px
+}
+
+#cart-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top:50px;
+    border-radius: 5px;
+    width: 45%;
+    height: 30px;
+    background-color: yellow;
+    color: var(--font-color);
+    border: 2px solid gainsboro
+}
