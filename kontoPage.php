@@ -10,17 +10,11 @@
 </head>
 
 <body>
-    <!-- Header wird von Kevin Junker implementiert (php import) -->
-    <header>
-        <nav>
-
-        </nav>
-        <img src="" alt="">
-        <nav>
-
-        </nav>
-    </header>
-
+    <!-- Header -->
+    <?php
+    require("header.php");
+    ?>
+    
     <!-- Dein Konto Box -->
     <div class="box1">
         <h1>Dein Konto</h1>
@@ -149,10 +143,10 @@
         <p>IBAN</p>
     </div>
 
-<!-- Footer wird von Markus Blumenstock geschrieben (PHP Import) -->
-<footer>
-
-</footer>
+    <!-- Footer -->
+    <?php
+    require("footer.php");
+    ?>
 </body>
 
 </html>

@@ -126,6 +126,12 @@ a {
 margin-top: 50px;
 }
 
+#login-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
 
 /* === GRID-SYSTEM === */
 
@@ -310,6 +316,7 @@ padding-top: 1.5rem;
 	align-items: center;
 	height: 50px;
 	background-color: #F3D5F3;
+    margin-bottom: 100px
 }
 
 .search-box {
