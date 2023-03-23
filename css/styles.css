@@ -1,0 +1,440 @@
+/* === Generelle Einstellungen === */
+
+:root {
+--theme-color-1: #fbeefb; /* Hintergrund */
+--theme-color-2: #525252; /* Nav1 und Footer Hintergrund */
+--theme-color-3: #f3d5f3; /* Nav2 und Überschriften */
+--theme-color-4: #ffcffc; /* Divs (e.g. Produkt und Kategorie auf Main Page) */
+--theme-color-5: #ffe6fc; /* Andere Divs */
+--theme-color-6: #fcf4f4; /* Hintergrundfarbe für Input Felder*/
+--font-color: #0c0b0c;    /* Schriftfarbe */
+--font-color-2: #f0f0f0;  /* Schriftfarbe (Header und Footer) */
+--font-color-3: #003003;  /* Schriftfarbe für große Überschriften (Komplementär)*/
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Schriftart muss abgesprochen werden */
+    margin: 0 !important;
+    overflow-x: hidden;
+    background-color: var(--theme-color-1);
+    box-sizing: border-box;
+}
+
+p {
+    color: var(--font-color);
+}
+
+button {
+    background-color: #ffb8ff;
+    color: var(--font-color-2);
+    border-radius: 10px;
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.trennlinie {
+    border-bottom: 2px solid black
+}
+
+/* === Mainpage === */
+#kategorien > .container > .row {
+    margin-left: auto;
+    margin-right: auto;
+}
+.row > .kategorie {
+    width: 25%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 40px;
+    background-color: var(--theme-color-4);
+    border: 2px solid black;
+    border-radius: 35px;
+}
+
+#kategorien-und-produkte img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+#kategorien-und-produkte p {
+    text-align: center;
+}
+
+#kategorien-und-produkte h2 {
+    text-align: center;
+}
+
+#bestseller-headline {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: var(--theme-color-3);
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: 2.7rem;
+}
+
+.row > .produkt {
+    border: 2px solid black;
+    width: 25%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 40px;
+    background-color: var(--theme-color-4);
+    border: 2px solid black;
+    border-radius: 5px;
+}
+/* === Footer ===*/
+#footer-default
+{
+    margin-top: 150px;
+    background-color: var(--theme-color-2);
+    color: var(--font-color-2);
+}
+#footer-default img {
+    margin-top:52px;
+}
+#footer-default a 
+{
+    color:var(--font-color-2);
+}
+
+.footer-links{
+    margin-top: 25px;
+    display: block;
+}
+
+#contact
+{
+margin-top: 50px;
+}
+
+#login-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* === GRID-SYSTEM === */
+
+.container {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+.col-0-5
+{
+    width: 8.333%;
+}
+
+.col-1 {
+    width: 16.666%
+}
+
+.col-1-5{
+    width: 25%;
+}
+
+.col-2 {
+    width: 33.333%
+}
+
+.col-3 {
+    width: 50%
+}
+
+.col-4 {
+    width: 66.666%
+}
+
+.col-6 {
+    width: 100%
+}
+
+/* === Login Page === */
+
+.login-div{
+	text-align: center;
+	border: 2px solid var(--font-color-3);
+	border-radius: 5px;
+	max-width: 250px;
+	min-width: 200px;
+	margin: 0 auto;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+
+	background-color: var(--theme-color-4);
+}
+
+#login-page-link:link{
+	text-decoration: none;
+}
+
+
+#login-button{
+	margin: 10px auto 10px auto;
+	border: 1px solid var(--theme-color-2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+}
+
+#login-button:hover {
+	background-color: #dea2de;
+	transition: ease-in-out .2s;
+}
+
+#login-form{
+	margin: 0 auto;
+}
+
+#login-form > input{
+	max-width: 150px;
+	margin-top: 2%;
+	margin-bottom: 5%;
+	border: 2px solid grey;
+	border-radius: 3px;
+}
+
+/* === PRODUKT-SEITE === */
+#eigenschafts-tabelle {
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+#eigenschafts-tabelle tr {
+    border-bottom: 2px solid black;
+}
+
+#eigenschafts-tabelle td {
+padding-top: 1.5rem;
+}
+
+#produkt-bild {
+    width: 70%;
+    height: auto;
+    float: right;
+    margin-right: 10%;
+}
+
+#preis-section {
+    padding: 10px
+}
+#preis-section p {
+    font-size: 1.3rem;
+}
+
+#bestell-section {
+    border: 2px solid black;
+}
+#bestell-form p, #bestell-form label {
+    width: 60%;
+    padding-left: 10%;
+    margin-bottom: 50px;
+    margin-top: 10px
+}
+
+#cart-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top:50px;
+    border-radius: 5px;
+    width: 45%;
+    height: 30px;
+    background-color: yellow;
+    color: var(--font-color);
+    border: 2px solid gainsboro
+}
+
+/* === Header === */
+.top-bar{
+	display: flex;
+	align-items: center;
+	height: 75px;
+	width: 100%;
+	background-color: #6e6e6e;
+}
+
+.header-icons {
+	margin-left: 1775px;
+	display: flex;
+	align-items: center;
+}
+
+.banner {
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bottom-bar {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	background-color: #F3D5F3;
+    margin-bottom: 100px
+}
+
+.search-box {
+	margin-left: 625px;
+}
+
+.password {
+	margin-bottom: 10px;
+	margin-left: 525px;
+}
+.search-box input[type="text"] {
+	padding: 5px;
+	border: none;
+	background-color: white;
+	border-radius: 5px;
+	width: 700px;
+}
+
+/* === Kontopage === */
+.box1 {
+	border: 2px solid black;
+	margin-bottom: 30px;
+	text-align: center;
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.button1 {
+	margin-bottom: 50px;
+	text-align: center;
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ffb8ff;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.boxlinks {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 20%;
+	margin-left: auto;
+	margin-right: 40px;
+}
+
+.boxrechts {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 20%;
+	margin-left: 40px;
+	margin-right: auto;
+}
+
+.boxfull {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 44.5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.boxgeb {
+	border: 2px solid black;
+	margin-bottom: 25px;
+	text-align: center;
+	width: 20%;
+	margin-left: 525px;
+}
+
+.boxstraße {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 45%;
+	margin-left: 525px;
+	margin-right: 40px;
+}
+
+.boxstrnr {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 17%;
+	margin-left: 40px;
+	margin-right: 525px;
+}
+
+.boxbic {
+	border: 2px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 20%;
+	margin-left: 525px;
+	margin-right: 40px;
+}
+
+.dropdown {
+	width: 387px;
+	height: 53px;
+	margin-left: 40px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.headline {
+	margin-bottom: 10px;
+	margin-left: 525px;
+}
+
+.password {
+	margin-bottom: 10px;
+	margin-left: 525px;
+}
