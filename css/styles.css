@@ -30,7 +30,7 @@ p {
 
 button {
     background-color: #ffb8ff;
-    color: var(var(--font-color-2));
+    color: var(--font-color-2);
     border-radius: 10px;
     display: block;
 }
@@ -39,6 +39,13 @@ h1 {
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+}
+
+.trennlinie {
+    border-bottom: 2px solid black
+}
 
 /* === Mainpage === */
 #kategorien > .container > .row {
@@ -93,8 +100,32 @@ h1 {
     background-color: var(--theme-color-4);
     border: 2px solid black;
     border-radius: 5px;
-
 }
+/* === Footer ===*/
+#footer-default
+{
+    margin-top: 150px;
+    background-color: var(--theme-color-2);
+    color: var(--font-color-2);
+}
+#footer-default img {
+    margin-top:52px;
+}
+#footer-default a 
+{
+    color:var(--font-color-2);
+}
+
+.footer-links{
+    margin-top: 25px;
+    display: block;
+}
+
+#contact
+{
+margin-top: 50px;
+}
+
 
 /* === GRID-SYSTEM === */
 
@@ -116,9 +147,17 @@ h1 {
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
 }
+.col-0-5
+{
+    width: 8.333%;
+}
 
 .col-1 {
     width: 16.666%
+}
+
+.col-1-5{
+    width: 25%;
 }
 
 .col-2 {
@@ -137,6 +176,157 @@ h1 {
     width: 100%
 }
 
+/* === Login Page === */
+
+.login-div{
+	text-align: center;
+	border: 2px solid var(--font-color-3);
+	border-radius: 5px;
+	max-width: 250px;
+	min-width: 200px;
+	margin: 0 auto;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+
+	background-color: var(--theme-color-4);
+}
+
+#login-page-link:link{
+	text-decoration: none;
+}
+
+
+#login-button{
+	margin: 10px auto 10px auto;
+	border: 1px solid var(--theme-color-2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+}
+
+#login-button:hover {
+	background-color: #dea2de;
+	transition: ease-in-out .2s;
+}
+
+#login-form{
+	margin: 0 auto;
+}
+
+#login-form > input{
+	max-width: 150px;
+	margin-top: 2%;
+	margin-bottom: 5%;
+	border: 2px solid grey;
+	border-radius: 3px;
+}
+
+/* === PRODUKT-SEITE === */
+#eigenschafts-tabelle {
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+#eigenschafts-tabelle tr {
+    border-bottom: 2px solid black;
+}
+
+#eigenschafts-tabelle td {
+padding-top: 1.5rem;
+}
+
+#produkt-bild {
+    width: 70%;
+    height: auto;
+    float: right;
+    margin-right: 10%;
+}
+
+#preis-section {
+    padding: 10px
+}
+#preis-section p {
+    font-size: 1.3rem;
+}
+
+#bestell-section {
+    border: 2px solid black;
+}
+#bestell-form p, #bestell-form label {
+    width: 60%;
+    padding-left: 10%;
+    margin-bottom: 50px;
+    margin-top: 10px
+}
+
+#cart-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top:50px;
+    border-radius: 5px;
+    width: 45%;
+    height: 30px;
+    background-color: yellow;
+    color: var(--font-color);
+    border: 2px solid gainsboro
+}
+
+/* === Header === */
+.top-bar{
+	display: flex;
+	align-items: center;
+	height: 75px;
+	width: 100%;
+	background-color: #6e6e6e;
+}
+
+.header-icons {
+	margin-left: 1775px;
+	display: flex;
+	align-items: center;
+}
+
+.banner {
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bottom-bar {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	background-color: #F3D5F3;
+}
+
+.search-box {
+	margin-left: 625px;
+}
+
+.password {
+	margin-bottom: 10px;
+	margin-left: 525px;
+}
+.search-box input[type="text"] {
+	padding: 5px;
+	border: none;
+	background-color: white;
+	border-radius: 5px;
+	width: 700px;
+}
 
 /* === Kontopage === */
 .box1 {
