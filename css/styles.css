@@ -33,6 +33,13 @@ button {
     color: var(--font-color-2);
     border-radius: 10px;
     display: block;
+	transition: ease-in-out .2s;
+
+}
+
+button:hover {
+	transition: ease-in-out .2s;
+	cursor:pointer;
 }
 
 h1 {
@@ -41,6 +48,12 @@ h1 {
 
 a {
     text-decoration: none;
+	transition: ease-in-out .2s;
+}
+
+a:hover {
+	transition: ease-in-out .2s;
+	color: var(--theme-color-4);
 }
 
 .trennlinie {
@@ -129,6 +142,10 @@ header .col-6 {
 #footer-default a 
 {
     color:var(--font-color-2);
+}
+
+#footer-default a:hover {
+	color: var(--theme-color-4);
 }
 
 .footer-links{
@@ -223,8 +240,8 @@ margin-top: 50px;
 	background-color: var(--theme-color-4);
 }
 
-#login-page-link:link{
-	text-decoration: none;
+#login-page-link:hover{
+	color: var(--font-color-1);
 }
 
 
@@ -240,7 +257,6 @@ margin-top: 50px;
 
 #login-button:hover {
 	background-color: #dea2de;
-	transition: ease-in-out .2s;
 }
 
 #login-form{
@@ -314,10 +330,7 @@ padding-top: 1.5rem;
 }
 
 #cart-button:hover {
-	transition: ease-in-out .2s;
-	cursor:pointer;
 	background-color: greenyellow;
-
 }
 
 /* === KONTO-PAGE === */
