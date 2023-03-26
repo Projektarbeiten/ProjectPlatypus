@@ -8,13 +8,33 @@
     <link rel="stylesheet" href="./css/styles.css">
     <title>Konto</title>
 </head>
+<?php
+    session_start();
 
+    require './phpFunctions/databaseConnection.php'
+    require './phpFunctions/sqlQueries.php'
+    $debug = true;
+
+    if(!isset($_SESSION['uid'])){
+        header("Location: http://www.google.de"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
+        exit;
+    }else{
+        $uid = $_SESSION['uid'];
+        $conn = DataConnection::buildConnection();
+        $result = getAccountInformation($conn,$uid);
+        if(!$result->rowCount() > 0){
+            echo (debug) ?:'No Rows found'
+             //weiterleitung an Login Page
+        }else{
+            $row = $result->fetch();
+        }
+    }
+?>
 <body>
     <!-- Header -->
     <?php
     require("header.php");
     ?>
-    
     <!-- Dein Konto Box -->
     <div class="box1">
         <h1>Dein Konto</h1>
@@ -33,31 +53,43 @@
     <!-- Titel und Anrede Boxen -->
     <div style="display: flex;">
         <div class="boxlinks">
-            <p>Titel</p>
+            <?php
+                echo '<p>'. $row['u.titel'] .'</p>'
+            ?>
         </div>
         <div class="boxrechts">
-            <p>Anrede</p>
+            <?php
+                echo '<p>'. $row['u.anrede'] .'</p>'
+            ?>
         </div>
     </div>
 
     <!-- Vorname und Nachname Boxen -->
     <div style="display: flex;">
         <div class="boxlinks">
-            <p>Vorname</p>
+            <?php
+                echo '<p>'. $row['u.vorname'] .'</p>'
+            ?>
         </div>
         <div class="boxrechts">
-            <p>Nachname</p>
+            <?php
+                echo '<p>'. $row['u.nachname'] .'</p>'
+            ?>
         </div>
     </div>
 
     <!-- Email Box -->
     <div class="boxfull">
-        <p>Email</p>
+            <?php
+                echo '<p>'. $row['u.email'] .'</p>'
+            ?>
     </div>
 
     <!-- Geburtsdatum Box -->
     <div class="boxgeb">
-        <p>Geburtsdatum</p>
+            <?php
+                echo '<p>'. $row['u.geburtsdatum'] .'</p>'
+            ?>
     </div>
 
     <div class="password">
@@ -81,32 +113,44 @@
 
     <!-- Land Box -->
     <div class="boxfull">
-        <p>Land</p>
+            <?php
+                echo '<p>'. $row['u.land'] .'</p>'
+            ?>
     </div>
 
     <!-- Postleitzahl und Ort Boxen -->
     <div style="display: flex;">
         <div class="boxlinks">
-            <p>Postleitzahl</p>
+            <?php
+                echo '<p>'. $row['u.plz'] .'</p>'
+            ?>
         </div>
         <div class="boxrechts">
-            <p>Ort</p>
+            <?php
+                echo '<p>'. $row['u.ort'] .'</p>'
+            ?>
         </div>
     </div>
 
     <!-- Straße und Straßen Nr. Boxen -->
     <div style="display: flex;">
         <div class="boxstraße">
-            <p>Straße</p>
+            <?php
+                echo '<p>'. $row['u.strasse'] .'</p>'
+            ?>
         </div>
         <div class="boxstrnr">
-            <p>Straßen Nr.</p>
+            <?php
+                echo '<p>'. $row['u.hausnr'] .'</p>'
+            ?>
         </div>
     </div>
 
     <!-- Adresszusatz Box -->
     <div class="boxfull">
-        <p>Adresszusatz</p>
+            <?php
+                echo '<p>'. $row['u.adresszusatz'] .'</p>'
+            ?>
     </div>
 
     <br>
@@ -120,17 +164,23 @@
 
     <!-- Bankname Box -->
     <div class="boxfull">
-        <p>Bankname</p>
+            <?php
+                echo '<p>'. $row['zi.bankname'] .'</p>'
+            ?>
     </div>
 
     <!-- BIC und Land Dropdown-Button -->
     <div style="display: flex;">
         <div class="boxbic">
-            <p>BIC</p>
+            <?php
+                echo '<p>'. $row['zi.bic'] .'</p>'
+            ?>
         </div>
         <div>
             <select class="dropdown">
-                <option>(Bitte Land wählen)</option>
+                <?php
+                    echo '<option>'. $row['zi.land'] .'</option>'
+                ?>
                 <option>Deutschland</option>
                 <option>Österreich</option>
                 <option>Schweiz</option>
@@ -140,7 +190,9 @@
 
     <!-- IBAN Box -->
     <div class="boxfull">
-        <p>IBAN</p>
+            <?php
+                echo '<p>'. $row['zi.iban'] .'</p>'
+            ?>
     </div>
 
     <!-- Footer -->
