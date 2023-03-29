@@ -1,7 +1,7 @@
 <?php
 // Creates a connection to the Database
-class DataConnection {
-  public function buildConnection($connpath){
+
+  function buildConnection($connpath){
     $inipath = ("$connpath/config/app.ini");
     $ini = parse_ini_file($inipath);
     header('Content-type: text/html; charset=utf-8');
@@ -18,4 +18,4 @@ class DataConnection {
       die(json_encode(array('outcome' => false, 'message' => "Unable to connect to the Database. Try if the Database exists :) ")));
     }
   }
-}
+
