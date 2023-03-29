@@ -1,8 +1,3 @@
-Create DATABASE if not EXISTS platypus;
-
-use platypus;
-
-
 -- user - Login - Registrierung --
 
 	create table if not exists passwort(
@@ -55,7 +50,7 @@ use platypus;
 
 			alter table zahlungsmethodexuser
 			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen (zi_id);
-		-- 
+		--
 
 		-- Foreign Keys for user
 			alter table user
@@ -63,8 +58,8 @@ use platypus;
 
 			alter table user
 			add FOREIGN KEY(z_id_ref) REFERENCES zahlungsmethodexuser (z_id);
-		-- 
-	-- 
+		--
+	--
 --
 
 -- produkte - Bilder --
@@ -113,7 +108,7 @@ use platypus;
 		-- Foreign Keys for produkt_kategorie
 			alter table produkt_kategorie
 			add FOREIGN KEY(p_k_b_id) REFERENCES produkt_kategorie_bild(p_k_b_id);
-		-- 
+		--
 
 		-- Foreign Keys for produkt
 			alter table produkt
@@ -124,9 +119,9 @@ use platypus;
 
 			alter table produkt
 			add FOREIGN KEY(p_b_id_ref) REFERENCES produktbild(p_b_id);
-		-- 
-	-- 
--- 
+		--
+	--
+--
 
 -- bestellung --
 
@@ -169,7 +164,7 @@ use platypus;
 
 			alter table bestellung
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
-		-- 
+		--
 
 		-- Foreign Keys for bestell_Historie
 			alter table bestell_Historie
@@ -177,7 +172,7 @@ use platypus;
 
 			alter table bestell_Historie
 			add FOREIGN KEY(b_id_ref) REFERENCES bestellung(b_id);
-		-- 
+		--
 
 		-- Foreign Keys for bestellposition
 			alter table bestellposition
@@ -185,6 +180,6 @@ use platypus;
 
 			alter table bestellposition
 			add FOREIGN KEY(p_id_ref) REFERENCES produkt(p_id);
-		-- 
-	-- 
--- 
+		--
+	--
+--
