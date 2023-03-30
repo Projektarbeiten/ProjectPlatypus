@@ -146,7 +146,6 @@
 
 	create table if not exists Bestellung(
 		b_id 						int AUTO_INCREMENT
-		,b_p_id_ref					int
 		,u_id_ref					int
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
