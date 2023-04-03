@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Verbindung zur Datenbank
 require './phpFunctions/databaseConnection.php';
 require './phpFunctions/sqlQueries.php';
 $conn = buildConnection("./");
@@ -21,8 +22,11 @@ $conn = buildConnection("./");
 		<hr>
 		<form id="login-form">
 			<label for="t_username">Username:</label> <br>
+			
 			<input type="email" name="t_username" value="
-				<?php if (isset($_POST['t_username'])) {
+				<?php
+				// Sollte der Login fehlschlagen, wird die email in dem Feld gespeichert 
+				if (isset($_POST['t_username'])) {
 					echo $_POST['t_username'];
 				} ?>" pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\u0022(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\u0022)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"> <br>
 			<label for="t_password" id="login-label">Password:</label> <br>
@@ -30,6 +34,7 @@ $conn = buildConnection("./");
 			<button type="submit" id="login-button">Anmelden</button> <br>
 
 			<?php
+			// Sobald das formular gesendet wird, wird eine sql query ausgeführt welche nach der Mail sucht und die Passwörter abgleicht. Ist das Passwort richtig, wird die User Session erstellt.
 			if (isset($_POST['t_username'], $_POST['t_password'])) {
 				try {
 					if ($result = login($conn, $_POST['t_username'])) {
