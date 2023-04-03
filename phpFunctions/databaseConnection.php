@@ -11,7 +11,7 @@
     $database = $ini['db_name'];
 
     try {
-      $pdo = new PDO("mysql:host=$host;dbname=$database", $username, $user_pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+      $pdo = new PDO("mysql:host=$host;dbname=$database", "port=3308", $username, $user_pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
       return $pdo;
 
     } catch (PDOException $ex) {
