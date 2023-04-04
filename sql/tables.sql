@@ -80,6 +80,8 @@
 	create table if not exists produktbild(
 		p_b_id 			int AUTO_INCREMENT
 		,image 			Longblob
+		,order_id		VARCHAR(2000)
+		,image_name		VARCHAR(2000)
 		,PRIMARY KEY(p_b_id)
 	);
 
