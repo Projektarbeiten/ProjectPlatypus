@@ -11,8 +11,8 @@
 <?php
     session_start();
 
-    require './phpFunctions/databaseConnection.php'
-    require './phpFunctions/sqlQueries.php'
+    require './phpFunctions/databaseConnection.php';
+    require './phpFunctions/sqlQueries.php';
     $debug = true;
 
     if(!isset($_SESSION['uid'])){
@@ -20,11 +20,11 @@
         exit;
     }else{
         $uid = $_SESSION['uid'];
-        $conn = DataConnection::buildConnection();
+        $conn = buildConnection(".");
         $result = getAccountInformation($conn,$uid);
         if(!$result->rowCount() > 0){
-            echo (debug) ?:'No Rows found'
-             //weiterleitung an Login Page
+            echo ($debug) ?:'No Rows found';
+             // Weiterleitung an Login Page
         }else{
             $row = $result->fetch();
         }
