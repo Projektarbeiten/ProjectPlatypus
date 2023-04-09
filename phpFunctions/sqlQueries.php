@@ -1,5 +1,5 @@
 <?php
-function getAccountInformation($conn, $uid)
+function getAccountInformation($uid, $conn)
 {
     try {
         $stmt_prep = $conn->prepare(
@@ -89,36 +89,35 @@ function login($email, $conn)
 function getProduktInfos($produktID, $conn) {
     try {
         $stmt_prep = $conn->prepare("
-        Select
-            p.bezeichnung
-            pb.image_name
-            p.eigenschaft_1
-            p.eigenschaft_2
-            p.eigenschaft_3
-            p.eigenschaft_4
-            p.eigenschaft_5
-            p.eigenschaft_6
-            p.details
-            p.menge
-            p.akt_preis
-            h.bezeichnung as oem_bezeichnung
+        SELECT
+            p.bezeichnung            
+            ,pb.image_name
+            ,p.eigenschaft_1
+            ,p.eigenschaft_2
+            ,p.eigenschaft_3
+            ,p.eigenschaft_4
+            ,p.eigenschaft_5
+            ,p.eigenschaft_6
+            ,p.details
+            ,p.menge
+            ,p.akt_preis
+            ,h.bezeichnung as oem_bezeichnung
         FROM 
             produkt p
-        JOIN produktbild pb
+        INNER JOIN produktbild pb
             on p.p_b_id_ref = pb.p_b_id
-        JOIN hersteller h
+        INNER JOIN hersteller h
             on p.oem_id_ref = h.oem_id
-        WHERE :produktID = p.p_id
+        WHERE :produktID = p.p_id;
           ");
         $stmt_prep->bindParam(':produktID', $produktID);
         $stmt_prep->execute();
-        $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC);
 
         // Sollte unter der ProduktID kein Eintrag gefunden werder, wird ein "Error" zurückgegeben um den User auf eine Errorpage umzuleiten. 
-        if (!$result_set->rowCount() > 0) {
+        if (!$stmt_prep->rowCount() > 0) {
             $returns = "ERROR";
         } else {
-            $row = $result_set->fetch();
+            $row = $stmt_prep->fetch();
             if($row['image_name'] === "" ) {
                 $stmt_prep = $conn->query("
                 Select
@@ -145,11 +144,11 @@ function getUserAdresse($userID, $conn) {
     $stmt_prep = $conn->prepare("
     Select 
         land
-        plz
-        ort
-        strasse
-        hausnr
-        adresszusatz
+        ,plz
+        ,ort
+        ,strasse
+        ,hausnr
+        ,adresszusatz
     FROM 
         user
     WHERE 
@@ -157,8 +156,7 @@ function getUserAdresse($userID, $conn) {
     ");
     $stmt_prep->bindParam(':userID', $userID);
     $stmt_prep->execute();
-    $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC);
-    $row = $result_set->fetch();
+    $row = $stmt_prep->fetch();
     
     return array($row['land'], $row['plz'], $row['ort'], $row['strasse'], $row['hausnr'], $row['adresszusatz']);
     } catch (PDOException $e) {
