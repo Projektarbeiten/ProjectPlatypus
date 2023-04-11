@@ -3,6 +3,7 @@ session_start();
 $produkt = $_GET['produkt_id'];
 require("./phpFunctions/databaseConnection.php");
 require("./phpFunctions/sqlQueries.php");
+require("./phpFunctions/util.php");
 $conn = buildConnection(".");
 $pInfo = getProduktInfos($produkt, $conn);
 
@@ -10,8 +11,7 @@ if ($pInfo === "ERROR") {
     # Wird ausgeführt, wenn unter der Produkt ID kein oder ein unvollständiges Verzeichnis gefunden wird.
     header("Location: error404.php");
 }
-$produktName = $pInfo[0];
-$bildSrc = $pInfo[1];
+$produktName = $pInfo[0]; // TODO: pInfo array anpassen da, ROW['ImageName'] obsolete ist!
 $produktEigenschaft1 = $pInfo[2];
 $produktEigenschaft2 = $pInfo[3];
 $produktEigenschaft3 = $pInfo[4];
@@ -20,12 +20,12 @@ $produktEigenschaft5 = $pInfo[6];
 $produktEigenschaft6 = $pInfo[7];
 $produktBeschreibung = $pInfo[8];
 $produktMenge = $pInfo[9];
-// Eventuell noch Rabatt (auch im SQL Query hinzufuegen) 
+// Eventuell noch Rabatt (auch im SQL Query hinzufuegen)
 $produktPreis = $pInfo[10];
 $oemBezeichnung = $pInfo[11];
 
-if ($_SESSION['loggedin'] = true) {
-    $adressInfo = getUserAdresse($_SESSION['u_id'], $conn);
+if (isset($_SESSION['uid'])) {
+    $adressInfo = getUserAdresse($_SESSION['uid'], $conn);
     $userLand =  $adressInfo[0];
     $userPlz = $adressInfo[1];
     $userOrt = $adressInfo[2];
@@ -65,9 +65,9 @@ function eingenschaften($eigenschaft)
     ?>
     <main id="product-seite">
         <div class="container">
-            <div class="row">
+            <div class="row"
                 <div class="col-2">
-                    <img id="produkt-bild" src="./img/testBild.png" alt=""> <!-- Src wird dynamisch nach Produkt ausgewählt-->
+                    <img id="produkt-bild" src="<?php echo getImage($produkt); ?>" alt=""> <!-- Image wird anhand der Produkt ID Base64 encoded angezeigt und dynamisch geladen-->
                 </div>
                 <div class="col-2" id="produkt-eigenschaften">
                     <p style="font-weight: bold"><?php echo $produktName ?></p>
@@ -107,12 +107,12 @@ function eingenschaften($eigenschaft)
                         <form action="" method="post" id="bestell-form">
                             <!-- Lieferadresse wird nur angezeigt, wenn der User eingeloggt ist. Menge und Inventar wird dynamisch angezeigt. -->
                             <label for="lieferadresse"></label>
-                            <?php if ($_SESSION['loggedin'] = true) {
+                            <?php if (isset($_SESSION['uid'])) {
                                 echo "<p>Ihre Lieferadresse: $userPlz $userOrt {$userStrasse}$userHausnr</p>";
                             } ?>
 
                             <?php
-                            // Sollte die Produktmenge 0 sein, wird der Button und die Funktion eine Menge auszuwählen deaktiviert, um Fehler zub vermeiden 
+                            // Sollte die Produktmenge 0 sein, wird der Button und die Funktion eine Menge auszuwählen deaktiviert, um Fehler zub vermeiden
                             if ($produktMenge > 0) {
                                 if ($produktMenge == 1) {
                                     echo "<p>Es ist noch ein Stück übrig</p>";
