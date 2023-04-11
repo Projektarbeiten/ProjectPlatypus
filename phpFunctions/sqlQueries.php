@@ -87,7 +87,7 @@ function login($email, $conn)
     Gibt der productPage.php alle Produktinformationen um die Seite zu bauen
 */
 function getProduktInfos($produktID, $conn) {
-    try {
+    try {	// Todo: Image_name kann entfernt werden, da Image Name nicht benötigt wird und somit Obsolete ist!
         $stmt_prep = $conn->prepare("
         SELECT
             p.bezeichnung
@@ -108,7 +108,7 @@ function getProduktInfos($produktID, $conn) {
             on p.p_b_id_ref = pb.p_b_id
         INNER JOIN hersteller h
             on p.oem_id_ref = h.oem_id
-        WHERE :produktID = p.p_id;
+        WHERE p.p_id = :produktID ;
 		");
         $stmt_prep->bindParam(':produktID', $produktID);
         $stmt_prep->execute();
@@ -118,13 +118,13 @@ function getProduktInfos($produktID, $conn) {
             $returns = "ERROR";
         } else {
             $row = $stmt_prep->fetch();
-            if($row['image_name'] === "" ) {
+            if($row['image_name'] === "" ) { // TODO: Dieser Abschnitt ist Obsolete, da ImageName nicht benötigt wird.
                 $stmt_prep = $conn->query("
                 Select
                     pb.image_name
                 from
                     produktbild pb
-                where p.p_b_id = 1
+                where pb.p_b_id = 100000;
                 ");
                 $rowImg = $stmt_prep->fetch();
                 $row['image_name'] = $rowImg['image_name'];
