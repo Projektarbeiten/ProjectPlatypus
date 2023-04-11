@@ -105,9 +105,9 @@ function getProduktInfos($produktID, $conn) {
             ,h.bezeichnung as oem_bezeichnung
         FROM
             produkt p
-        INNER JOIN produktbild pb
+        LEFT JOIN produktbild pb
             on p.p_b_id_ref = pb.p_b_id
-        INNER JOIN hersteller h
+        LEFT JOIN hersteller h
             on p.oem_id_ref = h.oem_id
         WHERE p.p_id = :produktID ;
 		");
