@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-  function buildConnection($connpath){
+  function buildConnection(){
     #$inipath = ("$connpath/config/app.ini");
     #$ini = parse_ini_file($inipath);
     header('Content-type: text/html; charset=utf-8');
