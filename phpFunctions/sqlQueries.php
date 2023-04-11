@@ -218,7 +218,7 @@ function getUserAdresse($userID, $conn) {
 		from
 			produktbild
 		where
-			p_b_id = 0");
+			p_b_id = 100000");
 		$stmt_prep->execute();
 		$row = $stmt_prep->fetch();
 		return $row['image'];
