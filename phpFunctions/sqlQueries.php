@@ -1,4 +1,5 @@
 <?php
+require("Classes.php");
 function getAccountInformation($uid, $conn)
 {
     try {
@@ -32,7 +33,7 @@ function getAccountInformation($uid, $conn)
 
         $stmt_prep->bindParam(':uid', $uid);
         $stmt_prep->execute();
-        $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC);
+        $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC); // TODO: Falsch muss ersetzt werden durch
     } catch (PDOException $e) {
         die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
     }
@@ -112,9 +113,12 @@ function getProduktInfos($produktID, $conn) {
 		");
         $stmt_prep->bindParam(':produktID', $produktID);
         $stmt_prep->execute();
-		$result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC);
+        #var_dump($result_set = $stmt_prep->fetchAll());
+
         // Sollte unter der ProduktID kein Eintrag gefunden werder, wird ein "Error" zurückgegeben um den User auf eine Errorpage umzuleiten.
-        if (!$result_set->rowCount() > 0) {
+        #print ("Type of:".gettype($result_set));
+        try{
+            if (!$stmt_prep->rowCount() > 0) {
             $returns = "ERROR";
         } else {
             $row = $stmt_prep->fetch();
@@ -128,9 +132,11 @@ function getProduktInfos($produktID, $conn) {
                 ");
                 $rowImg = $stmt_prep->fetch();
                 $row['image_name'] = $rowImg['image_name'];
-
             }
             $returns = array($row['bezeichnung'], $row['image_name'], $row['eigenschaft_1'], $row['eigenschaft_2'], $row['eigenschaft_3'], $row['eigenschaft_4'], $row['eigenschaft_5'], $row['eigenschaft_6'], $row['details'], $row['menge'], $row['akt_preis'], $row['oem_bezeichnung']);
+        }
+        }catch (Exception $e){
+            echo ("ERROR:". $e->getMessage());
         }
     }
     catch (PDOException $e) {
@@ -139,49 +145,59 @@ function getProduktInfos($produktID, $conn) {
     return $returns;
 }
 
+/**
+ * Summary of getUserAdresse
+ * @param mixed $userID
+ * @param mixed $conn
+ * @return array
+ */
 function getUserAdresse($userID, $conn) {
-    try {
-    $stmt_prep = $conn->prepare("
-    Select
-        land
-        ,plz
-        ,ort
-        ,strasse
-        ,hausnr
-        ,adresszusatz
-    FROM
-        user
-    WHERE
-        u_id = :userID
-    ");
-    $stmt_prep->bindParam(':userID', $userID);
-    $stmt_prep->execute();
-    $row = $stmt_prep->fetch();
+        try {
+        $stmt_prep = $conn->prepare("
+        Select
+            land
+            ,plz
+            ,ort
+            ,strasse
+            ,hausnr
+            ,adresszusatz
+        FROM
+            user
+        WHERE
+            u_id = :userID
+        ");
+        $stmt_prep->bindParam(':userID', $userID);
+        $stmt_prep->execute();
+        $row = $stmt_prep->fetch();
 
-    return array($row['land'], $row['plz'], $row['ort'], $row['strasse'], $row['hausnr'], $row['adresszusatz']);
-    } catch (PDOException $e) {
-        die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
+        return array($row['land'], $row['plz'], $row['ort'], $row['strasse'], $row['hausnr'], $row['adresszusatz']);
+        } catch (PDOException $e) {
+            die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
+        }
     }
 
-	function getProductImageData($produktNr, $conn){
-		try{ // Statement for receiving Produkt - Produktbild shortcut
-			$stmt_prep_produkt = $conn->prepare(
-				"Select
-					p_b_id_ref
-				from
-					produkt
-				where
-					p_id = :produktNr"
-			);
-
-			$stmt_prep_produkt->bindParam(':produktNr', $produktNr);
-			$stmt_prep_produkt->execute();
-			$row = $stmt_prep_produkt->fetch(PDO::FETCH_ASSOC);
-			$rowCount = $stmt_prep_produkt->rowCount();
-		} catch(PDOException $e) {
-			die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
-		}
-		if($rowCount>0){
+	/**
+	 * Summary of getProductImageData
+	 * @param mixed $produktNr
+	 * @param mixed $conn
+	 * @return mixed
+	 */
+	function getProductImageData($produktNr, $conn) {
+        // Statement for receiving Produkt - Produktbild shortcut
+		try {
+        $stmt_prep_produkt = $conn->prepare(
+            "Select
+                p_b_id_ref
+            from
+                produkt
+            where
+                p_id = :produktNr ;"
+        );
+        $stmt_prep_produkt->bindParam(':produktNr', $produktNr);
+        $stmt_prep_produkt->execute();
+        $row = $stmt_prep_produkt->fetch(PDO::FETCH_ASSOC);
+        $rowCount = $stmt_prep_produkt->rowCount();
+        if($rowCount>0){
 			try{ // Statement for receiving Image Data
 						$stmt_prep_image = $conn->prepare(
 							"Select
@@ -207,7 +223,10 @@ function getUserAdresse($userID, $conn) {
 		else{
 			return getDefaultImage($conn);
 		}
-	}
+		} catch(PDOException $e) {
+			die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
+		}
+    }
 
 	function getDefaultImage($conn){
 		$stmt_prep = $conn->prepare("
@@ -221,4 +240,3 @@ function getUserAdresse($userID, $conn) {
 		$row = $stmt_prep->fetch();
 		return $row['image'];
 	}
-}

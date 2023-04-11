@@ -1,11 +1,7 @@
 <?php
-	require("databaseConnection.php");
-	require("sqlQueries.php");
-
-	function getImage($artikelNr){
+	function getImage($artikelNr, $conn){
 		$mime = 'image/jpg';
-		$pdo = buildConnection(".");
-		$imageBinary = getProductImageData($artikelNr,$pdo);
+		$imageBinary = getProductImageData($artikelNr, $conn);
 		$base64 = base64_encode($imageBinary);
 		return ('data:' . $mime . ';base64,' . $base64);
 	}

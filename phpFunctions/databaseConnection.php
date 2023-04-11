@@ -13,16 +13,15 @@
 		$username = $ini['db_user'];
 		$user_pwd = $ini['db_password'];
 		$database = $ini['database'];
-		$port = $ini['db_port'];
+	 	$port = $ini['db_port'];
 
 		try {
 			#$pdo = new PDO("mysql:host=$host;dbname=$database;","port=$port", $username, $user_pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-			$pdo = new PDO("mysql:host=$host;dbname=$database;port=$port", "$username", "$user_pwd");
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo = new PDO("mysql:host=$host;dbname=$database;port=$port", $username, $user_pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			return $pdo;
 
 		} catch (PDOException $ex) {
-			error_log(strtotime("now") + "Connection failed", 3, "my-errors.log");
-			die(json_encode(array('outcome' => false, 'message' => "Unable to connect to the Database. Try if the Database exists :) ")));
+			error_log(strtotime("now") . "Connection failed", 3, "my-errors.log");
+			die(json_encode(array('outcome' => false, 'message' => "Unable to connect to the Database. Try if the Database exists :) " . $ex)));
 		}
 	}

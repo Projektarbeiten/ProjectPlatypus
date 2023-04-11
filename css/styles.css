@@ -292,10 +292,10 @@ padding-top: 1.5rem;
 }
 
 #produkt-bild {
-    width: 70%;
+    width: 30%;
     height: auto;
-    float: right;
-    margin-right: 10%;
+    float: left;
+    margin-left: 10%;
 }
 
 #preis-section {
