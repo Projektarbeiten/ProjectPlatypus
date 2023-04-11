@@ -34,7 +34,10 @@
         $userAdresszusatz = $adressInfo[5];
     }
 
-    function eingenschaften($eigenschaf(":", $eigenschaft);
+    function eingenschaften($eigenschaft)
+    {
+        try {
+            $str_arr = explode(":", $eigenschaft);
             echo "<tr class='eigenschaft-row'>
         <td>{$str_arr[0]}</td>
         <td>{$str_arr[1]}</td>
