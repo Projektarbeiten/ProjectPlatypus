@@ -92,7 +92,6 @@ function getProduktInfos($produktID, $conn) {
         $stmt_prep = $conn->prepare("
         SELECT
             p.bezeichnung
-            ,pb.image_name
             ,p.eigenschaft_1
             ,p.eigenschaft_2
             ,p.eigenschaft_3
@@ -122,18 +121,7 @@ function getProduktInfos($produktID, $conn) {
             $returns = "ERROR";
         } else {
             $row = $stmt_prep->fetch();
-            if($row['image_name'] === "" ) { // TODO: Dieser Abschnitt ist Obsolete, da ImageName nicht benötigt wird.
-                $stmt_prep = $conn->query("
-                Select
-                    pb.image_name
-                from
-                    produktbild pb
-                where pb.p_b_id = 100000;
-                ");
-                $rowImg = $stmt_prep->fetch();
-                $row['image_name'] = $rowImg['image_name'];
-            }
-            $returns = array($row['bezeichnung'], $row['image_name'], $row['eigenschaft_1'], $row['eigenschaft_2'], $row['eigenschaft_3'], $row['eigenschaft_4'], $row['eigenschaft_5'], $row['eigenschaft_6'], $row['details'], $row['menge'], $row['akt_preis'], $row['oem_bezeichnung']);
+            $returns = array($row['bezeichnung'], $row['eigenschaft_1'], $row['eigenschaft_2'], $row['eigenschaft_3'], $row['eigenschaft_4'], $row['eigenschaft_5'], $row['eigenschaft_6'], $row['details'], $row['menge'], $row['akt_preis'], $row['oem_bezeichnung']);
         }
         }catch (Exception $e){
             echo ("ERROR:". $e->getMessage());

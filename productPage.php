@@ -1,53 +1,53 @@
 <?php
-    session_start();
-    $produkt = $_GET['produkt_id'];
-    require("./phpFunctions/databaseConnection.php");
-    require("./phpFunctions/sqlQueries.php");
-    require("./phpFunctions/util.php");
-    $conn = buildConnection(".");
-    $pInfo = getProduktInfos($produkt, $conn);
+session_start();
+$produkt = $_GET['produkt_id'];
+require("./phpFunctions/databaseConnection.php");
+require("./phpFunctions/sqlQueries.php");
+require("./phpFunctions/util.php");
+$conn = buildConnection(".");
+$pInfo = getProduktInfos($produkt, $conn);
 
-    if ($pInfo === "ERROR") {
-        # Wird ausgeführt, wenn unter der Produkt ID kein oder ein unvollständiges Verzeichnis gefunden wird.
-        header("Location: error404.php");
-    }
-    $produktName = $pInfo[0]; // TODO: pInfo array anpassen da, ROW['ImageName'] obsolete ist!
-    $produktEigenschaft1 = $pInfo[2];
-    $produktEigenschaft2 = $pInfo[3];
-    $produktEigenschaft3 = $pInfo[4];
-    $produktEigenschaft4 = $pInfo[5];
-    $produktEigenschaft5 = $pInfo[6];
-    $produktEigenschaft6 = $pInfo[7];
-     $produktBeschreibung = $pInfo[8];
-     $produktMenge = $pInfo[9];
-    // Eventuell noch Rabatt (auch im SQL Query hinzufuegen)
-    $produktPreis = $pInfo[10];
-    $oemBezeichnung = $pInfo[11];
+if ($pInfo === "ERROR") {
+    # Wird ausgeführt, wenn unter der Produkt ID kein oder ein unvollständiges Verzeichnis gefunden wird.
+    header("Location: error404.php");
+}
+$produktName = $pInfo[0];
+$produktEigenschaft1 = $pInfo[1];
+$produktEigenschaft2 = $pInfo[2];
+$produktEigenschaft3 = $pInfo[3];
+$produktEigenschaft4 = $pInfo[4];
+$produktEigenschaft5 = $pInfo[5];
+$produktEigenschaft6 = $pInfo[6];
+$produktBeschreibung = $pInfo[7];
+$produktMenge = $pInfo[8];
+// Eventuell noch Rabatt (auch im SQL Query hinzufuegen)
+$produktPreis = $pInfo[9];
+$oemBezeichnung = $pInfo[10];
 
-    if (isset($_SESSION['uid'])) {
-        $adressInfo = getUserAdresse($_SESSION['uid'], $conn);
-        $userLand =  $adressInfo[0];
-        $userPlz = $adressInfo[1];
-        $userOrt = $adressInfo[2];
-        $userStrasse = $adressInfo[3];
-        $userHausnr = $adressInfo[4];
-        $userAdresszusatz = $adressInfo[5];
-    }
+if (isset($_SESSION['uid'])) {
+    $adressInfo = getUserAdresse($_SESSION['uid'], $conn);
+    $userLand =  $adressInfo[0];
+    $userPlz = $adressInfo[1];
+    $userOrt = $adressInfo[2];
+    $userStrasse = $adressInfo[3];
+    $userHausnr = $adressInfo[4];
+    $userAdresszusatz = $adressInfo[5];
+}
 
-    function eingenschaften($eigenschaft)
-    {
-        try {
-            $str_arr = explode(":", $eigenschaft);
-            echo "<tr class='eigenschaft-row'>
+function eingenschaften($eigenschaft)
+{
+    try {
+        $str_arr = explode(":", $eigenschaft);
+        echo "<tr class='eigenschaft-row'>
         <td>{$str_arr[0]}</td>
         <td>{$str_arr[1]}</td>
         </tr>";
-        } catch (Exception $e) {
-            echo "<tr class='eigenschaft-row'>
+    } catch (Exception $e) {
+        echo "<tr class='eigenschaft-row'>
         <td>{$eigenschaft}</td>
         </tr>";
-        }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,9 +65,9 @@
     ?>
     <main id="product-seite">
         <div class="container">
-            <div class="row"
+            <div class="row">
                 <div class="col-2">
-                    <img id="produkt-bild" src="<?php echo getImage($produkt,$conn); ?>" alt="" > <!-- Image wird anhand der Produkt ID Base64 encoded angezeigt und dynamisch geladen-->
+                    <img id="produkt-bild" src="<?php echo getImage($produkt, $conn); ?>" alt=""> <!-- Image wird anhand der Produkt ID Base64 encoded angezeigt und dynamisch geladen-->
                 </div>
                 <div class="col-2" id="produkt-eigenschaften">
                     <p style="font-weight: bold"><?php echo $produktName ?></p>
@@ -128,7 +128,7 @@
                                 echo '</select>
                                 <button id="cart-button" type="submit">In den Einkaufswagen</button>';
                             } else {
-                                echo "<p><strong>Produkt ist ausverkauft</strong></p>
+                                echo "<p style='text-align:center'><strong>Produkt ist ausverkauft</strong></p>
                                 <button id='cart-button' disabled>Ausverkauft</button>";
                             }
                             ?>
