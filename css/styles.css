@@ -294,8 +294,9 @@ padding-top: 1.5rem;
 #produkt-bild {
     width: 70%;
     height: auto;
-    float: right;
-    margin-right: 10%;
+    float: left;
+    margin-left: 10%;
+	border-radius: 10px;
 }
 
 #preis-section {
@@ -331,6 +332,10 @@ padding-top: 1.5rem;
 
 #cart-button:hover {
 	background-color: greenyellow;
+}
+#cart-button:disabled {
+	background-color: whitesmoke;
+	cursor: default;
 }
 
 /* === KONTO-PAGE === */
