@@ -88,7 +88,7 @@ function login($email, $conn)
     Gibt der productPage.php alle Produktinformationen um die Seite zu bauen
 */
 function getProduktInfos($produktID, $conn) {
-    try {	// Todo: Image_name kann entfernt werden, da Image Name nicht benötigt wird und somit Obsolete ist!
+    try {
         $stmt_prep = $conn->prepare("
         SELECT
             p.bezeichnung

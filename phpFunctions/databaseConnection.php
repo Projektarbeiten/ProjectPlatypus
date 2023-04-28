@@ -21,7 +21,7 @@
 			return $pdo;
 
 		} catch (PDOException $ex) {
-			error_log(strtotime("now") . "Connection failed", 3, "my-errors.log");
+			error_log(date("Y-m-d H:i:s", time()) . "Connection failed", 3, "my-errors.log");
 			die(json_encode(array('outcome' => false, 'message' => "Unable to connect to the Database. Try if the Database exists :) " . $ex)));
 		}
 	}
