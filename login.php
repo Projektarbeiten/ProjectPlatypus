@@ -19,7 +19,7 @@
 			<button type="submit" id="login-button">Anmelden</button>		<br>
 		</form>
 		<a href="_blank" id="login-page-link">Passwort vergessen?</a><!-- TODO: Verlinkung einfügen --><br>
-		<form action="_blank"> <!-- TODO: Verlinkung einfügen -->
+		<form action="register.php"> <!-- TODO: Verlinkung einfügen -->
 			<hr>
 			<p>Neuer Benutzer?</p>
 				<button type="submit" id="login-button">Registrieren</button>
@@ -31,6 +31,5 @@
     require("footer.php");
     ?>
 	</div>
-    
 </body>
 </html>
