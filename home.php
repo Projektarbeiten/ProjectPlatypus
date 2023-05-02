@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +81,7 @@
                     <div class="row">
                         <div class="col-2 produkt">
                             <h2 class="Produkt-name">Produkt 1</h2>
-                            <a href="">
+                            <a href="http://localhost/productPage?produkt_id=2">
                                 <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
                             </a>
                             <p class="Produkt-text">Produkt Text 1</p>

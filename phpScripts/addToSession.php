@@ -1,0 +1,65 @@
+<?php
+    session_start();
+    $debug = false;
+    $debug2= false;
+    if($debug){
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
+
+    if(!isset($_SESSION['produkt_array'])){
+        $_SESSION['produkt_array'] = array();
+    }
+
+    if(isset($_POST['mengenauswahl']) && isset($_POST['produkt_id'])){
+        $found;
+        $menge = $_POST['mengenauswahl'];
+        $produkt_ID = $_POST['produkt_id'];
+        $arrayOfProdukt = array(
+                                'produkt' => $produkt_ID,
+                                'menge'   => $menge,
+                                );
+        if(isset($_SESSION['produkt_array']) && !empty($_SESSION['produkt_array'])){
+            foreach ($_SESSION['produkt_array'] as &$array){
+                    if(in_array($produkt_ID,$array)){
+                        $found = 2;
+                        if($debug){
+                            echo "before:";
+                            var_dump($_SESSION['produkt_array']);
+                        }
+                        $index = array_search($array,$_SESSION['produkt_array']);
+                        $_SESSION['produkt_array'][$index]['menge'] = $menge;
+                        if($debug){
+                            echo "after:";
+                            var_dump($_SESSION['produkt_array']);
+                        }
+                        break;
+                    }
+            }
+            if($found != 2){
+                $found = 1;
+                array_push($_SESSION['produkt_array'],$arrayOfProdukt);
+            }
+        }else{
+            $found = 0;
+            array_push($_SESSION['produkt_array'],$arrayOfProdukt);
+        }
+    }
+    if($debug){ // Debuged das Resultat und verhindert wie weiterleitung zum testen
+        echo "Result:";
+        #var_dump($_SESSION['produkt_array']);
+            error_log(date("Y-m-d H:i:s", time()) . "\n
+            Found:" . $found . "\n
+            Menge: " .$menge . "\n
+            ProduktID: " .$produkt_ID."\n", 3, "my-debug.log");
+        #session_destroy();
+    }
+    if(!empty($found)){
+        if($debug2)
+            echo 200 ." ". $menge." ".$produkt_ID . var_dump($_SESSION['produkt_array']);;
+        echo 201;
+    }else{
+        echo 406;
+    }
+?>
