@@ -141,8 +141,7 @@ header .col-6 {
 #footer-default img {
     margin-top:52px;
 }
-#footer-default a
-{
+#footer-default a {
     color:var(--font-color-2);
 }
 
@@ -155,8 +154,7 @@ header .col-6 {
     display: block;
 }
 
-#contact
-{
+#contact{
 margin-top: 50px;
 }
 
@@ -267,7 +265,38 @@ margin-top: 50px;
 	padding: 3px;
 	border-radius: 3px;
 }
-
+/* === REGISTRIERUNGS PAGE === */
+.register-div{
+	text-align: left;
+	border: 2px solid var(--font-color-3);
+	border-radius: 5px;
+	width: 80%;
+	max-width: 750px;
+	min-width: 20%;
+	margin: 0 auto;
+	padding-left: 15px;
+	margin-top: 50px;
+	background-color: var(--theme-color-4);
+}
+.register-div input
+{
+	height: 20px;
+	margin: 10px;
+}
+.register-div select
+{
+	height: 26px;
+}
+#register-form > input{
+	width: 60%;
+	max-width: 650px;
+	min-width: 250px;
+	margin-top: 2%;
+	margin-bottom: 5%;
+	border: 2px solid grey;
+	padding: 3px;
+	border-radius: 3px;
+}
 /* === PRODUKT-PAGE === */
 #eigenschafts-tabelle {
     margin-left: auto;

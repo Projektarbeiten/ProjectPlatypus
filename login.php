@@ -44,7 +44,6 @@ session_start();
 		require("footer.php");
 		?>
 	</div>
-
 </body>
 
 </html>
