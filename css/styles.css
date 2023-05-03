@@ -383,6 +383,12 @@ padding-top: 1.5rem;
 	cursor: pointer;
 }
 
+.button1:hover {
+	background-color: #dea2de;
+}
+
+
+
 .boxlinks {
 	border: 2px solid black;
 	margin-bottom: 20px;

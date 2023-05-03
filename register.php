@@ -14,7 +14,7 @@ require_once('./phpFunctions/databaseConnection.php')
 
 <body>
     <div>
-        <?php
+        <?php # TODO: Auslagern in eine php Funktion!
         if (!empty($_POST['pw'])) {
             $titel = $_POST['titel'];
             $anrede = $_POST['anrede'];
@@ -75,7 +75,7 @@ require_once('./phpFunctions/databaseConnection.php')
                 }
             } else {
                 echo (
-                    "<script type='text/javascript' language='Javascript'>alert('Passwort stimmen nich überein')</script>");
+                    "<script type='text/javascript' language='Javascript'>alert('Passwort stimmen nich überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
             }
         }
         ?>
