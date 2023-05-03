@@ -35,7 +35,7 @@
     </div>
 
     <!-- Bestellungen Button -->
-    <button class="button1">Bestellungen</button>
+    <button class="button1">Bestellungen</button> <!-- # TODO: Weiterleitung zur Bestellhistorie -->
 
     <!-- Persönliche Daten Header -->
     <div class="headline">
@@ -112,7 +112,7 @@
     <!-- Land Box -->
     <div class="boxfull">
             <?php
-				echo'<p>'.$row['land'].'</p>';
+				echo'<p>'.$row['userland'].'</p>';
             ?>
     </div>
 
@@ -189,7 +189,7 @@
         <div>
             <select class="dropdown">
                 <?php
-                    echo '<option>'. $row['land'] .'</option>'
+                    echo '<option>'. $row['zahlland'] .'</option>'
                 ?>
                 <option>Deutschland</option>
                 <option>Österreich</option>

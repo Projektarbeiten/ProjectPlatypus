@@ -11,14 +11,14 @@ function getAccountInformation($uid, $conn)
                 ,u.anrede
                 ,u.email
                 ,u.geburtsdatum
-                ,u.land
+                ,u.land as userland
                 ,u.plz
                 ,u.ort
                 ,u.strasse
                 ,u.hausnr
                 ,u.adresszusatz
                 ,zi.banknamen
-                ,zi.land
+                ,zi.land as zahlland
                 ,zi.bic
                 ,zi.bezeichnung
                 ,zi.iban
