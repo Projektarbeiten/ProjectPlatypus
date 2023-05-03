@@ -6,12 +6,12 @@
     $debug = true;
 
     if(!isset($_SESSION['uid'])){
-        header("Location: http://www.google.de"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
+        header("Location: login"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
         exit;
     }else{
         $uid = $_SESSION['uid'];
         $conn = buildConnection(".");
-        $result = getAccountInformation($conn,$uid);
+        $result = getAccountInformation($uid, $conn);
         if(!$result->rowCount() > 0){
             echo ($debug) ?:'No Rows found';
              // Weiterleitung an Login Page

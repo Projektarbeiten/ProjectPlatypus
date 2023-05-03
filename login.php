@@ -38,7 +38,7 @@ $conn = buildConnection("./");
 								if (password_verify($_POST['t_password'], $result[0])) {
 									session_regenerate_id();
 									$_SESSION['loggedin'] = true;
-									$_SESSION['u_id'] = $result[1];
+									$_SESSION['uid'] = $result[1];
 									header("Location: home");
 								} else {
 									echo "<p style='color:red'>Incorrect E-Mail and/or password!</p>";

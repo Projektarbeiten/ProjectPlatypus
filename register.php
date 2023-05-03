@@ -407,7 +407,7 @@ require_once('./phpFunctions/databaseConnection.php')
                         <h3>Sicherheit</h3>
                         <hr>
                         <label for="pw">Passwort</label>
-                        <input type="password" name="pw" style="width: 70%;" required>
+                        <input type="password" name="pw" style="width: 70%;"title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
                         <br>
                         <label for="pwWiederholen">Passwort <br>wiederholen</label>
                         <input type="password" name="pwWiederholen" style="width: 67.5%;" required>

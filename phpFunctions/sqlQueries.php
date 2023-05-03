@@ -17,13 +17,13 @@ function getAccountInformation($uid, $conn)
                 ,u.strasse
                 ,u.hausnr
                 ,u.adresszusatz
-                ,zi.bankname
+                ,zi.banknamen
                 ,zi.land
                 ,zi.bic
                 ,zi.bezeichnung
                 ,zi.iban
             from user u
-            join zahlungsmethodenxuser zxu
+            join zahlungsmethodexuser zxu
                 on u.u_id = zxu.u_id_ref
             join zahlungsinformationen zi
                 on zxu.zi_id_ref = zi.zi_id
