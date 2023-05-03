@@ -254,7 +254,7 @@ margin-top: 50px;
 	background-color: #dea2de;
 }
 
-#login-form > input{
+#login-form > form > input{
 	width: 60%;
 	max-width: 650px;
 	min-width: 250px;
