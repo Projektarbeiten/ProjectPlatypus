@@ -23,21 +23,24 @@ function getAccountInformation($uid, $conn)
                 ,zi.bezeichnung
                 ,zi.iban
             from user u
-            join zahlungsmethodexuser zxu
+            left join zahlungsmethodexuser zxu
                 on u.u_id = zxu.u_id_ref
-            join zahlungsinformationen zi
+            left join zahlungsinformationen zi
                 on zxu.zi_id_ref = zi.zi_id
-            where u.u_id = :uid
+            where u.u_id = :uid ;
             '
         );
 
         $stmt_prep->bindParam(':uid', $uid);
         $stmt_prep->execute();
-        $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC); // TODO: Falsch muss ersetzt werden durch
+		if($stmt_prep->rowCount()>0){
+			$row = $stmt_prep->fetch();
+			return $row;
+		}
     } catch (PDOException $e) {
+		error_log(date("Y-m-d H:i:s", time()) . "Datenbezug failed - getAccountInformation \n", 3, "my-errors.log");
         die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
     }
-    return $result_set;
 }
 
 /* ##---- login ----

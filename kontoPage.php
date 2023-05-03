@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     require './phpFunctions/databaseConnection.php';
     require './phpFunctions/sqlQueries.php';
     $debug = true;
@@ -11,13 +10,7 @@
     }else{
         $uid = $_SESSION['uid'];
         $conn = buildConnection(".");
-        $result = getAccountInformation($uid, $conn);
-        if(!$result->rowCount() > 0){
-            echo ($debug) ?:'No Rows found';
-             // Weiterleitung an Login Page
-        }else{
-            $row = $result->fetch();
-        }
+        $row = getAccountInformation($uid, $conn);
     }
 ?>
 <!DOCTYPE html>
@@ -55,12 +48,16 @@
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-                echo '<p>'. $row['u.titel'] .'</p>'
+				if(!empty($row['titel'])){
+					echo '<p>'. $row['titel'] .'</p>';
+				}else{
+					echo '<p>'.'</p>';
+				}
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['u.anrede'] .'</p>'
+                echo '<p>'. $row['anrede'] .'</p>';
             ?>
         </div>
     </div>
@@ -69,12 +66,12 @@
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-                echo '<p>'. $row['u.vorname'] .'</p>'
+                echo '<p>'. $row['vorname'] .'</p>';
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['u.nachname'] .'</p>'
+                echo '<p>'. $row['nachname'] .'</p>';
             ?>
         </div>
     </div>
@@ -82,21 +79,21 @@
     <!-- Email Box -->
     <div class="boxfull">
             <?php
-                echo '<p>'. $row['u.email'] .'</p>'
+                echo '<p>'. $row['email'] .'</p>';
             ?>
     </div>
 
     <!-- Geburtsdatum Box -->
     <div class="boxgeb">
             <?php
-                echo '<p>'. $row['u.geburtsdatum'] .'</p>'
+                echo '<p>'. date_format(date_create($row['geburtsdatum']),"d.m.Y") .'</p>';
             ?>
     </div>
 
     <div class="password">
         <p>
             Passwort ändern?
-        </p>
+        </p> <!-- # TODO: Passwort änderung Funktion in Phase 4 -->
     </div>
 
     <br>
@@ -115,7 +112,7 @@
     <!-- Land Box -->
     <div class="boxfull">
             <?php
-                echo '<p>'. $row['u.land'] .'</p>'
+				echo'<p>'.$row['land'].'</p>';
             ?>
     </div>
 
@@ -123,12 +120,12 @@
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-                echo '<p>'. $row['u.plz'] .'</p>'
+                echo '<p>'. $row['plz'] .'</p>';
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['u.ort'] .'</p>'
+                echo '<p>'. $row['ort'] .'</p>';
             ?>
         </div>
     </div>
@@ -137,12 +134,12 @@
     <div style="display: flex;">
         <div class="boxstraße">
             <?php
-                echo '<p>'. $row['u.strasse'] .'</p>'
+                echo '<p>'. $row['strasse'] .'</p>';
             ?>
         </div>
         <div class="boxstrnr">
             <?php
-                echo '<p>'. $row['u.hausnr'] .'</p>'
+                echo '<p>'. $row['hausnr'] .'</p>';
             ?>
         </div>
     </div>
@@ -150,7 +147,11 @@
     <!-- Adresszusatz Box -->
     <div class="boxfull">
             <?php
-                echo '<p>'. $row['u.adresszusatz'] .'</p>'
+                if(!empty($row['adresszusatz'])){
+					echo '<p>'. $row['adresszusatz'] .'</p>';
+				}else{
+					echo '<p> Leer </p>';
+				}
             ?>
     </div>
 
@@ -166,7 +167,11 @@
     <!-- Bankname Box -->
     <div class="boxfull">
             <?php
-                echo '<p>'. $row['zi.bankname'] .'</p>'
+                if(!empty($row['bankname'])){
+					echo '<p>'. $row['bankname'] .'</p>';
+				}else{
+					echo '<p> Nicht angegeben </p>';
+				}
             ?>
     </div>
 
@@ -174,13 +179,17 @@
     <div style="display: flex;">
         <div class="boxbic">
             <?php
-                echo '<p>'. $row['zi.bic'] .'</p>'
+                if(!empty($row['bic'])){
+					echo '<p>'. $row['bic'] .'</p>';
+				}else{
+					echo '<p> Nicht angegeben </p>';
+				}
             ?>
         </div>
         <div>
             <select class="dropdown">
                 <?php
-                    echo '<option>'. $row['zi.land'] .'</option>'
+                    echo '<option>'. $row['land'] .'</option>'
                 ?>
                 <option>Deutschland</option>
                 <option>Österreich</option>
@@ -192,7 +201,11 @@
     <!-- IBAN Box -->
     <div class="boxfull">
             <?php
-                echo '<p>'. $row['zi.iban'] .'</p>'
+                if(!empty($row['iban'])){
+					echo '<p>'. $row['iban'] .'</p>';
+				}else{
+					echo '<p> Nicht angegeben </p>';
+				}
             ?>
     </div>
 
