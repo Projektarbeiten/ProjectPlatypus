@@ -17,9 +17,11 @@ echo "
             </div>
             <div class='row'>
                 <div class='col-6'>
-	    	        <div id='banner'>
-	    		        <img src='../img/banner.png' alt='Banner'>
-	    	        </div>
+					<a href='home'>
+	    	        	<div id='banner'>
+	    		        	<img src='../img/banner.png' alt='Banner'>
+	    	        	</div>
+					</a>
                 </div
             </div>
             <div class='row'>
