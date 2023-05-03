@@ -69,12 +69,10 @@ function login($email, $conn)
         $stmt_prep->bindParam(':email', $email);
         $stmt_prep->execute();
 
-        $result_set = $stmt_prep->setFetchMode(PDO::FETCH_ASSOC);
-
-        if (!$result_set->rowCount() > 0) {
+        if (!$stmt_prep->rowCount() > 0) {
             $returns = array(0, 0);
         } else {
-            $row = $result_set->fetch();
+            $row = $stmt_prep->fetch();
             $returns = array($row['pw'], $row['u_id']);
         }
     } catch (PDOException $e) {
@@ -183,7 +181,7 @@ function getUserAdresse($userID, $conn) {
         );
         $stmt_prep_produkt->bindParam(':produktNr', $produktNr);
         $stmt_prep_produkt->execute();
-        $row = $stmt_prep_produkt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt_prep_produkt->fetch();
         $rowCount = $stmt_prep_produkt->rowCount();
         if($rowCount>0){
 			try{ // Statement for receiving Image Data
@@ -197,7 +195,7 @@ function getUserAdresse($userID, $conn) {
 						);
 						$stmt_prep_image->bindParam(':id', $row['p_b_id_ref']);
 						$stmt_prep_image->execute();
-						$row = $stmt_prep_image->fetch(PDO::FETCH_ASSOC);
+						$row = $stmt_prep_image->fetch();
 						$rowCount = $stmt_prep_produkt->rowCount();
 					}catch(PDOException $e) {
 						die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());

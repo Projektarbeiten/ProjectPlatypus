@@ -416,7 +416,7 @@ require_once('./phpFunctions/databaseConnection.php')
                         <input type="checkbox" style="text-align: left;" name="agb" required>
                     </div>
                     <hr>
-                    <button type="submit" id="login-button">Registrieren</button>
+                    <button type="submit" class="login-button">Registrieren</button>
             </form>
     </div>
 </body>
