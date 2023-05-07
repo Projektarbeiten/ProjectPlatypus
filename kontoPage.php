@@ -2,7 +2,9 @@
     session_start();
     require './phpFunctions/databaseConnection.php';
     require './phpFunctions/sqlQueries.php';
-    $debug = true;
+    require './phpFunctions/sqlInserts.php';
+
+    $debug = false;
 
     if(!isset($_SESSION['uid'])){
         header("Location: login"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
@@ -163,52 +165,84 @@
             <h3>Zahlungsmethode</h3>
         </u>
     </div>
+    <form method="post"> <!-- # TODO: Dieses Form benötigt noch Styling-->
+        <!-- Bankname Box -->
+        <?php
+        if(isset($_POST['banknamen']) && isset($_POST['bic']) && isset($_POST['zahlland']) && isset($_POST['iban'])){
 
-    <!-- Bankname Box -->
-    <div class="boxfull">
-            <?php
-                if(!empty($row['bankname'])){
-					echo '<p>'. $row['bankname'] .'</p>';
-				}else{
-					echo '<p> Nicht angegeben </p>';
-				}
-            ?>
-    </div>
+           $zahlungsmethod = array($_POST['iban'],$_POST['zahlland'],$_POST['bic'],$_POST['banknamen']);
+            $return = setZahlungsmittel($uid,$zahlungsmethod,$conn);
+            switch ($return) {
+                case 1:
+                    echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
+                    break;
 
-    <!-- BIC und Land Dropdown-Button -->
-    <div style="display: flex;">
-        <div class="boxbic">
-            <?php
-                if(!empty($row['bic'])){
-					echo '<p>'. $row['bic'] .'</p>';
-				}else{
-					echo '<p> Nicht angegeben </p>';
-				}
-            ?>
-        </div>
-        <div>
-            <select class="dropdown">
+                case 2:
+                    echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
+                    break;
+
+                case 3:
+                    echo "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>";
+                    break;
+            }
+        }
+        ?>
+        <div class="boxfull">
+        <label for="Bankname">Bankname:</label>
                 <?php
-                    echo '<option>'. $row['zahlland'] .'</option>'
+                    if(!empty($row['banknamen'])){
+                        echo '<input type="text" name="banknamen" value="'. $row['banknamen'] .'" ><br>';
+                    }else{
+                        echo '<input type="text" name="banknamen" value="Nicht angegeben"><br>';
+                    }
                 ?>
-                <option>Deutschland</option>
-                <option>Österreich</option>
-                <option>Schweiz</option>
-            </select>
         </div>
-    </div>
 
-    <!-- IBAN Box -->
-    <div class="boxfull">
-            <?php
-                if(!empty($row['iban'])){
-					echo '<p>'. $row['iban'] .'</p>';
-				}else{
-					echo '<p> Nicht angegeben </p>';
-				}
-            ?>
-    </div>
+        <!-- BIC und Land Dropdown-Button -->
+        <div style="display: flex;">
+            <div class="boxbic">
+                <label for="bic">BIC:</label>
+                <?php
+                    if(!empty($row['bic'])){
+                        echo '<input type="text" name="bic" value="'. $row['bic'] .'" ><br>';
+                    }else{
+                        echo '<input type="text" name="bic" value="Nicht angegeben"> <br>';
+                    }
+                ?>
+            </div>
+            <div>
+                <label for="zahlland">Land:</label>
+                <select name="zahlland" class="dropdown">
+                    <?php
+                    if(!empty($row['zahlland'])){
+                        echo '<option value="'. $row['zahlland'].'" selected>'. $row['zahlland'] .'</option>';
+                    }else{
+                        echo '<option value="NichtAngegeben" selected> Nicht angegeben </option>';
+                    }
+                    ?>
+                    <option value="Deutschland">Deutschland</option>
+                    <option value="Österreich">Österreich</option>
+                    <option value="Schweiz">Schweiz</option>
+                </select>
+            </div>
+        </div>
 
+        <!-- IBAN Box -->
+        <div>
+            <fieldset class="boxfull"><legend>IBAN</legend>
+                    <?php
+                        if(!empty($row['iban'])){
+                            echo '<input type="text" name="iban" value="'. $row['iban'] .'"><br>';
+                        }else{
+                            echo '<input type="text" name="iban" value="Nicht angegeben"> <br>';
+                        }
+                    ?>
+            </fieldset>
+        </div>
+        <div class=".boxrechts">
+        <button class ="button1" type="submit">Zahlungsmethode speichern</button>
+        </div>
+    </form>
     <!-- Footer -->
     <?php
     require("footer.php");
