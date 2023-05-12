@@ -518,6 +518,25 @@ padding-top: 1.5rem;
     width: 100%
 }
 
+/* ====== Shopping Cart ===== */
+
+
+.sc-nav-container{
+	display: flex;
+	margin-top: 20px;
+}
+
+.sc-boxrechts {
+	border-left: none;
+	border-right: 2px solid black;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin-bottom: 20px;
+	margin-right: auto;
+	text-align: center;
+	width: 20%;
+}
+
 /* ====== FLASH Green ====== */
 
 .flash_green {
