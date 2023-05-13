@@ -104,7 +104,7 @@
                             <p>Aktueller Preis: <strong><?php echo $produktPreis ?>€</strong></p>
                         </div>
                         <div class="trennlinie"></div>
-                        <form action="addToSession.php" method="post" id="bestell-form">
+                        <form method="post" id="bestell-form">
                             <input type="hidden" name="produkt_id" value="<?php echo $produkt_ID ?>">
                             <!-- Lieferadresse wird nur angezeigt, wenn der User eingeloggt ist. Menge und Inventar wird dynamisch angezeigt. -->
                             <label for="lieferadresse"></label>
@@ -163,20 +163,3 @@
     <script src="javascript\addToShoppingCart.js"></script>
 </body>
 </html>
-
-<?php
- function eingenschaften($eigenschaft)
- {
-     try {
-         $str_arr = explode(":", $eigenschaft);
-         echo "<tr class='eigenschaft-row'>
-         <td>{$str_arr[0]}</td>
-         <td>{$str_arr[1]}</td>
-         </tr>";
-     } catch (Exception $e) {
-         echo "<tr class='eigenschaft-row'>
-         <td>{$eigenschaft}</td>
-         </tr>";
-     }
- }
-?>

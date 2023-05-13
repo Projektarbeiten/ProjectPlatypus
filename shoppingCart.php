@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require("./phpFunctions/util.php");
+    require("./phpFunctions/databaseConnection.php");
     
 ?>
 <!DOCTYPE html>
@@ -33,16 +35,19 @@
                 </div>
             </div>
             <hr>
+            <div class='col-6'>
             <?php
+               
                 if(!empty($_Session['produkt_array'])){
-                    echo "<div class='col-6'>
-                            <p>Kein Produkt im Warenkorb</p>
-                        </div>";
+                    echo "
+                            <p>Kein Produkt im Warenkorb</p>"
+                       ;
                 }else{
-                    
+                    loadShoppingCartInformation();
                 }
                 # Produktkarte
                 ?>
+            </div>"
         </div>
     </body>
 </html>
