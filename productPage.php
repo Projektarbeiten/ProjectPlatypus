@@ -2,7 +2,6 @@
     session_start();
     $produkt_ID = $_GET['produkt_id'];
     require("./phpFunctions/databaseConnection.php");
-    require("./phpFunctions/sqlQueries.php");
     require("./phpFunctions/util.php");
 
     $conn = buildConnection(".");

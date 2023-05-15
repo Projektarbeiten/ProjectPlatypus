@@ -520,6 +520,43 @@ padding-top: 1.5rem;
 
 /* ====== Shopping Cart ===== */
 
+.sc-mengen-div{
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.sc-price{
+	border: 2px solid black;
+}
+
+.sc-price > p {
+	text-align: center;
+	color:red;
+}
+
+
+.sc-product-cart-img{
+	width: 70%;
+    height: auto;
+    float: left;
+    margin-left: 10%;
+	border-radius: 10px;
+}
+
+.sc-bt-remove-product{
+	background-color: #ffb8ff;
+    color: var(--font-color-2);
+    border-radius: 10px;
+    display: block;
+	transition: ease-in-out .2s;
+	/* # TODO:Responsive Reseizing */
+	color: #0c0b0c;
+	min-height: 2.5vw;
+	min-width: 2.5vw;
+}
+
 
 .sc-nav-container{
 	display: flex;
