@@ -52,7 +52,8 @@
             error_log(date("Y-m-d H:i:s", time()) . "\n
             Found:" . $found . "\n
             Menge: " .$menge . "\n
-            ProduktID: " .$produkt_ID."\n", 3, "my-debug.log");
+            ProduktID: " .$produkt_ID."\n
+            Session_id: ".session_id()."\n", 3, "my-debug-addToSession.log");
         #session_destroy();
     }
     if(!empty($found)){

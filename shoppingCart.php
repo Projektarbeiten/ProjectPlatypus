@@ -38,26 +38,43 @@
                 </div>
             </div>
             <hr>
-            <table class='col-6'>
-                <thead>
-                    <tr>
-                        <th class='col-1'>Produktbild</th>
-                        <th class='col-2'>Produktinformationen</th>
-                        <th class='col-1'>Menge</th>
-                        <th class='col-1-5'>Preis</th>
-                    </tr>
-                </thead>
-            </table>
+            <?php
+            if(isset($_SESSION['produkt_array']) && $_SESSION['produkt_array'] != null){
+                    echo "
+                            <table class='col-6'>
+                                <thead>
+                                    <tr>
+                                        <th class='col-1'>Produktbild</th>
+                                        <th class='col-2'>Produktinformationen</th>
+                                        <th class='col-1'>Menge</th>
+                                        <th class='col-1-5'>Preis</th>
+                                    </tr>
+                                </thead>
+                            </table> ";
+            }
+            ?>
             <div class='col-6'>
             <?php
-                if(!empty($_Session['produkt_array'])){
+            # Produktkarte
+            #var_dump($_SESSION['produkt_array']);
+                if(!isset($_SESSION['produkt_array'])){
                     echo "
-                            <p>Kein Produkt im Warenkorb</p>";
+                            <p style='text-align: center'>Kein Produkt im Warenkorb</p>";
+                            error_log(date("Y-m-d H:i:s", time()) . "\n
+                                Session_id: ".session_id()."\n", 3, "my-debug-shoppingCart.log");
                 }else{
                     loadShoppingCartInformation($conn);
                 }
-                # Produktkarte
                 ?>
+            </div>
+            <hr>
+            <div class='row'>
+                <div class='col-4'></div>
+                    <div class="sc-box-between-endprice-and-productcard col-2 ">
+                        <p>Gutschein/Rabattcode:</p>
+                        <input type="text" id="gutschein"></input>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

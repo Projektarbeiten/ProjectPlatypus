@@ -520,6 +520,10 @@ padding-top: 1.5rem;
 
 /* ====== Shopping Cart ===== */
 
+.sc-box-between-endprice-and-productcard > input {
+	height: 40px;
+}
+
 .sc-mengen-div{
 	display: flex;
 	text-align: center;
@@ -528,12 +532,12 @@ padding-top: 1.5rem;
 }
 
 .sc-price{
-	border: 2px solid black;
+
 }
 
 .sc-price > p {
 	text-align: center;
-	color:red;
+	font-size: 1.5rem;
 }
 
 

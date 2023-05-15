@@ -22,6 +22,17 @@
      }
  }
 
+	function getProductAmountOptions($lagermenge, $menge){
+
+					for ($i = 1; $i <= $lagermenge; $i++) {
+								if($i == $menge){
+									echo "<option value='$i' selected>$i</option>";
+								}else {
+									echo "<option value='$i'>$i</option>";
+								}
+							}
+	}
+
  function getCustomDate($days){
 	$dateObject = date_create_from_format('d.m.Y', date('d.m.Y', strtotime('+'.$days.' day')));
 	$result = $dateObject->format('d.m.Y');
@@ -29,14 +40,14 @@
  }
 	function loadShoppingCartInformation($conn){
 		#var_dump($_SESSION['produkt_array']);
+		ob_start();
 		foreach ($_SESSION['produkt_array'] as $sessionArray) {
 			$produkt_ID = $sessionArray['produkt'];
 			$menge = intval($sessionArray['menge']);
 			$returnsArray = getProduktInfos($produkt_ID,$conn);
 			$bezeichnung = $returnsArray[0];
-			$akt_preis = intval($returnsArray[9]);
+			$akt_preis = doubleval($returnsArray[9]);
 			$lagermenge = intval($returnsArray[8]);
-	
 			echo "
                     <div class='sc-product-cart row'>
 			    <div class='col-1'>
@@ -69,16 +80,8 @@
 				<div class='col-1 sc-mengen-div' >
                 <fieldset class='sc-fd'>
                 <legend id='sc-legend'>Menge:</legend>
-					";
-						echo "
 						<select style='width:50px' name='mengenauswahl' id='sc-mengenauswahl'>";
-							/*for ($i = 1; $i <= $lagermenge; $i++) {
-								if($i = $menge){
-									echo "<option value='$i' selected>$i</option>";
-								}else {
-									echo "<option value='$i'>$i</option>";
-								}
-							};*/
+							 echo getProductAmountOptions($lagermenge, $menge); #TODO: Verhindert das Laden des Warenkorb Inhalts
 						echo "</select> </fieldset>
 						<button type='button' class='sc-bt-remove-product'>
                             <i class='bi bi-trash-fill'></i>
@@ -86,10 +89,12 @@
 				echo "
 				</div>
 				<div class='sc-price col-1-5'>
-						<p>". $akt_preis * $menge."</p>
+						<p>". number_format(doubleval($akt_preis * $menge), 2, '. ', '' )." €</p>
 				</div>
-			</div>";
-			
+			</div>
+			<hr>";
 		}
+		ob_end_flush();
+		ob_clean();
 	}
 ?>
