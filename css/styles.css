@@ -254,7 +254,7 @@ margin-top: 50px;
 	background-color: #dea2de;
 }
 
-#login-form > input{
+#login-form > form > input{
 	width: 60%;
 	max-width: 650px;
 	min-width: 250px;
@@ -382,6 +382,12 @@ padding-top: 1.5rem;
 	font-size: 18px;
 	cursor: pointer;
 }
+
+.button1:hover {
+	background-color: #dea2de;
+}
+
+
 
 .boxlinks {
 	border: 2px solid black;
