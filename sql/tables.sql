@@ -80,6 +80,8 @@
 	create table if not exists produktbild(
 		p_b_id 			int AUTO_INCREMENT
 		,image 			Longblob
+		,order_id		VARCHAR(2000)
+		,image_name		VARCHAR(2000)
 		,PRIMARY KEY(p_b_id)
 	);
 
@@ -91,12 +93,14 @@
 
 	create table if not exists produkt(
 		p_id 			int AUTO_INCREMENT
+		,bezeichnung	VARCHAR(2000)
 		,p_b_id_ref		int DEFAULT 1 NOT NULL	-- Info: Sinn: Wenn kein Bild hinterlegt ist, dann soll ein Placeholder genutzt werden
 		,eigenschaft_1	VARCHAR(100)
 		,eigenschaft_2	VARCHAR(100)
 		,eigenschaft_3	VARCHAR(100)
 		,eigenschaft_4	VARCHAR(100)
 		,eigenschaft_5	VARCHAR(100)
+		,eigenschaft_6	VARCHAR(100)
 		,details		VARCHAR(2000)
 		,menge			int not null
 		,akt_preis		decimal(8,2)
