@@ -269,9 +269,24 @@ LIMIT 6
     }
 }
 
-function getDefaultImage($conn)
-{
-    $stmt_prep = $conn->prepare("
+    function getPrice($conn,$produkt_id){
+        $stmt_prep = $conn->prepare(
+            '
+            select
+                akt_preis
+            from
+                produkt
+            where
+                p_id = :id
+            ;');
+        $stmt_prep->bindParam(':id', $produkt_id);
+		$stmt_prep->execute();
+        $row = $stmt_prep->fetch();
+        return $row['akt_preis'];
+    }
+
+	function getDefaultImage($conn){
+		$stmt_prep = $conn->prepare("
 		Select
 			image
 		from

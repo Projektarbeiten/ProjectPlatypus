@@ -5,7 +5,7 @@ echo "
             <div class='row'>
                 <div class='col-6' id='top-bar'>
 	    		    <div class='header-icons'>
-						<a href='cart'>
+						<a href='shoppingCart'>
 	    			    	<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdVpMdS6yhVyKICX1nqw6z83TYQpwBD6C2B-A91gpqww&s' height='50' alt='Warenkorb'>
 	    			    	&nbsp;
 						</a>
