@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+	header("Location: index");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +115,7 @@ session_start();
     <?php
     require("footer.php");
     ?>
-    
+
 </body>
 
 </html>

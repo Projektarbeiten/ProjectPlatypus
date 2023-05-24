@@ -3,7 +3,9 @@
     require './phpFunctions/databaseConnection.php';
     require './phpFunctions/sqlQueries.php';
     require './phpFunctions/sqlInserts.php';
-
+	if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+		header("Location: index");
+	}
     $debug = false;
 
     if(!isset($_SESSION['uid'])){

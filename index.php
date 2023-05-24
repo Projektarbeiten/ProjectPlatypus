@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 require './phpFunctions/databaseConnection.php';
 require './phpFunctions/sqlQueries.php';
 $conn = buildConnection("./");
@@ -23,8 +24,8 @@ $conn = buildConnection("./");
 				<div class="col-6">
 					<div id="login-form">
 						<p>Bitte den Code eingeben</p>
-						<for method="post" action="register.php">
-							<input type="text" id="code"></input>
+						<for method="post">
+							<input type="text" id="code" name='code'></input>
 							<div style="display: flex">
 								<button class="boxrechts" id="back">Zurück</button>
 								<button class="boxlinks" id="eingabe">Eingabe</button>
@@ -33,6 +34,15 @@ $conn = buildConnection("./");
 					</div>
 				</div>
 		</div>
+		<?php
+			if(isset($_POST['code'])){
+				$conn = buildConnection('.');
+				if(checkCode($_POST['code'],$conn)){
+					$_SESSION['access_token'] = true;
+					header("Location: home");
+				}
+			}
+		?>
 	</div>
 	<div id="login-footer">>
 	<?php

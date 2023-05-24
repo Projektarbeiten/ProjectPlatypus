@@ -165,6 +165,31 @@ function getUserAdresse($userID, $conn) {
         }
     }
 
+
+
+	function getCode($conn, $code){
+		$stmt_prep = $conn->prepare(
+			'
+			Select
+				valid,
+				insertDate
+			from
+				codes
+			where
+				code = :code;
+			'
+		);
+		$stmt_prep->bindParam(':code', $code);
+		$stmt_prep->execute();
+		$row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
+		$rowCount = $stmt_prep->rowCount();
+		if($rowCount >0){
+			return $row;
+		}else{
+			$rowErsatz = array('valid' => false);
+			return $rowErsatz;
+		}
+	}
 	/**
 	 * Summary of getProductImageData
 	 * @param mixed $produktNr

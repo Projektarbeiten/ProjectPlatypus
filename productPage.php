@@ -1,5 +1,8 @@
 <?php
     session_start();
+	if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+		header("Location: index");
+	}
     $produkt_ID = $_GET['produkt_id'];
     require("./phpFunctions/databaseConnection.php");
     require("./phpFunctions/sqlQueries.php");
