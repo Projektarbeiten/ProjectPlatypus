@@ -1,5 +1,9 @@
 <?php
-require_once('./phpFunctions/databaseConnection.php')
+session_start();
+require_once('./phpFunctions/databaseConnection.php');
+if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+	header("Location: index");
+}
     ?>
 <!DOCTYPE html>
 <html lang="en">

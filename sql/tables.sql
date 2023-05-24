@@ -1,5 +1,14 @@
 -- user - Login - Registrierung --
 
+	create table if not exists codes(
+		c_id int not null auto_increment,
+		code varchar(255) not null,
+		valid boolean not null,
+		value varchar(100) not null,
+		insertDate date default sysdate(),
+        PRIMARY Key(c_id)
+	)
+
 	create table if not exists passwort(
 		pw_id 		int AUTO_INCREMENT
 		,pw		VARCHAR(2000)

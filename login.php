@@ -1,9 +1,12 @@
 <?php
 session_start();
-
+if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+	header("Location: index");
+}
 require './phpFunctions/databaseConnection.php';
 require './phpFunctions/sqlQueries.php';
 $conn = buildConnection("./");
+
 
 ?>
 <!DOCTYPE html>
