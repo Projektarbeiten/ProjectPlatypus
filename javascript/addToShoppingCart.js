@@ -8,7 +8,7 @@ $("#cart-button").click(function() {
         data: datastring,
         success: function (response) {
             var flash;
-            if(response.includes("200")){ // Überprüft Response
+            if(response.includes("201") || response.includes("200")){ // Überprüft Response
                 flash = $(".flash_green"); // Beeinflusst Flash Message
                 $(".flash__body_g").html("Erfolgreich zum Warenkorb hinzugefügt");
                 //alert('Success: '+response);

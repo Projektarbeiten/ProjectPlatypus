@@ -7,7 +7,8 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
-
+    $menge = 'leer';
+    $produkt_ID = 'leer';
     if(!isset($_SESSION['produkt_array'])){
         $_SESSION['produkt_array'] = array();
     }
@@ -52,7 +53,8 @@
             error_log(date("Y-m-d H:i:s", time()) . "\n
             Found:" . $found . "\n
             Menge: " .$menge . "\n
-            ProduktID: " .$produkt_ID."\n", 3, "my-debug.log");
+            ProduktID: " .$produkt_ID."\n
+            Session_id: ".session_id()."\n", 3, "my-debug-addToSession.log");
         #session_destroy();
     }
     if(!empty($found)){

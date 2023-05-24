@@ -518,6 +518,148 @@ padding-top: 1.5rem;
     width: 100%
 }
 
+/* ====== Shopping Cart ===== */
+
+.sc-box-between-endprice-and-productcard > input {
+	height: 40px;
+}
+
+.sc-mengen-div{
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.sc-price-before{
+	margin-top: 2.5%;
+	border-top: 1.5px solid black;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+}
+
+.sc-mwst-box{
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	margin-top: -5.5%;
+}
+
+.sc-price-end-box{
+	align-content: center;
+	justify-content: center;
+	display: flex;
+}
+
+.sc-price-safed-box{
+	border: 2px solid black;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	height:2.5vh;
+	
+}
+
+#sc-price-safed-tag{
+	text-align: right;
+	margin: auto;
+}
+
+#sc-safed{
+	text-align: left;
+	margin: auto;
+}
+
+#sc-gs{
+	text-align: left;
+	font-weight: bold;
+	font-size: 1.6rem;
+}
+#sc-mwst{
+	text-align: left;
+}
+
+#sc-price-end-tag{
+	text-align: right;
+	font-size: 1.6rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+
+}
+
+#sc-price-mwst{
+	text-align: right;
+	font-size: 1.0rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
+
+#sc-gutschein{
+	height: 75%;
+}
+#sc-zw {
+	font-weight: bold;
+	text-align: left;
+}
+
+#sc-price-before-tag{
+	font-size: 1.5rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	text-align: right;
+}
+
+.sc-price{
+
+}
+
+.sc-price > p {
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+
+.sc-product-cart-img{
+	width: 70%;
+    height: auto;
+    float: left;
+    margin-left: 10%;
+	border-radius: 10px;
+}
+
+.sc-bt-remove-product{
+	background-color: #ffb8ff;
+    color: var(--font-color-2);
+    border-radius: 10px;
+    display: block;
+	transition: ease-in-out .2s;
+	/* # TODO:Responsive Reseizing */
+	color: #0c0b0c;
+	min-height: 2.5vw;
+	min-width: 2.5vw;
+}
+
+
+.sc-nav-container{
+	display: flex;
+	margin-top: 20px;
+}
+
+.sc-boxrechts {
+	border-left: none;
+	border-right: 2px solid black;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin-bottom: 20px;
+	margin-right: auto;
+	text-align: center;
+	width: 20%;
+}
+
 /* ====== FLASH Green ====== */
 
 .flash_green {
