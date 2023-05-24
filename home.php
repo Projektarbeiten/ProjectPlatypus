@@ -1,5 +1,10 @@
 <?php
 session_start();
+require("./phpFunctions/databaseConnection.php");
+require("./phpFunctions/util.php");
+require("./phpFunctions/sqlQueries.php");
+$conn = buildConnection(".");
+$bestseller = getBestseller($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,29 +49,6 @@ session_start();
                         <p class="kategorie-text">Kategorie Text 3</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2 kategorie">
-                        <h2 class="kategorie-name">Kategorie 4</h2>
-                        <a href="">
-                            <img class="kategorie-bild" src="./img/testBild.png" alt="Undefined picture">
-                        </a>
-                        <p class="kategorie-text">Kategorie Text 4</p>
-                    </div>
-                    <div class="col-2 kategorie">
-                        <h2 class="kategorie-name">Kategorie 5</h2>
-                        <a href="">
-                            <img class="kategorie-bild" src="./img/testBild.png" alt="Undefined picture">
-                        </a>
-                        <p class="kategorie-text">Kategorie Text 5</p>
-                    </div>
-                    <div class="col-2 kategorie">
-                        <h2 class="kategorie-name">Kategorie 6</h2>
-                        <a href="">
-                            <img class="kategorie-bild" src="./img/testBild.png" alt="Undefined picture">
-                        </a>
-                        <p class="kategorie-text">Kategorie Text 6</p>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -77,7 +59,13 @@ session_start();
                 </div>
 
                 <!-- Hier werden die Produkte durch php eingefügt (Beispiel später entfernen)-->
-
+                <?php
+                $counter = 0;
+                    foreach($bestseller as $product) {
+                        $info = getProduktInfos($product, $conn);
+                        $image = getImage($product, $conn);
+                    }
+                ?>
                     <div class="row">
                         <div class="col-2 produkt">
                             <h2 class="Produkt-name">Produkt 1</h2>
@@ -99,6 +87,29 @@ session_start();
                                 <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
                             </a>
                             <p class="Produkt-text">Produkt Text 3</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 produkt">
+                            <h2 class="Produkt-name">Produkt 4</h2>
+                            <a href="http://localhost/productPage?produkt_id=2">
+                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
+                            </a>
+                            <p class="Produkt-text">Produkt Text 4</p>
+                        </div>
+                        <div class="col-2 produkt">
+                            <h2 class="Produkt-name">Produkt 5</h2>
+                            <a href="">
+                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
+                            </a>
+                            <p class="Produkt-text">Produkt Text 5</p>
+                        </div>
+                        <div class="col-2 produkt">
+                            <h2 class="Produkt-name">Produkt 6</h2>
+                            <a href="">
+                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
+                            </a>
+                            <p class="Produkt-text">Produkt Text 6</p>
                         </div>
                     </div>
                 </div>
