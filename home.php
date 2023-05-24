@@ -5,7 +5,6 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 }
 require("./phpFunctions/databaseConnection.php");
 require("./phpFunctions/util.php");
-require("./phpFunctions/sqlQueries.php");
 $conn = buildConnection(".");
 $bestseller = getBestseller($conn);
 ?>

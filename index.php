@@ -3,7 +3,6 @@ session_start();
 
 
 require ('./phpFunctions/databaseConnection.php');
-require ('./phpFunctions/sqlQueries.php');
 require ("./phpFunctions/util.php");
 $conn = buildConnection("./");
 

@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require './phpFunctions/databaseConnection.php';
-    require './phpFunctions/sqlQueries.php';
-    require './phpFunctions/sqlInserts.php';
+    require ('./phpFunctions/databaseConnection.php');
+    require ('./phpFunctions/sqlQueries.php');
+    require ('./phpFunctions/sqlInserts.php');
 	if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 		header("Location: index");
 	}
