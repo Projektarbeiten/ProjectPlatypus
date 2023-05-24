@@ -57,62 +57,32 @@ $bestseller = getBestseller($conn);
                 <div class="row">
                     <h1 id="bestseller-headline" class="col-6">Bestseller Shit</h1>
                 </div>
-
-                <!-- Hier werden die Produkte durch php eingefügt (Beispiel später entfernen)-->
                 <?php
                 $counter = 0;
-                    foreach($bestseller as $product) {
-                        $info = getProduktInfos($product, $conn);
-                        $image = getImage($product, $conn);
+                foreach ($bestseller as $product) {
+                    $info = getProduktInfos($product, $conn);
+                    $picture = getImage($product, $conn);
+                    $produktName = $info[0];
+                    $produktPreis = $info[9];
+                    if ($counter == 0) {
+                        echo "<div class='row'>";
                     }
+                    echo ("<div class='col-2 produkt'>
+                        <h2 class='Produkt-name' style='font-size: 1.2rem'>$produktName</h2>
+                        <a href='http://localhost/productPage?produkt_id=$product'>
+                            <img class='Produkt-bild' src='$picture' alt='Undefined picture'>
+                        </a>
+                        <p class='Produkt-text'><strong>{$produktPreis}€</strong></p>
+                    </div>");
+                    ++$counter;
+                    if ($counter == 3) {
+                        echo "</div>";
+                        $counter = 0;
+                    }
+                }
                 ?>
-                    <div class="row">
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 1</h2>
-                            <a href="http://localhost/productPage?produkt_id=2">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 1</p>
-                        </div>
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 2</h2>
-                            <a href="">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 2</p>
-                        </div>
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 3</h2>
-                            <a href="">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 3</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 4</h2>
-                            <a href="http://localhost/productPage?produkt_id=2">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 4</p>
-                        </div>
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 5</h2>
-                            <a href="">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 5</p>
-                        </div>
-                        <div class="col-2 produkt">
-                            <h2 class="Produkt-name">Produkt 6</h2>
-                            <a href="">
-                                <img class="Produkt-bild" src="./img/testBild.png" alt="Undefined picture">
-                            </a>
-                            <p class="Produkt-text">Produkt Text 6</p>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
 
 
@@ -123,7 +93,7 @@ $bestseller = getBestseller($conn);
     <?php
     require("footer.php");
     ?>
-    
+
 </body>
 
 </html>
