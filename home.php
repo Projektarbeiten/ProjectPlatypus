@@ -26,7 +26,6 @@ $bestseller = getBestseller($conn);
         <div id="kategorien">
             <div class="container">
                 <div class="row">
-
                     <div class="col-2 kategorie">
                         <h2 class="kategorie-name">Kategorie 1</h2>
                         <a href="">
@@ -81,11 +80,7 @@ $bestseller = getBestseller($conn);
                     }
                 }
                 ?>
-
-
             </div>
-
-
         </div>
     </main>
 
@@ -95,5 +90,4 @@ $bestseller = getBestseller($conn);
     ?>
 
 </body>
-
 </html>
