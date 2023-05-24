@@ -28,12 +28,15 @@ echo "
                 <div class='col-6'>
 	    	        <div id='bottom-bar'>
 	    		        <div class='search-box'>
-	    			        <input type='text' placeholder='Search'>
+							<form action='searchpageresult.php' id='search-form' method='get'>
+	    			        <input name='search' type='text' id='search-bar' placeholder='Search'>
+							</form>
 	    		        </div>
 	    	        </div>
                 </div>    
             </div>
         </div>
 	</header>
+	<script src='./javascript/searchEnter.js'></script>
     ";
 ?>
