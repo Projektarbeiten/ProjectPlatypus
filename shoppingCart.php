@@ -24,7 +24,8 @@
         require("header.php");
         ?>
         <!-- /Header -->
-        <div class="container">
+        <main>
+        <div class="container artikel-container">
             <div style="display: flex;">
                 <div class="boxlinks" style="background-color: grey; opacity: 90%">
                     <h3>
@@ -57,7 +58,7 @@
             <?php
             # Produktkarte
             #var_dump($_SESSION['produkt_array']);
-                if(!isset($_SESSION['produkt_array'])){
+                if(!isset($_SESSION['produkt_array'])|| empty(($_SESSION['produkt_array']))){
                     echo "
                             <p style='text-align: center'>Kein Produkt im Warenkorb</p>";
                             error_log(date("Y-m-d H:i:s", time()) . "\n
@@ -67,15 +68,54 @@
                 }
                 ?>
             </div>
-            <hr>
-            <div class='row'>
-                <div class='col-4'></div>
-                    <div class="sc-box-between-endprice-and-productcard col-2 ">
-                        <p>Gutschein/Rabattcode:</p>
-                        <input type="text" id="gutschein"></input>
+            <?php
+            if(isset($_SESSION['produkt_array']) && $_SESSION['produkt_array'] != null){
+                echo "
+                    <div class='col-4'></div>
+                        <div class='sc-box-between-endprice-and-productcard col-2 '>
+                            <p>Gutschein/Rabattcode:</p>
+                            <input type='text' id='sc-gutschein' class='col-4'></input>
+                            <div class='col-4 sc-price-before'>
+                                <p id='sc-zw'> Zwischensumme: </p>
+                                <p id='sc-price-before-tag'></p>
+                            </div>
+                            <div>
+                                <div class='col-4 sc-mwst-box'>
+                                    <p id='sc-mwst'> 19% MwSt: </p>
+                                    <p id='sc-price-mwst'></p>
+                                </div>
+                            </div>
+                        </div>
+                    <hr>
+                    <div class='col-4' ></div>
+                        <div class='col-2'>
+                            <div class='col-4 sc-price-end-box'>
+                                <p id='sc-gs'> Gesamtsumme: </p>
+                                <p id='sc-price-end-tag'></p>
+                            </div>
+                            <div class='col-4 sc-price-safed-box' >
+                                <p id='sc-safed'> Du sparst bei diesem Einkauf:  </p>
+                                <p id='sc-price-safed-tag'></p>
+                            </div>
+                        </div>
+                <div class='row'>
+                    <div class='col-1'></div>
+                    <div class='col-2'>
+                        <button id='buy-more'>Weiter Einkaufen</button>
+                    </div>
+                    <div class='col-1'></div>
+                    <div class='col-2'>
+                        <button id='zur-kasse'>Zur Kasse</button>
                     </div>
                 </div>
-            </div>
+            </div>";
+            } #TODO: Button Styling überarbeiten (mehr Platz)?>
         </div>
+        </main>
+            <?php
+            require("./footer.php");
+            ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="javascript\removeFromShoppingCart.js"></script>
     </body>
 </html>

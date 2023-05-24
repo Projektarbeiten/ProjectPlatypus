@@ -22,6 +22,8 @@
      }
  }
 
+ // TODO: Write Debug Log Function
+
 	function getProductAmountOptions($lagermenge, $menge){
 
 					for ($i = 1; $i <= $lagermenge; $i++) {
@@ -49,7 +51,7 @@
 			$akt_preis = doubleval($returnsArray[9]);
 			$lagermenge = intval($returnsArray[8]);
 			echo "
-                    <div class='sc-product-cart row'>
+                    <article class='sc-product-cart row' id='".$produkt_ID."'>
 			    <div class='col-1'>
 					<img src='" . getImage($produkt_ID, $conn) . "' class='sc-product-cart-img' style' width: 25px;
 					height: 25px;'>
@@ -80,7 +82,7 @@
 				<div class='col-1 sc-mengen-div' >
                 <fieldset class='sc-fd'>
                 <legend id='sc-legend'>Menge:</legend>
-						<select style='width:50px' name='mengenauswahl' id='sc-mengenauswahl'>";
+						<select style='width:50px' name='mengenauswahl' class='sc-mengenauswahl'>";
 							 echo getProductAmountOptions($lagermenge, $menge); #TODO: Verhindert das Laden des Warenkorb Inhalts
 						echo "</select> </fieldset>
 						<button type='button' class='sc-bt-remove-product'>
@@ -89,10 +91,11 @@
 				echo "
 				</div>
 				<div class='sc-price col-1-5'>
-						<p>". number_format(doubleval($akt_preis * $menge), 2, '. ', '' )." €</p>
+						<p class='sc-article-price'>". number_format(doubleval($akt_preis * $menge), 2, '. ', '' )." €</p>
 				</div>
-			</div>
-			<hr>";
+			</article>
+			<hr>
+			";
 		}
 		ob_end_flush();
 		ob_clean();

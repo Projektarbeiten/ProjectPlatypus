@@ -531,6 +531,88 @@ padding-top: 1.5rem;
 	align-items: center;
 }
 
+.sc-price-before{
+	margin-top: 2.5%;
+	border-top: 1.5px solid black;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+}
+
+.sc-mwst-box{
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	margin-top: -5.5%;
+}
+
+.sc-price-end-box{
+	align-content: center;
+	justify-content: center;
+	display: flex;
+}
+
+.sc-price-safed-box{
+	border: 2px solid black;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	height:2.5vh;
+	
+}
+
+#sc-price-safed-tag{
+	text-align: right;
+	margin: auto;
+}
+
+#sc-safed{
+	text-align: left;
+	margin: auto;
+}
+
+#sc-gs{
+	text-align: left;
+	font-weight: bold;
+	font-size: 1.6rem;
+}
+#sc-mwst{
+	text-align: left;
+}
+
+#sc-price-end-tag{
+	text-align: right;
+	font-size: 1.6rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+
+}
+
+#sc-price-mwst{
+	text-align: right;
+	font-size: 1.0rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
+
+#sc-gutschein{
+	height: 75%;
+}
+#sc-zw {
+	font-weight: bold;
+	text-align: left;
+}
+
+#sc-price-before-tag{
+	font-size: 1.5rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	text-align: right;
+}
+
 .sc-price{
 
 }

@@ -7,7 +7,8 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
-
+    $menge = 'leer';
+    $produkt_ID = 'leer';
     if(!isset($_SESSION['produkt_array'])){
         $_SESSION['produkt_array'] = array();
     }
