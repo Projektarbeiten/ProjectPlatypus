@@ -2,8 +2,9 @@
 session_start();
 
 
-require './phpFunctions/databaseConnection.php';
-require './phpFunctions/sqlQueries.php';
+require ('./phpFunctions/databaseConnection.php');
+require ('./phpFunctions/sqlQueries.php');
+require ("./phpFunctions/util.php");
 $conn = buildConnection("./");
 
 ?>
@@ -24,11 +25,11 @@ $conn = buildConnection("./");
 				<div class="col-6">
 					<div id="login-form">
 						<p>Bitte den Code eingeben</p>
-						<for method="post">
+						<form method="post">
 							<input type="text" id="code" name='code'></input>
 							<div style="display: flex">
 								<button class="boxrechts" id="back">Zurück</button>
-								<button class="boxlinks" id="eingabe">Eingabe</button>
+								<button type="submit" class="boxlinks" id="eingabe">Eingabe</button>
 							</div>
 						</form>
 					</div>
@@ -49,6 +50,7 @@ $conn = buildConnection("./");
 		require("footer.php");
 	?>
 	</div>
-	<script src="javascript/indexLogin.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<!--<script src="javascript/indexLogin.js"></script>-->
 </body>
 </html>
