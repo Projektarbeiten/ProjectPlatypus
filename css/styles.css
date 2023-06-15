@@ -61,6 +61,11 @@
 	.trennlinie {
 		border-bottom: 2px solid black
 	}
+
+	input {
+		border-color: var(--font-color);
+		border-style: solid;
+	}
 	
 	/* === HEADER === */
 	
@@ -227,7 +232,6 @@
 		margin: 50px auto;
 		position: relative;
 		padding: 10px;
-	
 		background-color: var(--theme-color-4);
 	}
 	
@@ -513,6 +517,10 @@
 	.col-4 {
 		width: 66.666%
 	}
+
+	.col-5 {
+		width: 83.333%;
+	}
 	
 	.col-6 {
 		width: 100%
@@ -753,17 +761,36 @@
 	
 	 /* === Authentication === */
 	
+  	#code-login-form {
+		text-align: center;
+			border: 2px solid var(--font-color-3);
+			border-radius: 5px;
+			width: 80%;
+			max-width: 750px;
+			min-width: 250px;
+			margin: 50px auto;
+			position: relative;
+			background-color: var(--theme-color-4);
+			height: 140px;
+	}
+
 	#code {
 		margin-bottom: 20px;
 		padding: 4px;
 		border-radius: 7px;
+		width: 200px;
+		outline: 0px var(--font-color);
+		
+		
 	}
-	#back {
-		height: 27px;
+
+	.access-code-button {
+		height:25px;
 	}
 	
-	#eingabe {
-		height : 27px;
+		.access-code-button:hover, .access-code-button:focus {
+		background-color: var(--theme-color-3);
+		color: var(--font-color);
 	}
 	
 	
