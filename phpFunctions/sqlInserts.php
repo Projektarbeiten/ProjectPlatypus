@@ -1,6 +1,7 @@
 <?php
 
-function setZahlungsmittel($uid,$infoArray, $conn){
+function setZahlungsmittel($uid, $infoArray, $conn)
+{
     $lastRowID = 0;
     try {
         $stmt_prep_select = $conn->prepare(
@@ -14,7 +15,7 @@ function setZahlungsmittel($uid,$infoArray, $conn){
         $stmt_prep_select->bindParam(':u_id', $uid);
         $stmt_prep_select->execute();
         $row = $stmt_prep_select->fetch();
-        if(empty($row['z_id_ref'])){
+        if (empty($row['z_id_ref'])) {
             # Zahlungsmethoden Statement
             $stmt_prep_insert_zi = $conn->prepare(
                 'insert into zahlungsinformationen
@@ -66,7 +67,7 @@ function setZahlungsmittel($uid,$infoArray, $conn){
             $stmt_prep_insert_update_user->bindParam(':u_id', $uid);
             $stmt_prep_insert_update_user->execute();
             return 1;
-        }else{
+        } else {
             $stmt_prep_update = $conn->prepare(
                 'update
                     zahlungsinformationen as zi
@@ -91,10 +92,7 @@ function setZahlungsmittel($uid,$infoArray, $conn){
         }
     } catch (PDOException $e) {
         error_log(date("Y-m-d H:i:s", time()) . "Setzten der Zahlungsbedingung ist gescheitert - setZahlungsmittel() - sqlInserts.php \n"
-        ."SQL Fehler: \n ".$e."\n", 3, "my-errors-phpFuctions.log");
+            . "SQL Fehler: \n " . $e . "\n", 3, "my-errors-phpFuctions.log");
         return 3;
     }
 }
-
-
-?>

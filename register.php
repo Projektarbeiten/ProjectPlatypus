@@ -1,10 +1,10 @@
 <?php
 session_start();
 require_once('./phpFunctions/databaseConnection.php');
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-	header("Location: index");
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
 }
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +42,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                 $preparedMailCheck->bindParam(':mail', $email);
                 $preparedMailCheck->execute();
                 if ($preparedMailCheck->rowCount() > 0) {
-                    echo (
-                        "<script type='text/javascript' language='Javascript'>alert('E-Mail ist bereits vorhanden')</script>");
-
+                    echo ("<script type='text/javascript' language='Javascript'>alert('E-Mail ist bereits vorhanden')</script>");
                 } else {
                     $hashpw = password_hash($passwort, PASSWORD_DEFAULT);
                     $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw)";
@@ -78,8 +76,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     }
                 }
             } else {
-                echo (
-                    "<script type='text/javascript' language='Javascript'>alert('Passwort stimmen nich überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
+                echo ("<script type='text/javascript' language='Javascript'>alert('Passwort stimmen nich überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
             }
         }
         ?>
@@ -411,7 +408,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                         <h3>Sicherheit</h3>
                         <hr>
                         <label for="pw">Passwort</label>
-                        <input type="password" name="pw" style="width: 70%;"title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
+                        <input type="password" name="pw" style="width: 70%;" title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
                         <br>
                         <label for="pwWiederholen">Passwort <br>wiederholen</label>
                         <input type="password" name="pwWiederholen" style="width: 67.5%;" required>

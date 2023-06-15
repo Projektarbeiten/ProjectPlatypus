@@ -1,45 +1,46 @@
 <?php
-    session_start();
-	if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-		header("Location: index");
-	}
-    $produkt_ID = $_GET['produkt_id'];
-    require("./phpFunctions/databaseConnection.php");
-    require("./phpFunctions/util.php");
+session_start();
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
+}
+$produkt_ID = $_GET['produkt_id'];
+require("./phpFunctions/databaseConnection.php");
+require("./phpFunctions/util.php");
 
-    $conn = buildConnection(".");
-    $pInfo = getProduktInfos($produkt_ID, $conn);
+$conn = buildConnection(".");
+$pInfo = getProduktInfos($produkt_ID, $conn);
 
-    if ($pInfo === "ERROR") {
-        # Wird ausgeführt, wenn unter der Produkt ID kein oder ein unvollständiges Verzeichnis gefunden wird.
-        header("Location: error404.php");
-    }
-    $produktName = $pInfo[0];
-    $produktEigenschaft1 = $pInfo[1];
-    $produktEigenschaft2 = $pInfo[2];
-    $produktEigenschaft3 = $pInfo[3];
-    $produktEigenschaft4 = $pInfo[4];
-    $produktEigenschaft5 = $pInfo[5];
-    $produktEigenschaft6 = $pInfo[6];
-    $produktBeschreibung = $pInfo[7];
-    $produktMenge = $pInfo[8];
-    // Eventuell noch Rabatt (auch im SQL Query hinzufuegen)
-    $produktPreis = $pInfo[9];
-    $oemBezeichnung = $pInfo[10];
+if ($pInfo === "ERROR") {
+    # Wird ausgeführt, wenn unter der Produkt ID kein oder ein unvollständiges Verzeichnis gefunden wird.
+    header("Location: error404.php");
+}
+$produktName = $pInfo[0];
+$produktEigenschaft1 = $pInfo[1];
+$produktEigenschaft2 = $pInfo[2];
+$produktEigenschaft3 = $pInfo[3];
+$produktEigenschaft4 = $pInfo[4];
+$produktEigenschaft5 = $pInfo[5];
+$produktEigenschaft6 = $pInfo[6];
+$produktBeschreibung = $pInfo[7];
+$produktMenge = $pInfo[8];
+// Eventuell noch Rabatt (auch im SQL Query hinzufuegen)
+$produktPreis = $pInfo[9];
+$oemBezeichnung = $pInfo[10];
 
-    if (isset($_SESSION['uid'])) {
-        $adressInfo = getUserAdresse($_SESSION['uid'], $conn);
-        $userLand =  $adressInfo[0];
-        $userPlz = $adressInfo[1];
-        $userOrt = $adressInfo[2];
-        $userStrasse = $adressInfo[3];
-        $userHausnr = $adressInfo[4];
-        $userAdresszusatz = $adressInfo[5];
-    }
+if (isset($_SESSION['uid'])) {
+    $adressInfo = getUserAdresse($_SESSION['uid'], $conn);
+    $userLand =  $adressInfo[0];
+    $userPlz = $adressInfo[1];
+    $userOrt = $adressInfo[2];
+    $userStrasse = $adressInfo[3];
+    $userHausnr = $adressInfo[4];
+    $userAdresszusatz = $adressInfo[5];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,6 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <title><?php $produktName ?></title> <!-- Name will be changed from product name -->
 </head>
+
 <body>
     <!-- Header -->
     <?php
@@ -158,10 +160,11 @@
         </div>
     </main>
 
-   <?php
+    <?php
     require("./footer.php");
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="javascript\addToShoppingCart.js"></script>
 </body>
+
 </html>

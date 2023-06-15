@@ -138,13 +138,13 @@
 
 -- bestellung --
 
-	create table if not exists bestell_Historie(
+/*	create table if not exists bestell_Historie(
 		b_h_id			int AUTO_INCREMENT
 		,u_id_ref		int not null
 		,b_id_ref		int not null
 		,PRIMARY KEY(b_h_id)
 	);
-
+*/
 
 
 	create table if not exists bestellposition(
@@ -159,7 +159,7 @@
 
 	create table if not exists bestellung(
 		b_id 						int AUTO_INCREMENT
-		,b_p_id_ref					int
+--		,b_p_id_ref					int
 		,u_id_ref					int
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
@@ -172,19 +172,20 @@
 			alter table bestellung
 			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen(zi_id);
 
-			alter table bestellung
-			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
+--			alter table bestellung
+--			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
 
 			alter table bestellung
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 		--
 
 		-- Foreign Keys for bestell_Historie
-			alter table bestell_Historie
+/*		alter table bestell_Historie
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 
 			alter table bestell_Historie
 			add FOREIGN KEY(b_id_ref) REFERENCES bestellung(b_id);
+*/
 		--
 
 		-- Foreign Keys for bestellposition

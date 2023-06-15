@@ -47,8 +47,8 @@ $conn = buildConnection("./");
 		require("footer.php");
 		?>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	<script src="javascript/indexLogin.js"></script>
+	<script src="./javascript/jquery-3.6.1.min.js"></script>
+	<script src="./javascript/indexLogin.js"></script>
 </body>
 
 </html>

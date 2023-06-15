@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 	header("Location: index");
 }
 require './phpFunctions/databaseConnection.php';
@@ -74,4 +74,5 @@ $conn = buildConnection("./");
 		?>
 	</div>
 </body>
+
 </html>

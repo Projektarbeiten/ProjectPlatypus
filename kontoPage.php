@@ -1,21 +1,21 @@
 <?php
-    session_start();
-    require ('./phpFunctions/databaseConnection.php');
-    require ('./phpFunctions/sqlQueries.php');
-    require ('./phpFunctions/sqlInserts.php');
-	if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-		header("Location: index");
-	}
-    $debug = false;
+session_start();
+require('./phpFunctions/databaseConnection.php');
+require('./phpFunctions/sqlQueries.php');
+require('./phpFunctions/sqlInserts.php');
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
+}
+$debug = false;
 
-    if(!isset($_SESSION['uid'])){
-        header("Location: login"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
-        exit;
-    }else{
-        $uid = $_SESSION['uid'];
-        $conn = buildConnection(".");
-        $row = getAccountInformation($uid, $conn);
-    }
+if (!isset($_SESSION['uid'])) {
+    header("Location: login"); // TODO: Login Seite hinzufügen - Weiterleitung wenn man nicht eingeloggt ist
+    exit;
+} else {
+    $uid = $_SESSION['uid'];
+    $conn = buildConnection(".");
+    $row = getAccountInformation($uid, $conn);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,16 +52,16 @@
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-				if(!empty($row['titel'])){
-					echo '<p>'. $row['titel'] .'</p>';
-				}else{
-					echo '<p>'.'</p>';
-				}
+            if (!empty($row['titel'])) {
+                echo '<p>' . $row['titel'] . '</p>';
+            } else {
+                echo '<p>' . '</p>';
+            }
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['anrede'] .'</p>';
+            echo '<p>' . $row['anrede'] . '</p>';
             ?>
         </div>
     </div>
@@ -70,28 +70,28 @@
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-                echo '<p>'. $row['vorname'] .'</p>';
+            echo '<p>' . $row['vorname'] . '</p>';
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['nachname'] .'</p>';
+            echo '<p>' . $row['nachname'] . '</p>';
             ?>
         </div>
     </div>
 
     <!-- Email Box -->
     <div class="boxfull">
-            <?php
-                echo '<p>'. $row['email'] .'</p>';
-            ?>
+        <?php
+        echo '<p>' . $row['email'] . '</p>';
+        ?>
     </div>
 
     <!-- Geburtsdatum Box -->
     <div class="boxgeb">
-            <?php
-                echo '<p>'. date_format(date_create($row['geburtsdatum']),"d.m.Y") .'</p>';
-            ?>
+        <?php
+        echo '<p>' . date_format(date_create($row['geburtsdatum']), "d.m.Y") . '</p>';
+        ?>
     </div>
 
     <div class="password">
@@ -115,21 +115,21 @@
 
     <!-- Land Box -->
     <div class="boxfull">
-            <?php
-				echo'<p>'.$row['userland'].'</p>';
-            ?>
+        <?php
+        echo '<p>' . $row['userland'] . '</p>';
+        ?>
     </div>
 
     <!-- Postleitzahl und Ort Boxen -->
     <div style="display: flex;">
         <div class="boxlinks">
             <?php
-                echo '<p>'. $row['plz'] .'</p>';
+            echo '<p>' . $row['plz'] . '</p>';
             ?>
         </div>
         <div class="boxrechts">
             <?php
-                echo '<p>'. $row['ort'] .'</p>';
+            echo '<p>' . $row['ort'] . '</p>';
             ?>
         </div>
     </div>
@@ -138,25 +138,25 @@
     <div style="display: flex;">
         <div class="boxstraße">
             <?php
-                echo '<p>'. $row['strasse'] .'</p>';
+            echo '<p>' . $row['strasse'] . '</p>';
             ?>
         </div>
         <div class="boxstrnr">
             <?php
-                echo '<p>'. $row['hausnr'] .'</p>';
+            echo '<p>' . $row['hausnr'] . '</p>';
             ?>
         </div>
     </div>
 
     <!-- Adresszusatz Box -->
     <div class="boxfull">
-            <?php
-                if(!empty($row['adresszusatz'])){
-					echo '<p>'. $row['adresszusatz'] .'</p>';
-				}else{
-					echo '<p> Leer </p>';
-				}
-            ?>
+        <?php
+        if (!empty($row['adresszusatz'])) {
+            echo '<p>' . $row['adresszusatz'] . '</p>';
+        } else {
+            echo '<p> Leer </p>';
+        }
+        ?>
     </div>
 
     <br>
@@ -170,10 +170,11 @@
     <form method="post"> <!-- # TODO: Dieses Form benötigt noch Styling-->
         <!-- Bankname Box -->
         <?php
-        if(isset($_POST['banknamen']) && isset($_POST['bic']) && isset($_POST['zahlland']) && isset($_POST['iban'])){
+        if (isset($_POST['banknamen']) && isset($_POST['bic']) && isset($_POST['zahlland']) && isset($_POST['iban'])) {
 
-           $zahlungsmethod = array($_POST['iban'],$_POST['zahlland'],$_POST['bic'],$_POST['banknamen']);
-            $return = setZahlungsmittel($uid,$zahlungsmethod,$conn);
+            $zahlungsmethod = array($_POST['iban'], $_POST['zahlland'], $_POST['bic'], $_POST['banknamen']);
+            $return = setZahlungsmittel($uid, $zahlungsmethod, $conn); 
+            #INFO: Zahluingsinformation Speicher - Funktion
             switch ($return) {
                 case 1:
                     echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
@@ -190,14 +191,14 @@
         }
         ?>
         <div class="boxfull">
-        <label for="Bankname">Bankname:</label>
-                <?php
-                    if(!empty($row['banknamen'])){
-                        echo '<input type="text" name="banknamen" value="'. $row['banknamen'] .'" ><br>';
-                    }else{
-                        echo '<input type="text" name="banknamen" value="Nicht angegeben"><br>';
-                    }
-                ?>
+            <label for="Bankname">Bankname:</label>
+            <?php
+            if (!empty($row['banknamen'])) {
+                echo '<input type="text" name="banknamen" value="' . $row['banknamen'] . '" ><br>';
+            } else {
+                echo '<input type="text" name="banknamen" value="Nicht angegeben"><br>';
+            }
+            ?>
         </div>
 
         <!-- BIC und Land Dropdown-Button -->
@@ -205,20 +206,20 @@
             <div class="boxbic">
                 <label for="bic">BIC:</label>
                 <?php
-                    if(!empty($row['bic'])){
-                        echo '<input type="text" name="bic" value="'. $row['bic'] .'" ><br>';
-                    }else{
-                        echo '<input type="text" name="bic" value="Nicht angegeben"> <br>';
-                    }
+                if (!empty($row['bic'])) {
+                    echo '<input type="text" name="bic" value="' . $row['bic'] . '" ><br>';
+                } else {
+                    echo '<input type="text" name="bic" value="Nicht angegeben"> <br>';
+                }
                 ?>
             </div>
             <div>
                 <label for="zahlland">Land:</label>
                 <select name="zahlland" class="dropdown">
                     <?php
-                    if(!empty($row['zahlland'])){
-                        echo '<option value="'. $row['zahlland'].'" selected>'. $row['zahlland'] .'</option>';
-                    }else{
+                    if (!empty($row['zahlland'])) {
+                        echo '<option value="' . $row['zahlland'] . '" selected>' . $row['zahlland'] . '</option>';
+                    } else {
                         echo '<option value="NichtAngegeben" selected> Nicht angegeben </option>';
                     }
                     ?>
@@ -231,18 +232,19 @@
 
         <!-- IBAN Box -->
         <div>
-            <fieldset class="boxfull"><legend>IBAN</legend>
-                    <?php
-                        if(!empty($row['iban'])){
-                            echo '<input type="text" name="iban" value="'. $row['iban'] .'"><br>';
-                        }else{
-                            echo '<input type="text" name="iban" value="Nicht angegeben"> <br>';
-                        }
-                    ?>
+            <fieldset class="boxfull">
+                <legend>IBAN</legend>
+                <?php
+                if (!empty($row['iban'])) {
+                    echo '<input type="text" name="iban" value="' . $row['iban'] . '"><br>';
+                } else {
+                    echo '<input type="text" name="iban" value="Nicht angegeben"> <br>';
+                }
+                ?>
             </fieldset>
         </div>
         <div class=".boxrechts">
-        <button class ="button1" type="submit">Zahlungsmethode speichern</button>
+            <button class="button1" type="submit">Zahlungsmethode speichern</button>
         </div>
     </form>
     <!-- Footer -->

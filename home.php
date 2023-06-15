@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-	header("Location: index");
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
 }
 require("./phpFunctions/databaseConnection.php");
 require("./phpFunctions/util.php");
@@ -92,4 +92,5 @@ $bestseller = getBestseller($conn);
     ?>
 
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 "use strict";
 
-$("#back").click(function (e){
+$(".boxrechts").click(function (e) {
     e.preventDefault();
     window.history.back;
 });
