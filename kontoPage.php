@@ -39,7 +39,7 @@
     </div>
 
     <!-- Bestellungen Button -->
-    <button class="button1">Bestellungen</button> <!-- # TODO: Weiterleitung zur Bestellhistorie -->
+    <a href="orderHistory"><button class="button1">Bestellungen</button>a</a> <!-- # TODO: Weiterleitung zur Bestellhistorie -->
 
     <!-- Persönliche Daten Header -->
     <div class="headline">

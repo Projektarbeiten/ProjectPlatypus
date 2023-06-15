@@ -28,7 +28,7 @@ echo "
                 <div class='col-6'>
 	    	        <div id='bottom-bar'>
 	    		        <div class='search-box'>
-	    			        <input type='text' placeholder='Search'>
+	    			        <input type='text' placeholder='Suche nach Produkt'>
 	    		        </div>
 	    	        </div>
                 </div>    

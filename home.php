@@ -7,6 +7,7 @@ require("./phpFunctions/databaseConnection.php");
 require("./phpFunctions/util.php");
 $conn = buildConnection(".");
 $bestseller = getBestseller($conn);
+$baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://$_SERVER[HTTP_HOST]" 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +57,7 @@ $bestseller = getBestseller($conn);
         <div id="produkt-bestseller">
             <div class="container">
                 <div class="row">
-                    <h1 id="bestseller-headline" class="col-6">Bestseller Shit</h1>
+                    <h1 id="bestseller-headline" class="col-6">Unsere Bestseller</h1>
                 </div>
                 <?php
                 $counter = 0;
@@ -68,13 +69,13 @@ $bestseller = getBestseller($conn);
                     if ($counter == 0) {
                         echo "<div class='row'>";
                     }
-                    echo ("<div class='col-2 produkt'>
+                    echo "<div class='col-2 produkt'>
                         <h2 class='Produkt-name' style='font-size: 1.2rem'>$produktName</h2>
-                        <a href='http://localhost/productPage?produkt_id=$product'>
+                        <a href='$baseURL/productPage?produkt_id=$product'>
                             <img class='Produkt-bild' src='$picture' alt='Undefined picture'>
                         </a>
                         <p class='Produkt-text'><strong>{$produktPreis}€</strong></p>
-                    </div>");
+                    </div>";
                     ++$counter;
                     if ($counter == 3) {
                         echo "</div>";
