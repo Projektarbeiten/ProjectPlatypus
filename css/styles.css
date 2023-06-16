@@ -10,6 +10,8 @@
 	--font-color: #0c0b0c;    /* Schriftfarbe */
 	--font-color-2: #f0f0f0;  /* Schriftfarbe (Header und Footer) */
 	--font-color-3: #003003;  /* Schriftfarbe für große Überschriften (Komplementär)*/
+	--border-color: #000; /* Schriftfarbe für Border
+
 	}
 	
 	html {
@@ -59,7 +61,7 @@
 	}
 	
 	.trennlinie {
-		border-bottom: 2px solid black
+		border-bottom: 2px solid var(--border-color);
 	}
 
 	input {
@@ -176,7 +178,7 @@
 		margin-right: 4%;
 		margin-bottom: 40px;
 		background-color: var(--theme-color-4);
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		border-radius: 35px;
 	}
 	
@@ -204,19 +206,18 @@
 		margin-top: 100px;
 		margin-bottom: 100px;
 		background-color: var(--theme-color-3);
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		border-radius: 15px;
 		font-size: 2.7rem;
 	}
 	
 	.row > .produkt {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		width: 25%;
 		margin-left: 4%;
 		margin-right: 4%;
 		margin-bottom: 40px;
 		background-color: var(--theme-color-4);
-		border: 2px solid black;
 		border-radius: 5px;
 	}
 	
@@ -310,7 +311,7 @@
 	}
 	
 	#eigenschafts-tabelle tr {
-		border-bottom: 2px solid black;
+		border-bottom: 2px solid var(--border-color);
 	}
 	
 	#eigenschafts-tabelle td {
@@ -333,7 +334,7 @@
 	}
 	
 	#bestell-section {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 	}
 	#bestell-form p, #bestell-form label {
 		width: 60%;
@@ -365,7 +366,7 @@
 	
 	/* === KONTO-PAGE === */
 	.box1 {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 30px;
 		text-align: center;
 		width: 33%;
@@ -394,7 +395,7 @@
 	
 	
 	.boxlinks {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 20%;
@@ -403,7 +404,7 @@
 	}
 	
 	.boxrechts {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 20%;
@@ -412,7 +413,7 @@
 	}
 	
 	.boxfull {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 44.5%;
@@ -421,7 +422,7 @@
 	}
 	
 	.boxgeb {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 25px;
 		text-align: center;
 		width: 20%;
@@ -429,7 +430,7 @@
 	}
 	
 	.boxstraße {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 45%;
@@ -438,7 +439,7 @@
 	}
 	
 	.boxstrnr {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 17%;
@@ -447,7 +448,7 @@
 	}
 	
 	.boxbic {
-		border: 2px solid black;
+		border: 2px solid var(--border-color);
 		margin-bottom: 20px;
 		text-align: center;
 		width: 20%;
@@ -541,7 +542,7 @@
 
 .sc-price-before{
 	margin-top: 2.5%;
-	border-top: 1.5px solid black;
+	border-top: 1.5px solid var(--border-color);
 	align-content: center;
 	justify-content: center;
 	display: flex;
@@ -561,7 +562,7 @@
 }
 
 .sc-price-safed-box{
-	border: 2px solid black;
+	border: 2px solid var(--border-color);
 	align-content: center;
 	justify-content: center;
 	display: flex;
@@ -659,9 +660,9 @@
 
 .sc-boxrechts {
 	border-left: none;
-	border-right: 2px solid black;
-	border-top: 2px solid black;
-	border-bottom: 2px solid black;
+	border-right: 2px solid var(--border-color);
+	border-top: 2px solid var(--border-color);
+	border-bottom: 2px solid var(--border-color);
 	margin-bottom: 20px;
 	margin-right: auto;
 	text-align: center;
