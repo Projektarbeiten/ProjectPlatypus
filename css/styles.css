@@ -10,6 +10,7 @@
 	--font-color: #0c0b0c;    /* Schriftfarbe */
 	--font-color-2: #f0f0f0;  /* Schriftfarbe (Header und Footer) */
 	--font-color-3: #003003;  /* Schriftfarbe für große Überschriften (Komplementär)*/
+	--border-color: #000;
 	}
 	
 	html {
@@ -392,7 +393,14 @@
 	}
 	
 	
-	
+	#kontopage-personal-data {
+		width: 80%;
+	}
+	#kontopage-personal-data p {
+		text-align: center;
+		border: 2px solid var(--border-color);
+	}
+
 	.boxlinks {
 		border: 2px solid black;
 		margin-bottom: 20px;

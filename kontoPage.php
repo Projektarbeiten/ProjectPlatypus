@@ -31,7 +31,7 @@ if (!isset($_SESSION['uid'])) {
 <body>
     <!-- Header -->
     <?php
-    require("header.php");
+    require "header.php";
     ?>
     <!-- Dein Konto Box -->
     <div class="box1">
@@ -49,52 +49,48 @@ if (!isset($_SESSION['uid'])) {
     </div>
 
     <!-- Titel und Anrede Boxen -->
-    <div style="display: flex;">
-        <div class="boxlinks">
-            <?php
-            if (!empty($row['titel'])) {
-                echo '<p>' . $row['titel'] . '</p>';
-            } else {
-                echo '<p>' . '</p>';
-            }
-            ?>
+    <!-- Persönliche Daten Sektion -->
+    <div class="container" id="kontopage-personal-data">
+        <div class="row">
+            <div class="col-3">
+                <?php
+                echo "<p>{$row['anrede']}</p>";
+                ?>
+            </div>
+            <div class="col-3">
+                <?php
+                if (!empty($row['titel'])) {
+                    echo "<p>{$row['titel']}</p>";
+                } else {
+                    echo '<p></p>';
+                }
+                ?>
+            </div>
         </div>
-        <div class="boxrechts">
-            <?php
-            echo '<p>' . $row['anrede'] . '</p>';
-            ?>
+        <div class="row">
+            <div class="col-3">
+                <?php
+                echo "<p>{$row['vorname']}</p>";
+                ?></div>
+            <div class="col-3">
+                <?php
+                echo '<p>' . $row['nachname'] . '</p>';
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <?php
+                echo '<p>' . $row['email'] . '</p>';
+                ?>
+            </div>
+            <div class="col-3">
+                <?php
+                echo '<p>' . date_format(date_create($row['geburtsdatum']), "d.m.Y") . '</p>';
+                ?>
+            </div>
         </div>
     </div>
-
-    <!-- Vorname und Nachname Boxen -->
-    <div style="display: flex;">
-        <div class="boxlinks">
-            <?php
-            echo '<p>' . $row['vorname'] . '</p>';
-            ?>
-        </div>
-        <div class="boxrechts">
-            <?php
-            echo '<p>' . $row['nachname'] . '</p>';
-            ?>
-        </div>
-    </div>
-
-    <!-- Email Box -->
-    <div class="boxfull">
-        <?php
-        echo '<p>' . $row['email'] . '</p>';
-        ?>
-    </div>
-
-    <!-- Geburtsdatum Box -->
-    <div class="boxgeb">
-        <?php
-        echo '<p>' . date_format(date_create($row['geburtsdatum']), "d.m.Y") . '</p>';
-        ?>
-    </div>
-
-    <div class="password">
         <p>
             Passwort ändern?
         </p> <!-- # TODO: Passwort änderung Funktion in Phase 4 -->
@@ -173,7 +169,7 @@ if (!isset($_SESSION['uid'])) {
         if (isset($_POST['banknamen']) && isset($_POST['bic']) && isset($_POST['zahlland']) && isset($_POST['iban'])) {
 
             $zahlungsmethod = array($_POST['iban'], $_POST['zahlland'], $_POST['bic'], $_POST['banknamen']);
-            $return = setZahlungsmittel($uid, $zahlungsmethod, $conn); 
+            $return = setZahlungsmittel($uid, $zahlungsmethod, $conn);
             #INFO: Zahluingsinformation Speicher - Funktion
             switch ($return) {
                 case 1:
@@ -249,7 +245,7 @@ if (!isset($_SESSION['uid'])) {
     </form>
     <!-- Footer -->
     <?php
-    require("footer.php");
+    require "footer.php";
     ?>
 </body>
 
