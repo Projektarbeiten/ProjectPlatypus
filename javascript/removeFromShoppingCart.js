@@ -130,9 +130,9 @@ function updatePrices() {
                     }
                 });
                 document.getElementById('sc-price-before-tag').innerHTML = zwPrice.toFixed(2) + " €";
-                let mwst = zwPrice * 0.19
+                let mwst = ((zwPrice -(zwPrice / 119) * 100));
                 document.getElementById('sc-price-mwst').innerHTML = mwst.toFixed(2) + " €";
-                let endPrice = zwPrice + mwst;
+                let endPrice = zwPrice // Da Zwischenpreisch schon Bruttopreis beinhaltet
                 document.getElementById('sc-price-end-tag').innerHTML = endPrice.toFixed(2) + " €";
             }
 

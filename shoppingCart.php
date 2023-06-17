@@ -65,7 +65,7 @@ $conn = buildConnection(".");
                     error_log(date("Y-m-d H:i:s", time()) . "\n
                                 Session_id: " . session_id() . "\n", 3, "my-debug-shoppingCart.log");
                 } else {
-                    loadShoppingCartInformation($conn);
+                    loadAndPrintShoppingCartInformation($conn);
                 }
                 ?>
             </div>

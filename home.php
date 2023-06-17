@@ -70,7 +70,7 @@ $bestseller = getBestseller($conn);
                     }
                     echo ("<div class='col-2 produkt'>
                         <h2 class='Produkt-name' style='font-size: 1.2rem'>$produktName</h2>
-                        <a href='http://localhost/productPage?produkt_id=$product'>
+                        <a href='./productPage?produkt_id=$product'>
                             <img class='Produkt-bild' src='$picture' alt='Undefined picture'>
                         </a>
                         <p class='Produkt-text'><strong>{$produktPreis}€</strong></p>
