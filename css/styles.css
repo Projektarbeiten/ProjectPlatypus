@@ -329,10 +329,6 @@
 	#preis-section {
 		padding: 10px
 	}
-	#preis-section p {
-		font-size: 1.3rem;
-	}
-	
 	#bestell-section {
 		border: 2px solid var(--border-color);
 	}
@@ -622,10 +618,6 @@
 	text-align: right;
 }
 
-.sc-price{
-
-}
-
 .sc-price > p {
 	text-align: center;
 	font-size: 1.5rem;
@@ -669,6 +661,28 @@
 	width: 20%;
 }
 
+/* ====== Product Page ====== */
+
+.pp-price-before{
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	font-size: 1.3rem;
+}
+
+#pp-zw {
+	text-align: left;
+}
+
+.sc-mwst-box > p {
+	font-size: 1.0rem;
+}
+#pp-price-mwst{
+	text-align: left;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
 /* ====== FLASH Green ====== */
 
 .flash_green {

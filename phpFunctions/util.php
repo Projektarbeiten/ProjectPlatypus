@@ -50,17 +50,49 @@ function getCustomDate($days)
 	$result = $dateObject->format('d.m.Y');
 	return $result;
 }
-function loadShoppingCartInformation($conn)
+
+function loadShoppingCartInformation($conn) : array { // INFO: Kann für die Main Page und dessen ShoppingCart Info genutzt werden.
+		$shoppingCartProductAmount = 0;
+		$shoppingCartValue = 0;
+		$productInfoArray = array();
+		foreach ($_SESSION['produkt_array'] as $sessionArray) {
+			$produkt_ID = $sessionArray['produkt'];
+			$menge = intval($sessionArray['menge']);
+			$returnsArray = getProduktInfos($produkt_ID, $conn);
+			$bezeichnung = $returnsArray[0];
+			$akt_preis = doubleval($returnsArray[9]);
+			$lagermenge = intval($returnsArray[8]);
+
+			$productInfo = array(
+							'id' => $produkt_ID,
+							'menge' => $menge,
+							'bezeichnung' => $bezeichnung,
+							'akt_preis' => $akt_preis,
+							'lagermenge' => $lagermenge
+							);
+			array_push($productInfoArray,$productInfo);
+
+			$shoppingCartProductAmount += $menge;
+			$shoppingCartValue += $akt_preis * $menge;
+		}
+		$shoppingCartInformationArray = array(
+				'shoppingCartproduktAmount' => $shoppingCartProductAmount,
+				'shoppingCartValue' => $shoppingCartValue
+			);
+		$shoppingCartInformationArray['productInfoArray'] = $productInfoArray; // Adds the Parent Array including all Child Arrays to the Main Return Array
+		return $shoppingCartInformationArray;
+	}
+function loadAndPrintShoppingCartInformation($conn)
 {
 	#var_dump($_SESSION['produkt_array']);
 	ob_start();
-	foreach ($_SESSION['produkt_array'] as $sessionArray) {
-		$produkt_ID = $sessionArray['produkt'];
-		$menge = intval($sessionArray['menge']);
-		$returnsArray = getProduktInfos($produkt_ID, $conn);
-		$bezeichnung = $returnsArray[0];
-		$akt_preis = doubleval($returnsArray[9]);
-		$lagermenge = intval($returnsArray[8]);
+	$shoppingCartInformationArray = loadShoppingCartInformation($conn);
+	foreach ($shoppingCartInformationArray['productInfoArray'] as $productInfo) {
+		$produkt_ID = $productInfo['id'];
+		$menge = intval($productInfo['menge']);
+		$bezeichnung = $productInfo['bezeichnung'];
+		$akt_preis = doubleval($productInfo['akt_preis']);
+		$lagermenge = intval($productInfo['lagermenge']);
 		echo "
                 <article class='sc-product-cart row' id='" . $produkt_ID . "'>
 			<div class='col-1'>
@@ -94,7 +126,7 @@ function loadShoppingCartInformation($conn)
             <fieldset class='sc-fd'>
             <legend id='sc-legend'>Menge:</legend>
 					<select style='width:50px' name='mengenauswahl' class='sc-mengenauswahl'>";
-		echo getProductAmountOptions($lagermenge, $menge); #TODO: Verhindert das Laden des Warenkorb Inhalts
+		echo getProductAmountOptions($lagermenge, $menge);
 		echo "</select> </fieldset>
 					<button type='button' class='sc-bt-remove-product'>
                         <i class='bi bi-trash-fill'></i>
@@ -102,7 +134,7 @@ function loadShoppingCartInformation($conn)
 		echo "
 				</div>
 				<div class='sc-price col-1-5'>
-						<p class='sc-article-price'>" . number_format(doubleval($akt_preis * $menge), 2, '. ', '') . " €</p>
+						<p class='sc-article-price'>" . number_format(doubleval(($akt_preis * $menge) - (($akt_preis * $menge) / 119)*100), 2, ',', '') . " €</p>
 				</div>
 			</article>
 			<hr>

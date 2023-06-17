@@ -102,10 +102,14 @@ if (isset($_SESSION['uid'])) {
                 <div class="col-1-5" style="float:right">
                     <div id="bestell-section">
                         <div id="preis-section">
-                            <p>Preiskarte</p>
-                            <!-- Preis wird dynamisch hinzugefügt -->
-                            <!-- Alter Preis wird mit UVP ausgetauscht <p>Alter Preis: <strong>20.99€</strong></p> -->
-                            <p>Aktueller Preis: <strong><?php echo $produktPreis ?>€</strong></p>
+                            <div class='pp-price-before'>
+                                <p id='pp-zw'> Aktueller Preis: </p>
+                                <p id='sc-price-before-tag'><?php echo number_format(doubleval($produktPreis), 2, ',', '') .'€*' ?></p>
+                            </div>
+                            <div class='sc-mwst-box'>
+                                <p id='sc-mwst'> *inkl. 19% MwSt: </p>
+                                <p id='pp-price-mwst'>  <?php echo chr(40). number_format(doubleval($produktPreis-(($produktPreis / 119)*100)), 2, ',', '') .'€' .chr(41)?></p>
+                            </div>
                         </div>
                         <div class="trennlinie"></div>
                         <form method="post" id="bestell-form">
