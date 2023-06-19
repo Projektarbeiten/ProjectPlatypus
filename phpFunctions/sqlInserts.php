@@ -96,3 +96,22 @@ function setZahlungsmittel($uid, $infoArray, $conn)
         return 3;
     }
 }
+
+function updateUserEntry($uid, $target, $value, $conn)
+{
+    try {
+        $stmt_prep = $conn->prepare("
+    UPDATE 
+        `user`
+    SET $target=:value 
+    WHERE u_id=:uid;
+    ");
+        $stmt_prep->bindParam(':value', $value);
+        $stmt_prep->bindParam(':uid', $uid);
+        $stmt_prep->execute();
+        echo "$target erfolgreich gespeichert";
+    } catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . "Updaten von Wert $target gescheitert - updateUserEntry() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+    }
+}

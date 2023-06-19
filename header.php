@@ -8,10 +8,11 @@ echo "
         <div class='container'>
             <div class='row'>
                 <div class='col-6' id='top-bar'>
+					"./* Logout Button
 					<form method='post'>
 						<button type='submit' name='logout' id='header-logout-button'>Ausloggen?</button>
-					</form>
-	    		    <div class='header-icons'>
+					</form>*/
+	    		    "<div class='header-icons'>
 						<a href='shoppingCart'>
 	    			    	<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdVpMdS6yhVyKICX1nqw6z83TYQpwBD6C2B-A91gpqww&s' height='50' alt='Warenkorb'>
 	    			    	&nbsp;

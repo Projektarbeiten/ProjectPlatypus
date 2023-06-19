@@ -70,15 +70,24 @@ if (!isset($_SESSION['uid'])) {
             <h3>Persönliche Daten</h3>
         </div>
 
+        <?php
+        if (isset($_POST["value"], $_POST["dataTarget"])) {
+            echo "Update";
+            updateUserEntry($uid, $_POST["dataTarget"], $_POST["value"], $conn);
+        }
+        ?>
+
         <!-- Persönliche Daten Sektion -->
         <div class="container">
             <div class="row">
                 <div class="col-3">
+                    <label for="konto-anrede">Anrede</label>
                     <?php
                     echo "<p class='editable-field' id='konto-anrede'>$anrede</p>";
                     ?>
                 </div>
                 <div class="col-3">
+                    <label for="konto-titel">Titel</label>
                     <?php
                     if (!empty($row['titel'])) {
                         echo "<p class='editable-field' id='konto-titel'>$titel</p>";
@@ -90,10 +99,13 @@ if (!isset($_SESSION['uid'])) {
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label for="konto-vorname">Vorname</label>
                     <?php
                     echo "<p class='editable-field' id='konto-vorname'>$vorname</p>";
-                    ?></div>
+                    ?>
+                </div>
                 <div class="col-3">
+                    <label for="konto-nachname">Nachname</label>
                     <?php
                     echo "<p class='editable-field' id='konto-nachname'>$nachname</p>";
                     ?>
@@ -101,19 +113,21 @@ if (!isset($_SESSION['uid'])) {
             </div>
             <div class="row">
                 <div class="col-6">
+                    <label for="konto-email">Email</label>
                     <?php
-                    echo "<p>$email</p>";
+                    echo "<p id='konto-email'>$email</p>";
                     ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label for="konto-geburtsdatum">Geburtsdatum</label>
                     <?php
                     echo "<p  class='editable-field' id='konto-geburtsdatum'>$geburtsdatum</p>";
                     ?>
                 </div>
                 <div class="col-3">
-                    <p>
+                    <p id="password-change">
                         Passwort ändern?
                     </p> <!-- # TODO: Passwort änderung Funktion in Phase 4 -->
                 </div>
@@ -122,35 +136,34 @@ if (!isset($_SESSION['uid'])) {
 
         </div>
 
-        <br>
-
         <div class="trennlinie" style="width: 60%; display: block; margin: 0 auto;"></div>
-
-        <br>
 
         <!-- Adressangabe Header -->
         <div class="headline">
-            <u>
-                <h3>Adressangabe</h3>
-            </u>
+            <h3>Adressangabe</h3>
         </div>
 
         <!-- Adressangabe -->
         <div class="container">
             <div class="row">
                 <div class="col-6">
+                    <label for="konto-land">Land</label>
+
                     <?php
-                    echo "<p class='editable-field' id='konto-userland'>$userland</p>";
+                    echo "<p class='editable-field' id='konto-land'>$userland</p>";
                     ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label for="konto-plz">Postleitzahl</label>
+
                     <?php
                     echo "<p  class='editable-field' id='konto-plz'>$plz</p>";
                     ?>
                 </div>
                 <div class="col-3">
+                    <label for="konto-ort">Wohnort</label>
                     <?php
                     echo "<p class='editable-field' id='konto-ort'>$ort</p>";
                     ?>
@@ -158,23 +171,26 @@ if (!isset($_SESSION['uid'])) {
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label for="konto-strasse">Straße</label>
                     <?php
-                    echo "<p id='konto-strasse'>$strasse</p>";
+                    echo "<p id='konto-strasse' class='editable-field'>$strasse</p>";
                     ?>
                 </div>
                 <div class="col-3">
+                    <label for="konto-hausnr">Hausnummer</label>
                     <?php
-                    echo "<p id='konto-hausnr'>$hausnr</p>";
+                    echo "<p id='konto-hausnr' class='editable-field'>$hausnr</p>";
                     ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
+                    <label for="konto-adresszusatz">Adesszusatz</label>
                     <?php
                     if (!empty($adresszusatz)) {
-                        echo "<p id='konto-adresszusatz'>$adresszusatz</p>";
+                        echo "<p id='konto-adresszusatz' class='editable-field'>$adresszusatz</p>";
                     } else {
-                        echo "<p id='konto-adresszusatz'>Kein Adresszusatz</p>";
+                        echo "<p id='konto-adresszusatz' class='editable-field'>Kein Adresszusatz</p>";
                     }
                     ?>
                 </div>
@@ -184,9 +200,7 @@ if (!isset($_SESSION['uid'])) {
 
         <!-- Zahlungsmethode Header -->
         <div class="headline">
-            <u>
-                <h3>Zahlungsmethode</h3>
-            </u>
+            <h3>Zahlungsmethode</h3>
         </div>
         <form method="POST" action="?sendBankData">
             <div class="container">
@@ -219,7 +233,7 @@ if (!isset($_SESSION['uid'])) {
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label for="Bankname">Bankname:</label>
+                        <label for="Bankname">Bankname</label>
                         <?php
                         if (!empty($banknamen)) {
                             echo "<input type='text' name='banknamen' value='$banknamen' required placeholder='Bitte Banknamen eingeben'>";
@@ -231,7 +245,7 @@ if (!isset($_SESSION['uid'])) {
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <label for="bic">BIC:</label>
+                        <label for="bic">BIC</label>
                         <?php
                         if (!empty($bic)) {
                             echo "<input type='text' name='bic' value='$bic' title='Bitte gültige BIC angeben' placeholder='Bitte BIC angeben' pattern='^([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)$'>";
@@ -241,7 +255,7 @@ if (!isset($_SESSION['uid'])) {
                         ?>
                     </div>
                     <div class="col-3">
-                        <label for="zahlland">Land:</label>
+                        <label for="zahlland">Land</label>
                         <select name="zahlland" class="dropdown">
                             <?php
                             if (!empty($zahlland)) {
@@ -258,7 +272,7 @@ if (!isset($_SESSION['uid'])) {
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label for="iban">IBAN: </label>
+                        <label for="iban">IBAN</label>
                         <?php
                         if (!empty($iban)) {
                             echo "<input type='text' name='iban' value='$iban' required placeholder='Bitte gültige IBAN angeben' title='IBAN nicht gültig' pattern='^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$'>";
