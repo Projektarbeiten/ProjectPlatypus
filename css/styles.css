@@ -1,11 +1,11 @@
 /* === GENERELLE-EINSTELLUNGEN === */
 
 :root {
-	--theme-color-1: #fbeefb;
+	--theme-color-1: #fefdfb;
 	/* Hintergrund */
-	--theme-color-2: #525252;
+	--theme-color-2: #47257b;
 	/* Nav1 und Footer Hintergrund */
-	--theme-color-3: #f3d5f3;
+	--theme-color-3: #960099;
 	/* Nav2 und Überschriften */
 	--theme-color-4: #ffcffc;
 	/* Divs (e.g. Produkt und Kategorie auf Main Page) */
@@ -13,14 +13,18 @@
 	/* Andere Divs */
 	--theme-color-6: #fcf4f4;
 	/* Hintergrundfarbe für Input Felder*/
-	--font-color: #0c0b0c;
+	--font-color: #610e61;
 	/* Schriftfarbe */
 	--font-color-2: #f0f0f0;
 	/* Schriftfarbe (Header und Footer) */
 	--font-color-3: #003003;
 	/* Schriftfarbe für große Überschriften (Komplementär)*/
-	--border-color: #000;
+	--border-color: #eeedeb;
 	/* Schriftfarbe für Border */
+	--cancer-color: #fff;
+	/* Farbe für Kategorien */
+	--header-color: #f4eeee;
+	/* FArbe für den Header*/
 }
 
 html {
@@ -79,6 +83,24 @@ input {
 	border-style: solid;
 }
 
+
+::-webkit-scrollbar {
+	width: 15px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--theme-color-2);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--theme-color-3);
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--theme-color-4);
+}
+
 /* === HEADER === */
 
 header>.container {
@@ -90,31 +112,9 @@ header .col-6 {
 }
 
 #top-bar {
-	height: 80px;
 	width: 100%;
-	background-color: #6e6e6e;
-}
-
-.header-icons {
-	float: right;
-	margin-right: 30px
-}
-
-.header-icons img {
-	height: 50px;
-	margin: 18px;
-	transition: ease-in-out .3s;
-
-}
-
-.header-icons img:hover {
-	transform: scale(1.1);
-	height: 60px;
-	margin-top: 0px;
-}
-
-#banner {
-	height: 250px;
+	height: 90px;
+	background-color: var(--header-color);
 }
 
 #banner>img {
@@ -123,25 +123,49 @@ header .col-6 {
 	overflow-x: hidden;
 }
 
+#banner {
+	height: 250px;
+}
+
 #bottom-bar {
-	height: 50px;
-	background-color: #F3D5F3;
+	height: 80px;
+	background-color: var(--header-color);
 	margin-bottom: 100px
+}
+
+.header-icons {
+	float: right;
+	margin-right: 30px;
+}
+
+.header-icons img {
+	height: 50px;
+	margin-right: 19px;
+	margin-top: 20px;
+	mix-blend-mode:darken;
+	transition: ease-in-out .3s;
+}
+
+.header-icons img:hover {
+	transform: scale(1.5);
 }
 
 .search-box {
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 12px;
+	padding-top: 20px;
 }
 
 .search-box input {
 	display: block;
-	padding: 5px;
+	padding: 5px 10px;
+	font-size: 1.1rem;
 	border: none;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 20px;
 	width: 85%;
+
+	height: 30px;
 	max-width: 800px;
 	min-width: 300px;
 	margin-left: auto;
@@ -185,24 +209,30 @@ header .col-6 {
 }
 
 .row>.kategorie {
-	width: 25%;
+	width: 20%;
 	margin-left: 4%;
 	margin-right: 4%;
 	margin-bottom: 40px;
-	background-color: var(--theme-color-4);
-	border: 2px solid var(--border-color);
+	background-color: var(--cancer-color);
+	border: 4px solid var(--border-color);
 	border-radius: 35px;
 }
 
 #kategorien-und-produkte img {
+	mix-blend-mode: darken;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 70%;
+	width: 85%;
 	height: auto;
 	border-radius: 5px;
 	margin-top: 2.5rem;
 	margin-bottom: 2.5rem;
+	transition: .2s ease;
+}
+
+#kategorien-und-produkte img:hover {
+	width: 90%;
 }
 
 #kategorien-und-produkte p {
@@ -211,26 +241,28 @@ header .col-6 {
 
 #kategorien-und-produkte h2 {
 	text-align: center;
+	color: var(--font-color);
 }
 
 #bestseller-headline {
-	text-align: center;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	background-color: var(--theme-color-3);
-	border: 2px solid var(--border-color);
+
+	margin: 100px auto;
+	width: 70%;
+	max-width: 800px;
+	color: var(--theme-color-3);
 	border-radius: 15px;
-	font-size: 2.7rem;
+	border: 4px solid var(--border-color);
+	font-size: 3rem;
 }
 
 .row>.produkt {
-	border: 2px solid var(--border-color);
-	width: 25%;
+	border: 3px solid var(--border-color);
+	width: 20%;
 	margin-left: 4%;
 	margin-right: 4%;
 	margin-bottom: 40px;
 	background-color: var(--theme-color-4);
-	border-radius: 5px;
+	border-radius: 15px;
 }
 
 /* === LOGIN-PAGE === */
