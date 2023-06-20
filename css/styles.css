@@ -146,6 +146,22 @@ header .col-6 {
 	transition: ease-in-out .3s;
 }
 
+#platyweb-logo {
+	height: 80px;
+	transition: .3s ease-in-out;
+	margin-top: 5px;
+}
+
+#platyweb-logo:hover {
+	transform: scale(1.5);
+}
+
+#header-logo {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height:90px;
+}
 .header-icons img:hover {
 	transform: scale(1.5);
 }
