@@ -237,18 +237,18 @@ if (!isset($_SESSION['uid'])) {
                             #INFO: Zahluingsinformation Speicher - Funktion
                             switch ($return) {
                                 case 1:
-                                    echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
+                                    echo "<p style='text-align: center; color: ForestGreen; border: 0'>Erfolgreich abgespeichert</p>";
                                     break;
 
                                 case 2:
-                                    echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
+                                    echo "<p style='text-align: center; color: ForestGreen; border: 0'>Erfolgreich abgespeichert</p>";
                                     break;
 
                                 case 3:
-                                    echo "<p style='text-align: center; color: red'>Es sind Fehler bei der Sendung der Daten an die Datenbank entstanden</p>";
+                                    echo "<p style='text-align: center; color: red; border: 0'>Es sind Fehler bei der Sendung der Daten an die Datenbank entstanden</p>";
                                     break;
                                 default:
-                                    echo "<p style='text-align: center; color: red'>Ein unbekannter Fehler ist entstanden. Bitte erneut versuchen</p>";
+                                    echo "<p style='text-align: center; color: red; border: 0'>Ein unbekannter Fehler ist entstanden. Bitte erneut versuchen</p>";
                             }
                         }
                         ?>
