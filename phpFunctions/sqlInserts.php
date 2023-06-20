@@ -103,8 +103,8 @@ function updateUserEntry($uid, $target, $value, $conn)
         $stmt_prep = $conn->prepare("
     UPDATE 
         `user`
-    SET $target=:value 
-    WHERE u_id=:uid;
+    SET $target = :value 
+    WHERE u_id = :uid;
     ");
         $stmt_prep->bindParam(':value', $value);
         $stmt_prep->bindParam(':uid', $uid);
@@ -113,5 +113,28 @@ function updateUserEntry($uid, $target, $value, $conn)
     } catch (PDOException $e) {
         error_log(date("Y-m-d H:i:s", time()) . "Updaten von Wert $target gescheitert - updateUserEntry() - sqlInserts.php \n
         SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+    }
+}
+
+function updateUserPassword($uid, $password, $conn)
+{
+    try {
+        $stmt_prep = $conn->prepare("
+        UPDATE 
+        passwort 
+        LEFT JOIN user
+        on passwort.pw_id = user.pw_id_ref
+        SET 
+        pw = :newPassword 
+        WHERE passwort.pw_id = :uid
+        ");
+        $stmt_prep->bindValue(':newPassword', $password);
+        $stmt_prep->bindValue(':uid', $uid);
+        $stmt_prep->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . "Updaten von Passwort gescheitert - updateUserPassword() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+        return false;
     }
 }

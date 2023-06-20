@@ -526,9 +526,9 @@ header .col-6 {
 
 .lightbox {
 	background-color: var(--theme-color-1);
-	margin-top: 8.9%;
-	margin-left: auto;
-	margin-right: auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
 	border-radius: 10px;
 }
 
@@ -558,25 +558,25 @@ header .col-6 {
 
 #password-change:link,
 #theme-change:link {
-	color: var(--font-color-2);
+	color: var(--theme-color-2);
 	text-decoration: none;
 }
 
 #password-change:visited,
 #theme-change:visited {
-	color: var(--font-color);
+	color: var(--theme-color-2);
 	text-decoration: none;
 }
 
 #password-change:hover,
 #theme-change:hover {
-	color: var(--theme-color-3);
+	color: var(--theme-color-2);
 	text-decoration: none;
 }
 
 #password-change:active,
 #theme-change:active {
-	color: var(--theme-color-3);
+	color: var(--theme-color-2);
 	text-decoration: none;
 }
 
@@ -585,11 +585,16 @@ header .col-6 {
 	width: 80%;
 	max-width: 600px;
 	height: 420px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 #password-change-form {
-	margin-left: auto;
-	margin-right: auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	width: 90%;
 	max-width: 450px;
 	padding: 15px;

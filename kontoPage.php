@@ -31,6 +31,8 @@ if (!isset($_SESSION['uid'])) {
     $bic = $row['bic'];
     $zahlland = $row['zahlland'];
     $iban = $row['iban'];
+    $accRow = login($email, $conn);
+    $pw = $accRow[0];
 }
 ?>
 <!DOCTYPE html>
@@ -129,7 +131,27 @@ if (!isset($_SESSION['uid'])) {
                 <div class="col-3">
                     <p id="password-change">
                         Passwort ändern?
-                    </p> <!-- # TODO: Passwort änderung Funktion in Phase 4 -->
+                    </p>
+                    <?php
+                    //Changes the user password
+                    if (isset($_POST['old-password'], $_POST['add-new-password'], $_POST['repeat-new-password'])) {
+                        if (password_verify($_POST['old-password'], $pw)) {
+                            if ($_POST['add-new-password'] === $_POST['repeat-new-password']) {
+                                $newPassword = password_hash($_POST['add-new-password'], PASSWORD_DEFAULT);
+                                if (updateUserPassword($uid, $newPassword, $conn)) {
+                                    $_SESSION['userPassword'] = $newPassword;
+                                    echo "<p style='color:limegreen; text-align:center; border: 0'><strong>Passwort geändert</strong></p>";
+                                } else {
+                                    echo "ERROR: Could not execute the query. " . $stmt->errorInfo();
+                                }
+                            } else {
+                                echo "<p style='color:red; text-align:center; border: 0'>Passwort Wiederholung falsch</p>";
+                            }
+                        } else {
+                            echo "<p style='color:red; text-align:center; border: 0'>Altes Passwort falsch</p>";
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -196,6 +218,7 @@ if (!isset($_SESSION['uid'])) {
                 </div>
             </div>
         </div>
+        <div class="trennlinie" style="width: 60%; display: block; margin: 0 auto;"></div>
 
 
         <!-- Zahlungsmethode Header -->
