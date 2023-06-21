@@ -24,7 +24,7 @@
         if(isset($_SESSION['produkt_array']) && !empty($_SESSION['produkt_array'])){
             foreach ($_SESSION['produkt_array'] as &$array){
                     if(in_array($produkt_ID,$array)){
-                        $found = 2;
+                        $found = 3;
                         if($debug){
                             echo "before:";
                             var_dump($_SESSION['produkt_array']);
@@ -38,12 +38,12 @@
                         break;
                     }
             }
-            if($found != 2){
-                $found = 1;
+            if($found != 3){
+                $found = 2;
                 array_push($_SESSION['produkt_array'],$arrayOfProdukt);
             }
         }else{
-            $found = 0;
+            $found = 1; // War 0 davor, aber PHP considered 0 als Empty
             array_push($_SESSION['produkt_array'],$arrayOfProdukt);
         }
     }
