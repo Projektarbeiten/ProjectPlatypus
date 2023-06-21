@@ -1,5 +1,14 @@
 -- user - Login - Registrierung --
 
+	create table if not exists codes(
+		c_id int not null auto_increment,
+		code varchar(255) not null,
+		valid boolean not null,
+		value varchar(100) not null,
+		insertDate date default sysdate(),
+        PRIMARY Key(c_id)
+	)
+
 	create table if not exists passwort(
 		pw_id 		int AUTO_INCREMENT
 		,pw		VARCHAR(2000)
@@ -80,6 +89,8 @@
 	create table if not exists produktbild(
 		p_b_id 			int AUTO_INCREMENT
 		,image 			Longblob
+		,order_id		VARCHAR(2000)
+		,image_name		VARCHAR(2000)
 		,PRIMARY KEY(p_b_id)
 	);
 
@@ -91,12 +102,14 @@
 
 	create table if not exists produkt(
 		p_id 			int AUTO_INCREMENT
+		,bezeichnung	VARCHAR(2000)
 		,p_b_id_ref		int DEFAULT 1 NOT NULL	-- Info: Sinn: Wenn kein Bild hinterlegt ist, dann soll ein Placeholder genutzt werden
 		,eigenschaft_1	VARCHAR(100)
 		,eigenschaft_2	VARCHAR(100)
 		,eigenschaft_3	VARCHAR(100)
 		,eigenschaft_4	VARCHAR(100)
 		,eigenschaft_5	VARCHAR(100)
+		,eigenschaft_6	VARCHAR(100)
 		,details		VARCHAR(2000)
 		,menge			int not null
 		,akt_preis		decimal(8,2)
@@ -125,13 +138,13 @@
 
 -- bestellung --
 
-	create table if not exists bestell_Historie(
+/*	create table if not exists bestell_Historie(
 		b_h_id			int AUTO_INCREMENT
 		,u_id_ref		int not null
 		,b_id_ref		int not null
 		,PRIMARY KEY(b_h_id)
 	);
-
+*/
 
 
 	create table if not exists bestellposition(
@@ -146,7 +159,7 @@
 
 	create table if not exists bestellung(
 		b_id 						int AUTO_INCREMENT
-		,b_p_id_ref					int
+--		,b_p_id_ref					int
 		,u_id_ref					int
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
@@ -159,19 +172,20 @@
 			alter table bestellung
 			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen(zi_id);
 
-			alter table bestellung
-			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
+--			alter table bestellung
+--			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
 
 			alter table bestellung
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 		--
 
 		-- Foreign Keys for bestell_Historie
-			alter table bestell_Historie
+/*		alter table bestell_Historie
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 
 			alter table bestell_Historie
 			add FOREIGN KEY(b_id_ref) REFERENCES bestellung(b_id);
+*/
 		--
 
 		-- Foreign Keys for bestellposition
