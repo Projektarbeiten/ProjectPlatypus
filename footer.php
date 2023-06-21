@@ -1,5 +1,5 @@
 <?php
-echo"
+echo "
 <footer>
         <div id='footer-default'>
             <div class='container'>
@@ -31,4 +31,3 @@ echo"
             </div>
         </div>
     </footer>";
-?>
