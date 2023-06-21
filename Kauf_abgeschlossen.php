@@ -10,6 +10,10 @@
 </head>
 
 <body>
+	<!-- Header -->
+	<?php
+	require("header.php");
+	?>
 
 	<div class="container">
 		<h1>Vielen Dank für Ihre Bestellung!</h1>
@@ -24,10 +28,11 @@
 			<p><strong>Versandart:</strong> [VERSANDART EINFÜGEN]</p>
 		</div>
 	</div>
-</body>
 
-</html>
-
+	<!-- Footer -->
+	<?php
+	require("footer.php");
+	?>
 </body>
 
 </html>
