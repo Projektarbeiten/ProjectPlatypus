@@ -3,14 +3,14 @@
 
 
 $("#cart-button").click(function () {
-    var datastring = $("#bestell-form").serialize();
-    var debug = true;
+    let datastring = $("#bestell-form").serialize();
+    let debug = true;
     $.ajax({
         type: "POST",
         url: "../phpScripts/addToSession.php",
         data: datastring,
         success: function (response) {
-            var flash;
+            let flash;
             if (response.includes("201") || response.includes("200")) { // Überprüft Response
                 flash = $(".flash_green"); // Beeinflusst Flash Message
                 $(".flash__body_g").html("Erfolgreich zum Warenkorb hinzugefügt");

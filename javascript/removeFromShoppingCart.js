@@ -1,6 +1,7 @@
 "use strict";
 let debug = false;
-
+let mwst;
+let endPrice;
 
 $(function () {
     updatePrices();
@@ -129,11 +130,11 @@ function updatePrices() {
                         console.log("produkt_id: " + produkt_id + ", menge: " + menge + ", AKT_Price: " + akt_preis);
                     }
                 });
-                document.getElementById('sc-price-before-tag').innerHTML = zwPrice.toFixed(2) + " €";
-                let mwst = ((zwPrice -(zwPrice / 119) * 100));
-                document.getElementById('sc-price-mwst').innerHTML = mwst.toFixed(2) + " €";
-                let endPrice = zwPrice // Da Zwischenpreisch schon Bruttopreis beinhaltet
-                document.getElementById('sc-price-end-tag').innerHTML = endPrice.toFixed(2) + " €";
+                mwst = ((zwPrice - (zwPrice / 119) * 100));
+                endPrice = zwPrice // Da Zwischenpreisch schon Bruttopreis beinhaltet
+                $("#sc-price-before-tag").text(zwPrice.toFixed(2) + " €");
+                $("#sc-price-mwst").text(mwst.toFixed(2) + " €")    
+                $('#sc-price-end-tag').text(endPrice.toFixed(2) + " €");
             }
 
         });

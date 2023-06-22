@@ -7,7 +7,7 @@
 	/* Nav1 und Footer Hintergrund */
 	--theme-color-3: #960099;
 	/* Nav2 und Überschriften */
-	--theme-color-4: #ffcffc;
+	--theme-color-4: #ffe2fa;
 	/* Divs (e.g. Produkt und Kategorie auf Main Page) */
 	--theme-color-5: #ffe6fc;
 	/* Andere Divs */
@@ -24,7 +24,7 @@
 	--cancer-color: #fff;
 	/* Farbe für Kategorien */
 	--header-color: #f4eeee;
-	/* FArbe für den Header*/
+	/* Farbe für den Header*/
 }
 
 html {
@@ -276,6 +276,7 @@ header .col-6 {
 
 #footer-default img {
 	margin-top: 52px;
+	height: auto;
 }
 
 #footer-default a {
@@ -770,6 +771,12 @@ header .col-6 {
 
 }
 
+#warenkorb-karten-ueberschriften p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
 #sc-price-safed-tag {
 	text-align: right;
 	margin: auto;
@@ -824,6 +831,14 @@ header .col-6 {
 	text-align: right;
 }
 
+#buy-more, #zur-kasse {
+	height: 38px;
+	width: 70%;
+	max-width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .sc-price>p {
 	text-align: center;
 	font-size: 1.5rem;
@@ -831,11 +846,14 @@ header .col-6 {
 
 
 .sc-product-cart-img {
+	display: block;
 	width: 70%;
 	height: auto;
-	float: left;
 	margin-left: 10%;
 	border-radius: 10px;
+	mix-blend-mode: darken;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .sc-bt-remove-product {
@@ -846,8 +864,8 @@ header .col-6 {
 	transition: ease-in-out .2s;
 	/* # TODO:Responsive Reseizing */
 	color: #0c0b0c;
-	min-height: 2.5vw;
-	min-width: 2.5vw;
+	width: 50px;
+	height: 50px;
 }
 
 

@@ -94,18 +94,19 @@ function loadAndPrintShoppingCartInformation($conn)
 		$akt_preis = doubleval($productInfo['akt_preis']);
 		$lagermenge = intval($productInfo['lagermenge']);
 		echo "
-                <article class='sc-product-cart row' id='" . $produkt_ID . "'>
-			<div class='col-1'>
+                <article class='sc-product-cart row' id='$produkt_ID'>
+			<div class='row'>
+			<div class='col-1-5'>
 				<img src='" . getImage($produkt_ID, $conn) . "' class='sc-product-cart-img' style' width: 25px;
 				height: 25px;'>
 			</div>
-			<div class='col-2'>
+			<div class='col-1-5'>
 				<table id='eigenschafts-tabelle'>
 					<tr class='eigenschaft-row'>
-						<td>" . $bezeichnung . "</td>
+						<td>$bezeichnung</td>
                     </tr>
 					<tr class='eigenschaft-row'>
-						<td> Produkt Nummer: " . $produkt_ID . "</td>
+						<td> Produkt Nummer: $produkt_ID</td>
                     </tr>
 					<tr class='eigenschaft-row'>
 						<td>";
@@ -122,7 +123,7 @@ function loadAndPrintShoppingCartInformation($conn)
                     </tr>
 				</table>
 			</div>
-			<div class='col-1 sc-mengen-div' >
+			<div class='col-1-5 sc-mengen-div' >
             <fieldset class='sc-fd'>
             <legend id='sc-legend'>Menge:</legend>
 					<select style='width:50px' name='mengenauswahl' class='sc-mengenauswahl'>";
@@ -130,12 +131,12 @@ function loadAndPrintShoppingCartInformation($conn)
 		echo "</select> </fieldset>
 					<button type='button' class='sc-bt-remove-product'>
                         <i class='bi bi-trash-fill'></i>
-                    </button>";
-		echo "
+                    </button>
 				</div>
 				<div class='sc-price col-1-5'>
-						<p class='sc-article-price'>" . number_format(doubleval(($akt_preis * $menge) - (($akt_preis * $menge) / 119)*100), 2, ',', '') . " €</p>
+						<p class='sc-article-price'>". ($akt_preis * $menge) . " €</p>
 				</div>
+			</div>
 			</article>
 			<hr>
 			";
