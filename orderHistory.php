@@ -60,16 +60,24 @@ if (!isset($_SESSION['uid'])) {
                     <div class="col-1-5">
                         <p><strong>Summe</strong></p>
                     </div>
+                    <div class="col-1-5">
+                        <p><strong>Menge</strong></p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-1-5">
-                        <a href="orderHistory"><p>test Produkt 1234</p></a> <!-- Bitte an Verlinkung denken -->
+                        <a href="orderHistory">
+                            <p>test Produkt 1234</p>
+                        </a> <!-- Bitte an Verlinkung denken -->
                     </div>
                     <div class="col-1-5">
                         <p>20.02.2023</p>
                     </div>
                     <div class="col-1-5">
-                        <p>36,88€</p>
+                        <p>36,88€</p> <!-- Gesamtpreis -->
+                    </div>
+                    <div class="col-1-5">
+                        <p>2</p>
                     </div>
 
                 </div>
