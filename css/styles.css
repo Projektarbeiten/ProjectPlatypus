@@ -117,6 +117,73 @@ header .col-6 {
 	background-color: var(--header-color);
 }
 
+#top-bar {
+	height: 80px;
+	width: 100%;
+	background-color: #6e6e6e;
+}
+
+#header-logout-button {
+	float: left;
+	margin-left: 15px;
+	height: 50px;
+	margin-top: 15px;
+	color: var(--font-color);
+	width: 100px;
+}
+
+#header-logout-button:hover {
+	color: var(--font-color-2);
+	animation: logout .2s;
+	background: #24dbff
+}
+
+@keyframes logout {
+	0% {
+		background: linear-gradient(90deg, #24dbff 0%, #ffb8ff 0%)
+	}
+
+	10% {
+		background: linear-gradient(90deg, #24dbff 10%, #ffb8ff 0%)
+	}
+
+	20% {
+		background: linear-gradient(90deg, #24dbff 20%, #ffb8ff 0%)
+	}
+
+	30% {
+		background: linear-gradient(90deg, #24dbff 30%, #ffb8ff 0%)
+	}
+
+	40% {
+		background: linear-gradient(90deg, #24dbff 40%, #ffb8ff 0%)
+	}
+
+	50% {
+		background: linear-gradient(90deg, #24dbff 50%, #ffb8ff 0%)
+	}
+
+	60% {
+		background: linear-gradient(90deg, #24dbff 60%, #ffb8ff 0%)
+	}
+
+	70% {
+		background: linear-gradient(90deg, #24dbff 70%, #ffb8ff 0%)
+	}
+
+	80% {
+		background: linear-gradient(90deg, #24dbff 80%, #ffb8ff 0%)
+	}
+
+	90% {
+		background: linear-gradient(90deg, #24dbff 90%, #ffb8ff 0%)
+	}
+
+	100% {
+		background: linear-gradient(90deg, #24dbff 100%, #ffb8ff 0%)
+	}
+}
+
 #banner>img {
 	height: 250px;
 	width: 100%;
@@ -427,16 +494,8 @@ header .col-6 {
 }
 
 /* === KONTO-PAGE === */
-.box1 {
-	border: 2px solid var(--border-color);
-	margin-bottom: 30px;
-	text-align: center;
-	width: 33%;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-.button1 {
+.konto-page-button {
 	margin-bottom: 50px;
 	text-align: center;
 	width: 33%;
@@ -450,98 +509,157 @@ header .col-6 {
 	cursor: pointer;
 }
 
-.button1:hover {
+.konto-page-button:hover {
 	background-color: #dea2de;
 }
 
-
-
-.boxlinks {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 20%;
-	margin-left: auto;
-	margin-right: 40px;
+.editable-field:hover {
+	cursor: pointer;
 }
 
-.boxrechts {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 20%;
-	margin-left: 40px;
-	margin-right: auto;
+.in-edit-input {
+	display: block;
+	font-size: 16px;
 }
 
-.boxfull {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 44.5%;
+#kontopage-personal-data {
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.boxgeb {
+#kontopage-personal-data p,
+#kontopage-personal-data input,
+#kontopage-personal-data select {
+	display: block;
+	background-color: unset;
+	text-align: center;
 	border: 2px solid var(--border-color);
-	margin-bottom: 25px;
+	border-radius: 3px;
+	padding: 15px 0;
+	width: 60%;
+	margin: 0 auto 15px;
+	transition: .2s ease-in-out;
+}
+
+#kontopage-personal-data label {
+	display: block;
 	text-align: center;
-	width: 20%;
-	margin-left: 525px;
 }
 
-.boxstraße {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 45%;
-	margin-left: 525px;
-	margin-right: 40px;
+#password-change:hover {
+	cursor: pointer;
 }
 
-.boxstrnr {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 17%;
-	margin-left: 40px;
-	margin-right: 525px;
-}
-
-.boxbic {
-	border: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	text-align: center;
-	width: 20%;
-	margin-left: 525px;
-	margin-right: 40px;
-}
-
-.dropdown {
-	width: 387px;
-	height: 53px;
-	margin-left: 40px;
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.headline {
-	margin-bottom: 10px;
-	margin-left: 525px;
-}
-
-.password {
-	margin-bottom: 10px;
-	margin-left: 525px;
-}
-
-/* === Kauf_abgeschlossen === */
-
-.box {
-	background-color: #f2f2f2;
+.lightbox {
+	background-color: var(--theme-color-1);
+	position: fixed;
+	top: 50%;
+	left: 50%;
 	border-radius: 10px;
-	padding: 20px;
+}
+
+#lightbox__overlay {
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #000 !important;
+	opacity: 0.8;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	overflow: hidden;
+}
+
+#lightbox__overlay-container {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+}
+
+#password-change {
+	text-decoration: none;
+}
+
+#password-change:link,
+#theme-change:link {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:visited,
+#theme-change:visited {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:hover,
+#theme-change:hover {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:active,
+#theme-change:active {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#lightbox__overlay-password-change {
+	display: block;
+	width: 80%;
+	max-width: 600px;
+	height: 420px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#password-change-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 450px;
+	padding: 15px;
+}
+
+#password-change-form h1 {
+	text-align: center;
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+#password-change-form input {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 3px;
+	width: 80%;
+	max-width: 300px;
+	margin-bottom: 1.3rem;
+	border-radius: 3px;
+}
+
+#password-change-form label {
+	font-size: 1.1rem;
+	display: block;
+	margin-left: 16%;
+
+}
+
+#password-change-form button {
+	display: block;
+	width: 50%;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .7rem;
+	font-size: 1.1rem;
 }
 
 /* === GRID-SYSTEM === */
