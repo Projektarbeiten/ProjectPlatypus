@@ -14,7 +14,10 @@ $db = buildConnection(".");
     <link rel="stylesheet" href="./css/styles.css">
     <title>Suchergebnis</title>
 </head>
-
+<script>
+let products = [];
+let singleProduct = [];                    
+</script>
 <body>
     <!-- Header -->
     <?php
@@ -26,19 +29,33 @@ $db = buildConnection(".");
                 ; {
                 $search = $_GET['search'];
                 $stmt =
-                    "SELECT p_id, bezeichnung, akt_preis 
-    FROM produkt 
-    WHERE bezeichnung LIKE '%{$search}%'
-    OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
+                    "SELECT p_id, bezeichnung, akt_preis, eigenschaft_1, eigenschaft_2, eigenschaft_3, eigenschaft_4, eigenschaft_5, eigenschaft_6
+                    FROM produkt
+                    WHERE bezeichnung LIKE '%{$search}%'
+                    OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
                 $preparedstmt = $db->prepare($stmt);
                 //$preparedstmt->bindParam(':search',$search);
-            
+                
                 $counter = 0;
                 $result = $preparedstmt->execute();
                 while ($row = $preparedstmt->fetch()) {
                     if ($counter == 0) {
                         echo "<div class=row>";
                     }
+                    echo"
+                    <script>
+                    singleProduct = []
+                    singleProduct.push('{$row['p_id']}')
+                    singleProduct.push('{$row['bezeichnung']}')
+                    singleProduct.push('{$row['akt_preis']}')
+                    singleProduct.push('{$row['eigenschaft_1']}')
+                    singleProduct.push('{$row['eigenschaft_2']}')
+                    singleProduct.push('{$row['eigenschaft_3']}')
+                    singleProduct.push('{$row['eigenschaft_4']}')
+                    singleProduct.push('{$row['eigenschaft_5']}')
+                    singleProduct.push('{$row['eigenschaft_6']}')
+                    products.push(singleProduct)
+                    </script>";
                     $p_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/productpage?produkt_id={$row["p_id"]}";
                     $p_b = getImage($row['p_id'], $db);
                     echo "<div class='col-1-2 .produkt'>
@@ -54,11 +71,15 @@ $db = buildConnection(".");
                         $counter = 0;
                     }
                 }
+                echo "<script> console.log(products)</script>";
+
             }
             ?>
         </div>
     </main>
 </body>
+<script>
+    </script>
 <!-- Footer -->
 <?php
 require("footer.php");
