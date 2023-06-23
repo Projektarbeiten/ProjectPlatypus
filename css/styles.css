@@ -51,17 +51,20 @@ select:hover {
 }
 
 button {
-	background-color: #ffb8ff;
+	background-color: var(--theme-color-3);
 	color: var(--font-color-2);
 	border-radius: 10px;
 	display: block;
 	transition: ease-in-out .2s;
+	font-weight: bold;
 
 }
 
 button:hover {
 	transition: ease-in-out .2s;
 	cursor: pointer;
+	background-color: var(--theme-color-6);
+	color: var(--font-color);
 }
 
 h1 {
@@ -69,13 +72,14 @@ h1 {
 }
 
 a {
+	color: var(--font-color-3);
 	text-decoration: none;
 	transition: ease-in-out .2s;
 }
 
 a:hover {
 	transition: ease-in-out .2s;
-	color: var(--theme-color-4);
+	color: var(--theme-color-2);
 }
 
 .trennlinie {
@@ -518,16 +522,18 @@ header .col-6 {
 	width: 33%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #ffb8ff;
+	background-color: var(--theme-color-3);
 	color: white;
 	padding: 10px 20px;
 	border-radius: 5px;
 	font-size: 18px;
 	cursor: pointer;
+	transition: .4s ease-in-out;
 }
 
 .konto-page-button:hover {
-	background-color: #dea2de;
+	background-color: var(--theme-color-5);
+	color: var(--theme-color-2);
 }
 
 .editable-field:hover {
@@ -740,7 +746,7 @@ header .col-6 {
 	text-align: center;
 	height: 50px;
 	padding-top: 25px;
-	border-radius: 8px;
+	border-radius: 10px;
 	transition: .4s ease-in-out;
 	margin: 0;
 }
@@ -820,16 +826,19 @@ header .col-6 {
 	display: block;
 	width: 70%;
 	height: auto;
-	margin-left: 10%;
+	margin: 0;
 	border-radius: 10px;
 	mix-blend-mode: darken;
-	margin-left: auto;
-	margin-right: auto;
+	transition: .2s ease-in-out;
+	margin: 0 auto;
+}
+
+.sc-product-cart-img:hover {
+	width: 75%;
 }
 
 .sc-bt-remove-product {
 	background-color: var(--cancer-color);
-	color: var(--font-color-2);
 	border-radius: 10px;
 	display: block;
 	transition: .4s ease;
@@ -837,16 +846,18 @@ header .col-6 {
 	color: #0c0b0c;
 	width: 50px;
 	height: 50px;
+	max-width: 50px;
+
 }
 
-.bi {
+.bi-trash-fill {
 	margin: -1rem;
 	padding: 1rem;
 	overflow-x: visible;
 	transition: .4s ease;
 }
 
-.bi:hover {
+.bi-trash-fill:hover {
 	color: white;
 }
 
@@ -889,7 +900,6 @@ header .col-6 {
 /* ====== FLASH Green ====== */
 
 .flash_green {
-	pointer-events: none;
 	display: block;
 	position: fixed;
 	top: 25px;
@@ -901,7 +911,6 @@ header .col-6 {
 	color: var(--font-color);
 	background-color: var(--font-color-2);
 	border: 2px solid var(--theme-color-2);
-	;
 	border-radius: 2px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 	opacity: 0;

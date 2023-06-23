@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 $("#cart-button").click(function () {
     let datastring = $("#bestell-form").serialize();
     let debug = true;

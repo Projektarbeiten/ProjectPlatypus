@@ -107,6 +107,7 @@ $conn = buildConnection(".");
                             </div>
                         </div>
                     </div>
+                    "./* Bitte wieder hinzufügen sobald Rabatte implementiert wurden
                     <div class='row'>
                         <div class='col-6'>
                             <div class='sc-price-information' >
@@ -114,7 +115,8 @@ $conn = buildConnection(".");
                                 <p id='sc-price-safed-tag'></p>
                             </div>
                         </div>
-                    </div>
+                    </div>*/
+                    "
                     <div class='row'>
                         <div class='col-3'>
                             <button id='buy-more'>Weiter Einkaufen</button>

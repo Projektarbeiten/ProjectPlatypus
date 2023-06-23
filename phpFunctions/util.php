@@ -5,7 +5,7 @@ function getImage($artikelNr, $conn)
 	$mime = 'image/jpg';
 	$imageBinary = getProductImageData($artikelNr, $conn);
 	$base64 = base64_encode($imageBinary);
-	return ('data:' . $mime . ';base64,' . $base64);
+	return ("data: $mime; base64, $base64");
 }
 
 function checkCode($code, $conn)
@@ -97,13 +97,12 @@ function loadAndPrintShoppingCartInformation($conn)
                 <article class='sc-product-cart row' id='$produkt_ID'>
 			<div class='row'>
 			<div class='col-1-5'>
-				<img src='" . getImage($produkt_ID, $conn) . "' class='sc-product-cart-img' style' width: 25px;
-				height: 25px;'>
+				<a href='productPage?produkt_id=$produkt_ID'><img src='" . getImage($produkt_ID, $conn) . "' class='sc-product-cart-img'></a>
 			</div>
 			<div class='col-1-5'>
 				<table id='eigenschafts-tabelle'>
 					<tr class='eigenschaft-row'>
-						<td>$bezeichnung</td>
+						<td><a href='productPage?produkt_id=$produkt_ID'>$bezeichnung</a></td>
                     </tr>
 					<tr class='eigenschaft-row'>
 						<td> Produkt Nummer: $produkt_ID</td>

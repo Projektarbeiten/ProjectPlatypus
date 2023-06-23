@@ -51,15 +51,15 @@
         echo "Result:";
         #var_dump($_SESSION['produkt_array']);
             error_log(date("Y-m-d H:i:s", time()) . "\n
-            Found:" . $found . "\n
-            Menge: " .$menge . "\n
-            ProduktID: " .$produkt_ID."\n
+            Found: $found \n
+            Menge: $menge \n
+            ProduktID: $produkt_ID \n
             Session_id: ".session_id()."\n", 3, "my-debug-addToSession.log");
         #session_destroy();
     }
     if(!empty($found)){
         if($debug2)
-            echo 200 ." ". $menge." ".$produkt_ID . var_dump($_SESSION['produkt_array']);;
+            echo 200 ." $menge $produkt_ID ". var_dump($_SESSION['produkt_array']);;
         echo 201;
     }else{
         echo 406;

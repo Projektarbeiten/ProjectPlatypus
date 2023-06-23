@@ -54,7 +54,7 @@ if (isset($_SESSION['uid'])) {
 <body>
     <!-- Header -->
     <?php
-    require("header.php");
+    require "header.php";
     ?>
     <main id="product-seite">
         <div class="container">
@@ -64,12 +64,16 @@ if (isset($_SESSION['uid'])) {
                 </div>
                 <p class="flash__body_r"></p>
             </div>
+
             <div class="flash_green">
-                <div class="flash__icon_g">
-                    <i class="icon bi bi-bag-plus"></i>
-                </div>
-                <p class="flash__body_g"></p>
+                <a href="shoppingCart" style="z-index: 999">
+                    <div class="flash__icon_g">
+                        <i class="icon bi bi-bag-plus"></i>
+                    </div>
+                    <p class="flash__body_g"></p>
+                </a>
             </div>
+
             <div class="row">
                 <div class="col-2">
                     <img id="produkt-bild" src="<?php echo getImage($produkt_ID, $conn); ?>" alt=""> <!-- Image wird anhand der Produkt ID Base64 encoded angezeigt und dynamisch geladen-->
@@ -79,11 +83,11 @@ if (isset($_SESSION['uid'])) {
                     <p style="font-weight: bold"><?php echo $oemBezeichnung ?></p>
                     <table id="eigenschafts-tabelle">
                         <!-- Eigenschaften werden dynamisch hinzugefügt -->
-                        <?php 
-                        for ($i=1; $i <= 6; $i++) { 
+                        <?php
+                        for ($i = 1; $i <= 6; $i++) {
                             $eigenschaft = "produktEigenschaft$i";
                             # $$ Macht mit einer loop dynamische variablenNamen
-                            if (!empty($$eigenschaft)){
+                            if (!empty($$eigenschaft)) {
                                 eingenschaften($$eigenschaft);
                             }
                         }
@@ -95,11 +99,11 @@ if (isset($_SESSION['uid'])) {
                         <div id="preis-section">
                             <div class='pp-price-before'>
                                 <p id='pp-zw'> Aktueller Preis: </p>
-                                <p id='sc-price-before-tag'><?php echo number_format(doubleval($produktPreis), 2, ',', '') .'€*' ?></p>
+                                <p id='sc-price-before-tag'><?php echo number_format(doubleval($produktPreis), 2, ',', '') . '€*' ?></p>
                             </div>
                             <div class='sc-mwst-box'>
                                 <p id='sc-mwst'> *inkl. 19% MwSt: </p>
-                                <p id='pp-price-mwst'>  <?php echo '(' . number_format(doubleval($produktPreis-(($produktPreis / 119)*100)), 2, ',', '') . ' €)'?></p>
+                                <p id='pp-price-mwst'> <?php echo number_format(doubleval($produktPreis - (($produktPreis / 119) * 100)), 2, ',', '') . ' €' ?></p>
                             </div>
                         </div>
                         <div class="trennlinie"></div>
@@ -156,9 +160,9 @@ if (isset($_SESSION['uid'])) {
     </main>
 
     <?php
-    require("./footer.php");
+    require "./footer.php";
     ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="javascript/jquery-3.6.1.min.js"></script>
     <script src="javascript\addToShoppingCart.js"></script>
 </body>
 
