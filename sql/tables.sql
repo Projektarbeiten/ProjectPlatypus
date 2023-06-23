@@ -152,7 +152,8 @@
 		,b_id_ref		int not null
 		,p_id_ref		int not null
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
-		,menge			int
+		,menge			int not null
+		,akt_preis		int not null
 		,PRIMARY KEY(b_p_id)
 	);
 
