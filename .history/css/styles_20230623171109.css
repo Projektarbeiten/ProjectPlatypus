@@ -764,16 +764,10 @@ header .col-6 {
 
 
 .arrow {
-	border: solid var(--font-color-3);
-	border-width: 0 8px 8px 0;
-	padding: 5px;
+	border: solid black;
+	border-width: 0 3px 3px 0;
 	display: inline-block;
-}
-
-#orders .order-dropdown-arrow {
-	float: right;
-	display: block;
-	margin-right: 15px;
+	padding: 3px;
 }
 
 .left {

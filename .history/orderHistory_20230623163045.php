@@ -52,41 +52,45 @@ if (!isset($_SESSION['uid'])) {
             <div class="order-card">
                 <div class="row">
                     <div class="col-1-5">
-                        <p><strong>Bestellung aufgegeben</strong></p>
+                        <p><strong>Produkt</strong></p>
                     </div>
                     <div class="col-1-5">
-                        <p><strong>Anzahl Artikel</strong></p>
+                        <p><strong>Bestellung aufgegeben</strong></p>
                     </div>
                     <div class="col-1-5">
                         <p><strong>Summe</strong></p>
                     </div>
                     <div class="col-1-5">
-                        <p class="order-dropdown-arrow"><i class="arrow left"></i></p>
+                        <p><strong>Menge</strong></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-1-5">
-                        <p>20.02.2023</p>
+                        <a href="orderHistory">
+                            <p>test Produkt 1234</p>
+                        </a> <!-- Bitte an Verlinkung denken -->
                     </div>
                     <div class="col-1-5">
-                        <p>4</p>
+                        <p>20.02.2023</p>
                     </div>
                     <div class="col-1-5">
                         <p>36,88€</p> <!-- Gesamtpreis -->
                     </div>
                     <div class="col-1-5">
-                        <button type="button">Bestellung zurückschicken/Bestellung stornieren</button> <!-- Wert wird dynmaisch ermittelt -->
+                        <p>2</p>
                     </div>
 
-
                 </div>
-                <div class="trennlinie" style="width: 100%; border-color: black"></div>
-                <div class="row" class="order-dropdown">
-                    <div class="col-6">
-                        <p class="order-dropdown-closed">...</p>
+                <div class="trennlinie"></div>
+                <div class="row">
+                    <div class="col-1-5">
+                        <img src="./img/testBild.png" alt="Produktbild">
+                    </div>
+                    <div class="col-4">
+                        <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
+                            dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
@@ -100,16 +104,3 @@ if (!isset($_SESSION['uid'])) {
 </body>
 
 </html>
-<div class="row">
-    <div class="col-1-5">
-        <img src="./img/testBild.png" alt="Produktbild">
-    </div>
-    <div class="col-4">
-        <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
-            dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
-    </div>
-</div>
-
-<a href="orderHistory">
-    <p>test Produkt 1234</p>
-</a> <!-- Bitte an Verlinkung denken -->

@@ -51,31 +51,25 @@ if (!isset($_SESSION['uid'])) {
         <div class="container" id="orders">
             <div class="order-card">
                 <div class="row">
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p><strong>Bestellung aufgegeben</strong></p>
                     </div>
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p><strong>Anzahl Artikel</strong></p>
                     </div>
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p><strong>Summe</strong></p>
-                    </div>
-                    <div class="col-1-5">
-                        <p class="order-dropdown-arrow"><i class="arrow left"></i></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p>20.02.2023</p>
                     </div>
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p>4</p>
                     </div>
-                    <div class="col-1-5">
+                    <div class="col-2">
                         <p>36,88€</p> <!-- Gesamtpreis -->
-                    </div>
-                    <div class="col-1-5">
-                        <button type="button">Bestellung zurückschicken/Bestellung stornieren</button> <!-- Wert wird dynmaisch ermittelt -->
                     </div>
 
 
@@ -83,7 +77,7 @@ if (!isset($_SESSION['uid'])) {
                 <div class="trennlinie" style="width: 100%; border-color: black"></div>
                 <div class="row" class="order-dropdown">
                     <div class="col-6">
-                        <p class="order-dropdown-closed">...</p>
+                        <p style="width:100%; text-align: center; font-size: 2rem; height: 15px; padding-bottom: 1rem">...</p>
                     </div>
                 </div>
 

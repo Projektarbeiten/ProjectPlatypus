@@ -61,7 +61,7 @@ if (!isset($_SESSION['uid'])) {
                         <p><strong>Summe</strong></p>
                     </div>
                     <div class="col-1-5">
-                        <p class="order-dropdown-arrow"><i class="arrow left"></i></p>
+                        <p><i class="arrow down"></i></p>
                     </div>
                 </div>
                 <div class="row">

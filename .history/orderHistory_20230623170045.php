@@ -60,9 +60,7 @@ if (!isset($_SESSION['uid'])) {
                     <div class="col-1-5">
                         <p><strong>Summe</strong></p>
                     </div>
-                    <div class="col-1-5">
-                        <p class="order-dropdown-arrow"><i class="arrow left"></i></p>
-                    </div>
+                    div.col
                 </div>
                 <div class="row">
                     <div class="col-1-5">
@@ -73,9 +71,6 @@ if (!isset($_SESSION['uid'])) {
                     </div>
                     <div class="col-1-5">
                         <p>36,88€</p> <!-- Gesamtpreis -->
-                    </div>
-                    <div class="col-1-5">
-                        <button type="button">Bestellung zurückschicken/Bestellung stornieren</button> <!-- Wert wird dynmaisch ermittelt -->
                     </div>
 
 

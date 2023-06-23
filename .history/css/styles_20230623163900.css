@@ -737,16 +737,7 @@ header .col-6 {
 	padding-bottom: 5px;
 }
 
-.order-dropdown-closed {
-	width: 100%;
-	text-align: center;
-	font-size: 2rem;
-	height: 15px;
-}
-
 #orders img {
-	border-radius: 10px;
-	mix-blend-mode: darken;
 	margin-left: 40px;
 	width: 270px;
 }
@@ -760,30 +751,6 @@ header .col-6 {
 	margin-right: auto;
 	padding-top: 10px;
 	background-color: var(--theme-color-5);
-}
-
-
-.arrow {
-	border: solid var(--font-color-3);
-	border-width: 0 8px 8px 0;
-	padding: 5px;
-	display: inline-block;
-}
-
-#orders .order-dropdown-arrow {
-	float: right;
-	display: block;
-	margin-right: 15px;
-}
-
-.left {
-	transform: rotate(135deg);
-	-webkit-transform: rotate(135deg);
-}
-
-.down {
-	transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
 }
 
 /* === GRID-SYSTEM === */

@@ -770,10 +770,9 @@ header .col-6 {
 	display: inline-block;
 }
 
-#orders .order-dropdown-arrow {
-	float: right;
+#order-dropdown-arrow {
+	text-align: right;
 	display: block;
-	margin-right: 15px;
 }
 
 .left {
