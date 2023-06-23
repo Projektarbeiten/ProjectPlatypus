@@ -46,6 +46,10 @@ p {
 	color: var(--font-color);
 }
 
+select:hover {
+	cursor: pointer;
+}
+
 button {
 	background-color: #ffb8ff;
 	color: var(--font-color-2);
@@ -730,6 +734,28 @@ header .col-6 {
 
 /* ====== Shopping Cart ===== */
 
+#sc-overview-switch h3{
+	display:inline-block;
+	width: calc(99%/2);
+	text-align: center;
+	height: 50px;
+	padding-top: 25px;
+	border-radius: 8px;
+	transition: .4s ease-in-out;
+	margin: 0;
+}
+
+#sc-overview-switch h3:hover {
+	background-color: rgba(128, 128, 128, 0.911);
+}
+
+#sc-overview-switch {
+	width:70%;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .sc-box-between-endprice-and-productcard>input {
 	height: 40px;
 }
@@ -741,34 +767,30 @@ header .col-6 {
 	align-items: center;
 }
 
-.sc-price-before {
-	margin-top: 2.5%;
-	border-top: 1.5px solid var(--border-color);
-	align-content: center;
-	justify-content: center;
-	display: flex;
+#warenkorb-preis-information p{
+	display: inline;
+	margin-left: 5px;
+	font-size: 1.3rem;
 }
 
-.sc-mwst-box {
-	align-content: center;
-	justify-content: center;
-	display: flex;
-	margin-top: -5.5%;
+.sc-price-information {
+	float: right;
 }
 
-.sc-price-end-box {
-	align-content: center;
-	justify-content: center;
-	display: flex;
+#sc-gutschein {
+	border-radius: 5px;
+	font-size: 1.3rem;
 }
+
+#sc-mwst-box>p {
+	display: inline;
+	margin-left: 5px;
+}
+
 
 .sc-price-safed-box {
 	border: 2px solid var(--border-color);
-	align-content: center;
-	justify-content: center;
-	display: flex;
 	height: 2.5vh;
-
 }
 
 #warenkorb-karten-ueberschriften p {
@@ -777,61 +799,10 @@ header .col-6 {
 	font-size: 1.1rem;
 }
 
-#sc-price-safed-tag {
-	text-align: right;
-	margin: auto;
-}
 
-#sc-safed {
-	text-align: left;
-	margin: auto;
-}
 
-#sc-gs {
-	text-align: left;
-	font-weight: bold;
-	font-size: 1.6rem;
-}
-
-#sc-mwst {
-	text-align: left;
-}
-
-#sc-price-end-tag {
-	text-align: right;
-	font-size: 1.6rem;
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: auto;
-
-}
-
-#sc-price-mwst {
-	text-align: right;
-	font-size: 1.0rem;
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: auto;
-}
-
-#sc-gutschein {
-	height: 75%;
-}
-
-#sc-zw {
-	font-weight: bold;
-	text-align: left;
-}
-
-#sc-price-before-tag {
-	font-size: 1.5rem;
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: auto;
-	text-align: right;
-}
-
-#buy-more, #zur-kasse {
+#buy-more,
+#zur-kasse {
 	height: 38px;
 	width: 70%;
 	max-width: 280px;
@@ -857,15 +828,30 @@ header .col-6 {
 }
 
 .sc-bt-remove-product {
-	background-color: #ffb8ff;
+	background-color: var(--cancer-color);
 	color: var(--font-color-2);
 	border-radius: 10px;
 	display: block;
-	transition: ease-in-out .2s;
+	transition: .4s ease;
 	/* # TODO:Responsive Reseizing */
 	color: #0c0b0c;
 	width: 50px;
 	height: 50px;
+}
+
+.bi {
+	margin: -1rem;
+	padding: 1rem;
+	overflow-x: visible;
+	transition: .4s ease;
+}
+
+.bi:hover {
+	color: white;
+}
+
+.sc-bt-remove-product:hover {
+	background-color: var(--theme-color-3);
 }
 
 
@@ -874,16 +860,6 @@ header .col-6 {
 	margin-top: 20px;
 }
 
-.sc-boxrechts {
-	border-left: none;
-	border-right: 2px solid var(--border-color);
-	border-top: 2px solid var(--border-color);
-	border-bottom: 2px solid var(--border-color);
-	margin-bottom: 20px;
-	margin-right: auto;
-	text-align: center;
-	width: 20%;
-}
 
 /* ====== Product Page ====== */
 
@@ -899,11 +875,12 @@ header .col-6 {
 }
 
 .sc-mwst-box>p {
-	font-size: 1.0rem;
+	display: inline;
 }
 
 #pp-price-mwst {
-	text-align: left;
+
+	display: inline;
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-left: auto;

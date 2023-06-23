@@ -68,28 +68,13 @@ function checkShoppingCart() {
     if ($('.sc-product-cart').length) {
 
     } else {
-        $('.artikel-container').remove();
-        $('.sc-box-between-endprice-and-productcard').remove();
-        $('#zur-kasse').remove();
-        let newContent = $(" <div class='container artikel-container'>\
-        <div style='display: flex;'>\
-            <div class='boxlinks' style='background-color: grey; opacity: 90%'>\
-                <h3>\
-                    Warenkorb\
-                </h3>\
-            </div>\
-            <div class='sc-boxrechts' style='margin-left: -39.5px;'>\
-                <h3>\
-                    Kasse\
-                </h3>\
-            </div>\
-        </div>\
-        <hr>\
-                    <div class='col-6'>\
-        \
-                        <p style='text-align: center'>Kein Produkt im Warenkorb</p>            </div>\
-                </div>");
-        $('main').append(newContent);
+        $('hr').remove();
+        $('#warenkorb-karten-ueberschriften').remove();
+        $('#warenkorb-preis-information').remove();
+        let newContent = $(`
+            <hr />
+            <p style='text-align: center'>Kein Produkt im Warenkorb</p>`);
+        $('#sc-overview-switch').append(newContent);
     }
 }
 
@@ -133,7 +118,7 @@ function updatePrices() {
                 mwst = ((zwPrice - (zwPrice / 119) * 100));
                 endPrice = zwPrice // Da Zwischenpreisch schon Bruttopreis beinhaltet
                 $("#sc-price-before-tag").text(zwPrice.toFixed(2) + " €");
-                $("#sc-price-mwst").text(mwst.toFixed(2) + " €")    
+                $("#sc-price-mwst").text(mwst.toFixed(2) + " €")
                 $('#sc-price-end-tag').text(endPrice.toFixed(2) + " €");
             }
 

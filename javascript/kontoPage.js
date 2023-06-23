@@ -41,14 +41,14 @@ $(".editable-field").on("click", function (e) {
         $(field).remove();
 
         // Beim Drücken von Enter, wird von dem Fokussierte Element der neue Wert abgespeichert und weitergeleitet
-        $(".editable-field").keypress(function (e) {
+        $(".editable-field").on("keypress", function (e) {
             if (e.which == 13) {
-                field = $(this);
-                newVal = $(this).val();
-                fieldId = $(this).attr("id");
-                attributeTarget = fieldId.split("-")[1];
-                sendAndSwitchToP();
+                checkNormalField();
             }
+        });
+
+        $(".editable-field").on("blur", function (e) {
+            checkNormalField();
         });
 
         $("select").on("change", function (e) {
@@ -105,6 +105,14 @@ $("#password-change").click(function (event) {
         };
     });
 });
+
+function checkNormalField() {
+    field = $(`#${fieldId}`);
+    newVal = $(`#${fieldId}`).val();
+    fieldId = $(`#${fieldId}`).attr("id");
+    attributeTarget = fieldId.split("-")[1];
+    sendAndSwitchToP();
+}
 
 // Sendet den neuen Wert des Feldes an php zur weiteren Datenverarbeitung und gibt dem User eine Meldung zurück
 function sendAndSwitchToP() {

@@ -79,24 +79,14 @@ if (isset($_SESSION['uid'])) {
                     <p style="font-weight: bold"><?php echo $oemBezeichnung ?></p>
                     <table id="eigenschafts-tabelle">
                         <!-- Eigenschaften werden dynamisch hinzugefügt -->
-                        <?php if ($produktEigenschaft1 != "")
-                            eingenschaften($produktEigenschaft1)
-                        ?>
-                        <?php if ($produktEigenschaft2 != "")
-                            eingenschaften($produktEigenschaft2)
-                        ?>
-                        <?php if ($produktEigenschaft3 != "")
-                            eingenschaften($produktEigenschaft3)
-                        ?>
-                        <?php if ($produktEigenschaft4 != "")
-                            eingenschaften($produktEigenschaft4)
-                        ?>
-                        <?php if ($produktEigenschaft5 != "")
-                            eingenschaften($produktEigenschaft5)
-                        ?>
-                        <?php if ($produktEigenschaft6 != "")
-                            eingenschaften($produktEigenschaft6)
-
+                        <?php 
+                        for ($i=1; $i <= 6; $i++) { 
+                            $eigenschaft = "produktEigenschaft$i";
+                            # $$ Macht mit einer loop dynamische variablenNamen
+                            if (!empty($$eigenschaft)){
+                                eingenschaften($$eigenschaft);
+                            }
+                        }
                         ?>
                     </table>
                 </div>
@@ -109,7 +99,7 @@ if (isset($_SESSION['uid'])) {
                             </div>
                             <div class='sc-mwst-box'>
                                 <p id='sc-mwst'> *inkl. 19% MwSt: </p>
-                                <p id='pp-price-mwst'>  <?php echo chr(40). number_format(doubleval($produktPreis-(($produktPreis / 119)*100)), 2, ',', '') .'€' .chr(41)?></p>
+                                <p id='pp-price-mwst'>  <?php echo '(' . number_format(doubleval($produktPreis-(($produktPreis / 119)*100)), 2, ',', '') . ' €)'?></p>
                             </div>
                         </div>
                         <div class="trennlinie"></div>
