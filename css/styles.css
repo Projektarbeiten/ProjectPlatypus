@@ -737,11 +737,22 @@ header .col-6 {
 	padding-bottom: 5px;
 }
 
-.order-dropdown-closed {
+.order-dropdown-closed p {
 	width: 100%;
 	text-align: center;
 	font-size: 2rem;
 	height: 15px;
+	transition: .4s ease-in-out;
+}
+
+.order-dropdown-open {
+	transition: .4s ease-in-out;
+}
+
+#order-refund {
+	height: 35px;
+	width: 250px;
+	margin-top: -1rem;
 }
 
 #orders img {
@@ -768,6 +779,7 @@ header .col-6 {
 	border-width: 0 8px 8px 0;
 	padding: 5px;
 	display: inline-block;
+	transition: .4s ease-in-out;
 }
 
 #orders .order-dropdown-arrow {

@@ -75,16 +75,24 @@ if (!isset($_SESSION['uid'])) {
                         <p>36,88€</p> <!-- Gesamtpreis -->
                     </div>
                     <div class="col-1-5">
-                        <button type="button">Bestellung zurückschicken/Bestellung stornieren</button> <!-- Wert wird dynmaisch ermittelt -->
+                        <button type="button" id="order-refund">Bestellung zurückschicken/Bestellung stornieren</button> <!-- Wert wird dynmaisch ermittelt -->
                     </div>
-
-
                 </div>
                 <div class="trennlinie" style="width: 100%; border-color: black"></div>
                 <div class="row" class="order-dropdown">
-                    <div class="col-6">
-                        <p class="order-dropdown-closed">...</p>
+                    <div class="col-6 order-dropdown-closed">
+                        <p>...</p>
                     </div>
+                    <div class="order-dropdown-open" style="display:none">
+                        <div class="col-2">
+                            <img src="./img/testBild.png" alt="Produktbild">
+                        </div>
+                        <div class="col-4">
+                            <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
+                                dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -96,20 +104,7 @@ if (!isset($_SESSION['uid'])) {
     require "footer.php";
     ?>
     <script src="./javascript/jquery-3.6.1.min.js"></script>
-    <script src="./javascript/orderHistorySearch.js"></script>
+    <script src="./javascript/orderHistory.js"></script>
 </body>
 
 </html>
-<div class="row">
-    <div class="col-1-5">
-        <img src="./img/testBild.png" alt="Produktbild">
-    </div>
-    <div class="col-4">
-        <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
-            dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
-    </div>
-</div>
-
-<a href="orderHistory">
-    <p>test Produkt 1234</p>
-</a> <!-- Bitte an Verlinkung denken -->
