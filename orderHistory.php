@@ -79,22 +79,75 @@ if (!isset($_SESSION['uid'])) {
                     </div>
                 </div>
                 <div class="trennlinie" style="width: 100%; border-color: black"></div>
-                <div class="row" class="order-dropdown">
-                    <div class="col-6 order-dropdown-closed">
-                        <p>...</p>
-                    </div>
-                    <div class="order-dropdown-open" style="display:none">
-                        <div class="col-2">
-                            <img src="./img/testBild.png" alt="Produktbild">
-                        </div>
-                        <div class="col-4">
-                            <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
-                                dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
+                <div class="order-dropdown">
+                    <div class="row">
+                        <div class="col-6 order-dropdown-closed">
+                            <p>...</p>
                         </div>
                     </div>
 
+                    <div class="order-dropdown-open" id="order-123" style="display:none"> <!-- ID wird von order in der Datenbank bestimmt -->
+                        <div class="row">
+                            <div class="col-2">
+                                <p><strong>Versand am</strong></p>
+                            </div>
+                            <div class="col-2">
+                                <p><strong>Zugestellt am /voraussichtliche Zustellung</strong></p>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="article-refund">Artikel zurückschicken/Artikel stornieren</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p>20.02.2023</p>
+                            </div>
+                            <div class="col-2">
+                                <p>22.02.2023</p>
+                            </div>
+                        </div>
+                        <div class="trennlinie" style="width: 100%; border-color: black"></div>
+                        <div class="row">
+                            <div class="col-1-5">
+                                <p><strong>Produktname</strong></p>
+                            </div>
+                            <div class="col-1-5">
+                                <p><strong>Einzelpreis</strong></p>
+                            </div>
+                            <div class="col-1-5">
+                                <p><strong>Menge</strong></p>
+                            </div>
+                            <div class="col-1-5">
+                                <p><strong>Summe</strong></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1-5">
+                                <a href="">
+                                    <p>Produkt XYZ</p>
+                                </a> <!-- An Verlinkung denken -->
+                            </div>
+                            <div class="col-1-5">
+                                <p>12.34€</p>
+                            </div>
+                            <div class="col-1-5">
+                                <p>3</p>
+                            </div>
+                            <div class="col-1-5">
+                                <p>37.02€</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="./img/testBild.png" alt="Produktbild">
+                            </div>
+                            <div class="col-4">
+                                <p> Test Beschreibung: Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum autem tempore, sequi suscipit iste ipsum repudiandae itaque iure eligendi,
+                                    dolor est delectus vel odit quasi nihil laboriosam corporis. Vero.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </main>

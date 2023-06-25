@@ -746,6 +746,9 @@ header .col-6 {
 }
 
 .order-dropdown-open {
+	border: 3px solid var(--font-color);
+	border-radius: 35px;
+	margin: 30px 10px;
 	transition: .4s ease-in-out;
 }
 
@@ -770,9 +773,17 @@ header .col-6 {
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 10px;
+	margin-bottom: 70px;
 	background-color: var(--theme-color-5);
 }
 
+.article-refund {
+	height: 40px;
+margin-bottom: -60px;
+
+	
+	
+}
 
 .arrow {
 	border: solid var(--font-color-3);
