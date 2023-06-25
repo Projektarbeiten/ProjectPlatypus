@@ -1,5 +1,5 @@
 <?php
-require("./phpFunctions/sqlQueries.php");
+require('sqlQueries.php');
 function getImage($artikelNr, $conn)
 {
 	$mime = 'image/jpg';
@@ -43,8 +43,11 @@ function getProductAmountOptions($lagermenge, $menge)
 	}
 }
 
-function getCustomDate($days)
+function getCustomBussinessDate($days)
 {
+	while (date('N', strtotime(date(strtotime('+' . $days . ' day')))) >= 6){
+	$days += 1;
+	}
 	$dateObject = date_create_from_format('d.m.Y', date('d.m.Y', strtotime('+' . $days . ' day')));
 	$result = $dateObject->format('d.m.Y');
 	return $result;
@@ -110,7 +113,7 @@ function loadAndPrintShoppingCartInformation($conn)
 					<tr class='eigenschaft-row'>
 						<td>";
 		if ($lagermenge > 0) {
-			echo "Lieferbar bis zum " . getCustomDate(1);
+			echo "Lieferbar bis zum " . getCustomBussinessDate(1);
 			// berechnet ein Pseudo Lieferdatum
 		} else {
 			echo "Aktuell nicht Lieferbar";

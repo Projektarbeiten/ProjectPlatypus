@@ -900,6 +900,7 @@ header .col-6 {
 /* ====== FLASH Green ====== */
 
 .flash_green {
+	pointer-events: none;
 	display: block;
 	position: fixed;
 	top: 25px;
