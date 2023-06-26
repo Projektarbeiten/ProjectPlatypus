@@ -35,7 +35,7 @@ if (!isset($_SESSION['uid'])) {
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <h1 id="history-headline">Meine Bestellungen</h1>
+                    <h1 class="headline">Meine Bestellungen</h1>
                 </div>
             </div>
             <div class="row">
@@ -94,6 +94,9 @@ if (!isset($_SESSION['uid'])) {
                             <div class="col-2">
                                 <p><strong>Zugestellt am /voraussichtliche Zustellung</strong></p>
                             </div>
+                            <div class="col-2">
+                                <button type="button" class="article-refund">Artikel zurückschicken/Artikel stornieren</button>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-2">
@@ -101,9 +104,6 @@ if (!isset($_SESSION['uid'])) {
                             </div>
                             <div class="col-2">
                                 <p>22.02.2023</p>
-                            </div>
-                            <div class="col-2">
-                                <button type="button" class="article-refund">Artikel zurückschicken/Artikel stornieren</button>
                             </div>
                         </div>
                         <div class="trennlinie" style="width: 100%; border-color: black"></div>

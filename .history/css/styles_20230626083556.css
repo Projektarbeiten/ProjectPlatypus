@@ -707,9 +707,9 @@ header .col-6 {
 
 #order-search {
 	width: 80%;
-	height: 35px;
+	height: 40px;
 	font-size: 1.1rem;
-	border-radius: 12px;
+	border-radius: 10px;
 	padding-left: 8px;
 	max-width: 500px;
 	border: 2px solid var(--border-color);
