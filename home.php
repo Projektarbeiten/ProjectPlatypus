@@ -5,7 +5,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 }
 require(dirname(__FILE__) . "/phpFunctions/databaseConnection.php");
 require(dirname(__FILE__) ."/phpFunctions/util.php");
-$conn = buildConnection(".");
+$conn = buildConnection();
 $bestseller = getBestseller($conn);
 ?>
 <!DOCTYPE html>

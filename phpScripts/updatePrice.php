@@ -8,7 +8,7 @@
 
     if(isset($_SESSION['produkt_array'])){
 
-        $conn = buildConnection('../');
+        $conn = buildConnection();
         if($debug){
             ini_set('log_errors', TRUE);
             ini_set('display_errors', 1);

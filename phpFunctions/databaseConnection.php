@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 #print  (dirname(__FILE__,2)."/config/app.ini");
-function buildConnection($connpath)
+function buildConnection()
 {
 	$inipath = (dirname(__FILE__,2)."/config/app.ini");
 	$ini = parse_ini_file($inipath);

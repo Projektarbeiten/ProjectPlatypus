@@ -2,7 +2,7 @@
 session_start();
 require dirname(__FILE__) . "/phpFunctions/databaseConnection.php";
 require dirname(__FILE__) . '/phpFunctions/util.php';
-$conn = buildConnection("./");
+$conn = buildConnection();
 
 ?>
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ $conn = buildConnection("./");
 		</div>
 		<?php
 		if (isset($_POST['code'])) {
-			$conn = buildConnection('.');
+			$conn = buildConnection();
 			if (checkCode($_POST['code'], $conn)) {
 				$_SESSION['access_token'] = true;
 				header("Location: home");

@@ -37,7 +37,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
             $passwortw = $_POST['pwWiederholen'];
             $agb = $_POST['agb'];
             if ($passwort === $passwortw) {
-                $db = buildConnection('.');
+                $db = buildConnection();
                 $checkMailStmt = "SELECT u_id FROM user WHERE email = :mail";
                 $preparedMailCheck = $db->prepare($checkMailStmt);
                 $preparedMailCheck->bindParam(':mail', $email);

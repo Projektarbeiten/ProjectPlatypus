@@ -1,11 +1,11 @@
 <?php
 session_start();
 require dirname(__FILE__) . '/phpFunctions/databaseConnection.php';
-require dirname(__FILE__) . './phpFunctions/util.php';
+require dirname(__FILE__) . '/phpFunctions/util.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$conn = buildConnection(".");
+$conn = buildConnection();
 ?>
 <!DOCTYPE html>
 <html lang="en">

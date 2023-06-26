@@ -13,7 +13,7 @@ if (!isset($_SESSION['uid'])) {
     exit;
 } else {
     $uid = $_SESSION['uid'];
-    $conn = buildConnection(".");
+    $conn = buildConnection();
     $row = getAccountInformation($uid, $conn);
     $anrede = $row['anrede'];
     $titel = $row['titel'];

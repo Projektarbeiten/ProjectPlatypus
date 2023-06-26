@@ -7,7 +7,7 @@ $produkt_ID = $_GET['produkt_id'];
 require(dirname(__FILE__) . "/phpFunctions/databaseConnection.php");
 require(dirname(__FILE__) . "/phpFunctions/util.php");
 
-$conn = buildConnection(".");
+$conn = buildConnection();
 $pInfo = getProduktInfos($produkt_ID, $conn);
 
 if ($pInfo === "ERROR") {
