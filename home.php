@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
     header("Location: index");
 }
-require "./phpFunctions/databaseConnection.php";
-require "./phpFunctions/util.php";
+require(dirname(__FILE__) . "/phpFunctions/databaseConnection.php");
+require(dirname(__FILE__) ."/phpFunctions/util.php");
 $conn = buildConnection(".");
 $bestseller = getBestseller($conn);
 ?>

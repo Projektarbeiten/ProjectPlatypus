@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 	header("Location: index");
 }
-require './phpFunctions/databaseConnection.php';
-require './phpFunctions/sqlQueries.php';
+require (dirname(__FILE__) . '/phpFunctions/databaseConnection.php');
+require (dirname(__FILE__) . '/phpFunctions/sqlQueries.php');
 $conn = buildConnection("./");
 
 

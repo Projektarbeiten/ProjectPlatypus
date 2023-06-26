@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require('../phpFunctions/sqlQueries.php');
-    require('../phpFunctions/databaseConnection.php');
+    require dirname(__FILE__,2) .'/phpFunctions/sqlQueries.php';
+    require dirname(__FILE__,2) .'/phpFunctions/databaseConnection.php';
     $debug = true;
     $debug2= false;
     $shoppingCartArray = array();

@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require('databaseConnection.php');
-    require('util.php');
+    require dirname(__FILE__,2) . '/phpFunctions/databaseConnection.php';
+    require dirname(__FILE__,2) .'/phpFunctions/util.php';
 
     $conn = buildConnection('../');
     $debug = false;

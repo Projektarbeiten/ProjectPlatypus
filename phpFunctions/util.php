@@ -1,5 +1,5 @@
 <?php
-require('sqlQueries.php');
+require dirname(__FILE__) .'/sqlQueries.php';
 function getImage($artikelNr, $conn)
 {
 	$mime = 'image/jpg';
