@@ -283,8 +283,11 @@ header .col-6 {
 }
 
 #footer-default img {
-	margin-top: 52px;
-	height: auto;
+	display: block;
+	margin: 20px auto 0 auto;
+	width: 90%;
+	max-width: 250px;
+	border-radius: 10px;
 }
 
 #footer-default a {
@@ -295,15 +298,33 @@ header .col-6 {
 	color: var(--theme-color-4);
 }
 
-.footer-links {
-	margin-top: 25px;
+.footer-links>a {
+	font-size: 1.5rem;
+	margin-top: 20px;
 	display: block;
 }
 
-#contact {
-	margin-top: 50px;
+@media (max-width: 1368px) {
+	#footer-default .col-1-5, 
+	#footer-default .col-0-5,
+	#footer-default .col-1
+	{
+		width: 100%;
+	}
+	#footer-default img {
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	.footer-links {
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
+	}
+	.footer-links>a {
+		text-align: center;
+		font-size: 1.5rem;
+	}
 }
-
 
 /* === MAIN-PAGE === */
 #kategorien>.container>.row {
@@ -418,37 +439,55 @@ header .col-6 {
 }
 
 /* === REGISTRIERUNGS PAGE === */
-.register-div {
-	text-align: left;
-	border: 2px solid var(--font-color-3);
-	border-radius: 5px;
-	width: 80%;
-	max-width: 750px;
-	min-width: 20%;
-	margin: 0 auto;
-	padding-left: 15px;
-	margin-top: 50px;
-	background-color: var(--theme-color-4);
+#register-form {
+	width: 50%;
+	background-color: var(--theme-color-5);
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 35px;
+	padding: 20px;
+	border: 2px solid black;
 }
 
-.register-div input {
+#register-form .col-3, #register-form .col-6 {
+	padding-top: 0;
+	padding-bottom: 0;
+
+}
+
+#register-form .row:nth-of-type(even) {
+	margin-bottom: 20px;
+}
+
+
+#register-form input, #register-form select{
 	height: 20px;
-	margin: 10px;
+	border-radius: 5px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
 }
 
-.register-div select {
-	height: 26px;
+#register-form label {
+	text-align: center;
+	display: block;
+	margin-bottom: 7px;
 }
 
-#register-form>input {
-	width: 60%;
-	max-width: 650px;
-	min-width: 250px;
-	margin-top: 2%;
-	margin-bottom: 5%;
-	border: 2px solid grey;
-	padding: 3px;
-	border-radius: 3px;
+#register-form .trennlinie {
+	width: 100%;
+	border: 2px solid black;
+}
+
+@media (max-width: 1024px) {
+	#register-form {
+		width: 80%;
+	}
+		#register-form input,
+		#register-form select {
+			width: 85%;
+		}
 }
 
 /* === PRODUKT-PAGE === */
