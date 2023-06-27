@@ -49,6 +49,33 @@ if (!isset($_SESSION['uid'])) {
             </div>
         </div>
         <div class="container" id="orders">
+        <?php
+        $orders = array();
+        $sql = "SELECT * 
+        FROM bestellung, bestellposition 
+        WHERE bestellung.b_id = bestellposition.b_id_ref 
+        AND bestellung.u_id_ref = :uid";
+        $sql2 = "SELECT COUNT(*) FROM bestellung WHERE u_id_ref = :uid";
+        $sqlstmtamount = $conn->prepare($sql2);
+        $stmt =$conn->prepare($sql);
+        $sqlstmtamount->bindParam(":uid",$uid);
+        $stmt->bindParam(":uid",$uid);
+        $sqlstmtamount->execute();
+        $stmt->execute();
+        $orderCounter = $sqlstmtamount->fetch();
+        $count = $orderCounter[0];
+        $count = intval($count);
+        while ($count>0)
+        {
+            while ($row = $stmt->fetch()) {
+                array_push($orders,$row);
+            }
+            $count--;
+        }
+        for ($i=0; $i < Count($orders); $i++) { 
+           
+        }
+        ?>
             <div class="order-card">
                 <div class="row">
                     <div class="col-1-5">
