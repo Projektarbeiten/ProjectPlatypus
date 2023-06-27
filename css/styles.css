@@ -160,7 +160,7 @@ header .col-6 {
 @keyframes logout {
 	0% {
 		background: linear-gradient(90deg, #24dbff 0%, #ffb8ff 0%)
-	}
+  }
 
 	10% {
 		background: linear-gradient(90deg, #24dbff 10%, #ffb8ff 0%)
@@ -706,6 +706,303 @@ header .col-6 {
 	font-size: 1.1rem;
 }
 
+/* === ORDER HISTORY ===*/
+
+#order-history h1 {
+	margin-top: 0;
+	padding: 30px;
+	border: 2px solid var(--font-color);
+	width: 60%;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+#order-filter {
+	width: 60%;
+	max-width: 750px;
+	margin: 0 auto;
+
+}
+
+#order-search {
+	width: 80%;
+	height: 35px;
+	font-size: 1.1rem;
+	border-radius: 12px;
+	padding-left: 8px;
+	max-width: 500px;
+	border: 2px solid var(--border-color);
+}
+
+#history-headline {
+	border-radius: 5px;
+}
+
+#order-filter-button {
+	max-width: 250px;
+	width: 20%;
+	height: 30px;
+	border-radius: 0;
+	display: inline-block;
+	margin: 0;
+}
+
+#orders {
+	margin-top: 30px;
+}
+
+#orders p {
+	display: inline-block;
+	margin: 0;
+	margin-left: 40px;
+}
+
+#orders .col-1-5 {
+	padding-bottom: 5px;
+}
+
+.order-dropdown-closed p {
+	width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	height: 15px;
+	transition: .4s ease-in-out;
+}
+
+.order-dropdown-open {
+	border: 3px solid var(--font-color);
+	border-radius: 35px;
+	margin: 30px 10px;
+	transition: .4s ease-in-out;
+}
+
+#order-refund {
+	height: 35px;
+	width: 250px;
+	margin-top: -1rem;
+}
+
+#orders img {
+	border-radius: 10px;
+	mix-blend-mode: darken;
+	margin-left: 40px;
+	width: 270px;
+}
+
+.order-card {
+	border: 3px solid var(--font-color);
+	width: 90%;
+	max-width: 1600px;
+	border-radius: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+	margin-bottom: 70px;
+	background-color: var(--theme-color-5);
+}
+
+.article-refund {
+	height: 35px;
+	width: 250px;
+	margin-bottom: -5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* === KONTO-PAGE === */
+
+.konto-page-button {
+	margin-bottom: 50px;
+	text-align: center;
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: var(--theme-color-3);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: .4s ease-in-out;
+}
+
+.konto-page-button:hover {
+	background-color: var(--theme-color-5);
+	color: var(--theme-color-2);
+}
+
+.editable-field:hover {
+	cursor: pointer;
+}
+
+.in-edit-input {
+	display: block;
+	font-size: 16px;
+}
+
+#kontopage-personal-data {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#kontopage-personal-data p,
+#kontopage-personal-data input,
+#kontopage-personal-data select {
+	display: block;
+	background-color: unset;
+	text-align: center;
+	border: 2px solid var(--border-color);
+	border-radius: 3px;
+	padding: 15px 0;
+	width: 60%;
+	margin: 0 auto 15px;
+	transition: .2s ease-in-out;
+}
+
+#kontopage-personal-data label {
+	display: block;
+	text-align: center;
+}
+
+#password-change:hover {
+	cursor: pointer;
+}
+
+.lightbox {
+	background-color: var(--theme-color-1);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+}
+
+#lightbox__overlay {
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #000 !important;
+	opacity: 0.8;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	overflow: hidden;
+}
+
+#lightbox__overlay-container {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+}
+
+#password-change {
+	text-decoration: none;
+}
+
+#password-change:link,
+#theme-change:link {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:visited,
+#theme-change:visited {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:hover,
+#theme-change:hover {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:active,
+#theme-change:active {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#lightbox__overlay-password-change {
+	display: block;
+	width: 80%;
+	max-width: 600px;
+	height: 420px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#password-change-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 450px;
+	padding: 15px;
+}
+
+#password-change-form h1 {
+	text-align: center;
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+#password-change-form input {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 3px;
+	width: 80%;
+	max-width: 300px;
+	margin-bottom: 1.3rem;
+	border-radius: 3px;
+}
+
+#password-change-form label {
+	font-size: 1.1rem;
+	display: block;
+	margin-left: 16%;
+
+.arrow {
+	border: solid var(--font-color-3);
+	border-width: 0 8px 8px 0;
+	padding: 5px;
+	display: inline-block;
+	transition: .4s ease-in-out;
+}
+
+#orders .order-dropdown-arrow {
+	float: right;
+	display: block;
+	margin-right: 15px;
+}
+
+.left {
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+}
+
+.down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+  
+#password-change-form button {
+	display: block;
+	width: 50%;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .7rem;
+	font-size: 1.1rem;
+}
+
 /* === GRID-SYSTEM === */
 
 .container {
@@ -761,8 +1058,8 @@ header .col-6 {
 
 /* ====== Shopping Cart ===== */
 
-#sc-overview-switch h3{
-	display:inline-block;
+#sc-overview-switch h3 {
+	display: inline-block;
 	width: calc(99%/2);
 	text-align: center;
 	height: 50px;
@@ -777,7 +1074,7 @@ header .col-6 {
 }
 
 #sc-overview-switch {
-	width:70%;
+	width: 70%;
 	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
@@ -794,7 +1091,7 @@ header .col-6 {
 	align-items: center;
 }
 
-#warenkorb-preis-information p{
+#warenkorb-preis-information p {
 	display: inline;
 	margin-left: 5px;
 	font-size: 1.3rem;
@@ -825,7 +1122,6 @@ header .col-6 {
 	font-weight: bold;
 	font-size: 1.1rem;
 }
-
 
 
 #buy-more,
@@ -921,7 +1217,6 @@ header .col-6 {
 /* ====== FLASH Green ====== */
 
 .flash_green {
-	pointer-events: none;
 	display: block;
 	position: fixed;
 	top: 25px;
