@@ -537,7 +537,7 @@ header .col-6 {
 	margin-left: 525px;
 }
 
-/* === KASSE-PAGE === */
+/* === Checkout-PAGE === */
 
 .bestelldaten {
 	display: flex;
@@ -584,7 +584,9 @@ header .col-6 {
 .lief_vers {
 	display: flex;
 	margin-left: 10%;
+	align-items: center;
 }
+
 
 #dotted-box-lief {
 	border: 2px dotted #030303;
@@ -670,6 +672,11 @@ header .col-6 {
 	margin-right: auto;
 	padding-top: 3%;
 	padding-bottom: 3%;
+}
+
+#ch-box-preis{
+	align-self: right;
+	margin-right: 5px;
 }
 
 /* === GRID-SYSTEM === */

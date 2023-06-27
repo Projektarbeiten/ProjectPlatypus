@@ -52,26 +52,33 @@ $conn = buildConnection(".");
     <h3>3 Artikel und Versand überprüfen</h3>
     </div>
     <br>
-    <div class="box_check_art_vers">
-        <div class="lief_vers">
-            <h4>Lieferung:</h4>
+    <div class="row box_check_art_vers">
+        <div class="col-5 lief_vers">
+            <h4> voraussichtliche Lieferung:</h4>
             <p id="dotted-box-lief">Datum</p>
+            <div class='col-1 lief_vers'>
+			    <p id="ch-box-preis" >Menge:</p>
+                <p>2</p>
+            </div>
+            <div class='col-0-5 lief_vers'>
+            <p id="ch-box-preis">Preis:</p>
+            <p>2€</p>
+            </div>
         </div>
         <br>
-        <div style="display: flex;">
+        <div class="col-5" style="display: flex;">
             <div id="solid-box">
             <img src="[PRODUKTBILD-URL]" alt="Produktbild">
             </div>
             <p id="dotted-box-artbeschreibung">Artikelbeschreibung</p>
         </div>
-		<div style="display: flex;">
-			<p id="dotted-box-preis">Preis</p>
-			<p id="dotted-box-anzahl">Anzahl</p>
-		</div>
         <br>
-        <div class="lief_vers">
+        <div class="col-5 lief_vers">
             <h4>Versandart:</h4>
-            <p id="dotted-box-vers">Beschreibung der Versandart</p>
+            <form id> <!--- TODO: Dynamisches Inserten + Versandarten Tabelle erstellen -->
+                <input type="radio" id="versandart" name="v1" value="dhl">
+                <label for="versandart">Standard DHL Versand</label>
+            </form>
         </div>
     </div>
 
