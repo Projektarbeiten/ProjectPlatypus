@@ -101,9 +101,9 @@ function updateUserEntry($uid, $target, $value, $conn)
 {
     try {
         $stmt_prep = $conn->prepare("
-    UPDATE 
+    UPDATE
         `user`
-    SET $target = :value 
+    SET $target = :value
     WHERE u_id = :uid;
     ");
         $stmt_prep->bindParam(':value', $value);
@@ -151,7 +151,7 @@ function insertOrder($conn,$bestArray): int {
         $stmt_prep->bindValue(':uid', intval($bestArray['uid']));
         $stmt_prep->bindValue(':gesKosten', floatval($bestArray['gesamtkosten']));
         $stmt_prep->bindValue(':zi_id', intval($bestArray['zi_id']));
-        $stmt_prep->bindValue(':anzahl_bestellpos', intval($bestArray['produktAnzahl']));
+        $stmt_prep->bindValue(':anzahl_bestellpos', intval($bestArray['anzahlBestellpositionen']));
         $stmt_prep->bindValue(':bestell_datum', $bestArray['bestellDatum']);
         $stmt_prep->bindValue(':lieferdatum', $bestArray['lieferdatum']);
         $stmt_prep->execute();

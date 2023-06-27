@@ -33,10 +33,10 @@
         # todo: Bestellungsmail versenden #
         $_SESSION['produkt_array'] = Null;
         unset($_SESSION['produkt_array']);
-        header("location: ".dirname(__FILE__,2)."/checkout");
+        header("location: ../thankYou");
         }
     }else{
-        header("Location: ".dirname(__FILE__,2)."/login");
+        header("Location: ../login");
     }
     function getOrderData($conn){
         $counter = 0;
@@ -61,7 +61,8 @@
             'produktAnzahl' => $amountOfProducts,
             'bestellDatum' => date_format(date_create(getCustomBussinessDate(0)),"Y-m-d"),
             'bestellPositionen' => $orderPosArray,
-            'lieferdatum' => date_format(date_create(getCustomBussinessDate(5)),"Y-m-d")
+            'lieferdatum' => date_format(date_create(getCustomBussinessDate(5)),"Y-m-d"),
+			'anzahlBestellpositionen' => $counter
         );
         return $orderArray;
     }
