@@ -283,8 +283,11 @@ header .col-6 {
 }
 
 #footer-default img {
-	margin-top: 52px;
-	height: auto;
+	display: block;
+	margin: 20px auto 0 auto;
+	width: 90%;
+	max-width: 250px;
+	border-radius: 10px;
 }
 
 #footer-default a {
@@ -295,15 +298,33 @@ header .col-6 {
 	color: var(--theme-color-4);
 }
 
-.footer-links {
-	margin-top: 25px;
+.footer-links>a {
+	font-size: 1.5rem;
+	margin-top: 20px;
 	display: block;
 }
 
-#contact {
-	margin-top: 50px;
+@media (max-width: 1368px) {
+	#footer-default .col-1-5, 
+	#footer-default .col-0-5,
+	#footer-default .col-1
+	{
+		width: 100%;
+	}
+	#footer-default img {
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	.footer-links {
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
+	}
+	.footer-links>a {
+		text-align: center;
+		font-size: 1.5rem;
+	}
 }
-
 
 /* === MAIN-PAGE === */
 #kategorien>.container>.row {

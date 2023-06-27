@@ -215,3 +215,45 @@ function updateProduktMenge($conn,$bestArray): bool {
 }
 
 ?>
+function registerUser($conn, $email, $passwort, $titel, $vorname,
+$nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
+{
+    $checkMailStmt = "SELECT u_id FROM user WHERE email = :mail";
+    $preparedMailCheck = $conn->prepare($checkMailStmt);
+    $preparedMailCheck->bindParam(':mail', $email);
+    $preparedMailCheck->execute();
+    if ($preparedMailCheck->rowCount() > 0) {
+        return "<script type='text/javascript'>alert('E-Mail ist bereits vorhanden')</script>";
+    } else {
+        $hashpw = password_hash($passwort, PASSWORD_DEFAULT);
+        $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw)";
+        $stmt = $conn->prepare($SQL);
+        $stmt->bindParam(':hashpw', $hashpw);
+        echo ($stmt->queryString);
+        $stmt->execute();
+        $preparedid = $conn->lastInsertId();
+        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz)
+            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz)";
+        $preparedinsert = $conn->prepare($insertuser);
+        $preparedinsert->bindParam(':titel', $titel);
+        $preparedinsert->bindParam(':vorname', $vorname);
+        $preparedinsert->bindParam(':nachname', $nachname);
+        $preparedinsert->bindParam(':anrede', $anrede);
+        $preparedinsert->bindParam(':pwref', $preparedid);
+        $preparedinsert->bindParam(':email', $email);
+        $preparedinsert->bindParam(':bday', $bday);
+        $preparedinsert->bindParam(':land', $land);
+        $preparedinsert->bindParam(':plz', $plz);
+        $preparedinsert->bindParam(':ort', $ort);
+        $preparedinsert->bindParam(':strasse', $strasse);
+        $preparedinsert->bindParam(':hausnr', $hausnr);
+        $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
+        $resultprepuser = $preparedinsert->execute();
+        if ($resultprepuser) {
+            echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
+            header("Location: login.php");
+        } else {
+            return "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>";
+        }
+    }
+}
