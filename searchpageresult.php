@@ -16,7 +16,8 @@ $db = buildConnection(".");
 </head>
 <script>
 let products = [];
-let singleProduct = [];                    
+let singleProduct = [];
+let singleProductProperty = [];
 </script>
 <body>
     <!-- Header -->
@@ -24,6 +25,11 @@ let singleProduct = [];
     require("header.php"); ?>
     <main class="searchpage">
         <div class="container">
+        <div class="filter-container">
+        <label class="filter-label">Filteroptionen:</label>
+        <div id="filter-options"></div>
+        <button onclick="applyFilters()">Anwenden</button>
+    </div>
             <?php
             if (isset($_GET['search']))
                 ; {
@@ -35,7 +41,6 @@ let singleProduct = [];
                     OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
                 $preparedstmt = $db->prepare($stmt);
                 //$preparedstmt->bindParam(':search',$search);
-                
                 $counter = 0;
                 $result = $preparedstmt->execute();
                 while ($row = $preparedstmt->fetch()) {
@@ -45,15 +50,34 @@ let singleProduct = [];
                     echo"
                     <script>
                     singleProduct = []
-                    singleProduct.push('{$row['p_id']}')
-                    singleProduct.push('{$row['bezeichnung']}')
-                    singleProduct.push('{$row['akt_preis']}')
-                    singleProduct.push('{$row['eigenschaft_1']}')
-                    singleProduct.push('{$row['eigenschaft_2']}')
-                    singleProduct.push('{$row['eigenschaft_3']}')
-                    singleProduct.push('{$row['eigenschaft_4']}')
-                    singleProduct.push('{$row['eigenschaft_5']}')
-                    singleProduct.push('{$row['eigenschaft_6']}')
+                    singleProductProperty = []
+                    let ID = []
+                    ID.push('{$row['p_id']}')
+                    singleProduct.push(ID)
+                    let Bezeichnung = []
+                    Bezeichnung.push('{$row['bezeichnung']}')
+                    singleProduct.push(Bezeichnung)
+                    let Preis = []
+                    Preis.push('{$row['akt_preis']}')
+                    singleProduct.push(Preis)
+                    let Eigenschaft_1 = []
+                    Eigenschaft_1.push('{$row['eigenschaft_1']}')
+                    singleProduct.push(Eigenschaft_1)
+                    let Eigenschaft_2 = []
+                    Eigenschaft_2.push('{$row['eigenschaft_2']}')
+                    singleProduct.push(Eigenschaft_2)
+                    let Eigenschaft_3 = []
+                    Eigenschaft_3.push('{$row['eigenschaft_3']}')
+                    singleProduct.push(Eigenschaft_3)
+                    let Eigenschaft_4 = []
+                    Eigenschaft_4.push('{$row['eigenschaft_4']}')
+                    singleProduct.push(Eigenschaft_4)
+                    let Eigenschaft_5 = []
+                    Eigenschaft_5.push('{$row['eigenschaft_5']}')
+                    singleProduct.push(Eigenschaft_5)
+                    let Eigenschaft_6 = []
+                    Eigenschaft_6.push('{$row['eigenschaft_6']}')
+                    singleProduct.push(Eigenschaft_6)
                     products.push(singleProduct)
                     </script>";
                     $p_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/productpage?produkt_id={$row["p_id"]}";
@@ -72,13 +96,82 @@ let singleProduct = [];
                     }
                 }
                 echo "<script> console.log(products)</script>";
-
             }
             ?>
         </div>
     </main>
 </body>
 <script>
+    function applyFilters() {
+        var selectedOptions = document.getElementsByClassName('filter-option');
+        var filters = {};
+
+        for (var i = 0; i < selectedOptions.length; i++) {
+            var attribute = selectedOptions[i].getAttribute('data-attribute');
+            var value = selectedOptions[i].value;
+        if (value !== '') {
+            filters[attribute] = value;
+        }
+        }
+
+      // Hier kannst du die Filterlogik implementieren und die Suchergebnisse aktualisieren
+        console.log('Angewendete Filter: ', filters);
+    }
+
+    function generateFilterOptions() {
+        var filterOptions = document.getElementById('filter-options');
+
+      var attributes = getUniqueAttributes(products); // Funktion zum Extrahieren eindeutiger Attribute
+        let firstone = true;
+        for (var attr in attributes) {
+            if(firstone ==true)
+            {
+
+            }
+            else
+            {}
+            var select = document.createElement('select');
+            select.className = 'filter-option';
+            select.setAttribute('data-attribute', attr);
+
+            var defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = '-- Alle ' + attr + ' --';
+            select.appendChild(defaultOption);
+
+        for (var i = 0; i < attributes[attr].length; i++) {
+            var option = document.createElement('option');
+            option.value = attributes[attr][i];
+            option.text = attributes[attr][i];
+            select.appendChild(option);
+        }
+
+            filterOptions.appendChild(select);
+        }
+    }
+
+    function getUniqueAttributes(products) {
+    var attributes = {};
+
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+        for (var attr in product) {
+            if (product.hasOwnProperty(attr)) {
+                if (!attributes[attr]) {
+                attributes[attr] = [];
+            }
+            if (!attributes[attr].includes(product[attr])) {
+                attributes[attr].push(product[attr]);
+            }
+        }
+    }
+}
+
+    return attributes;
+    }
+    //window.onload = function() {
+      //  generateFilterOptions();
+    //};
     </script>
 <!-- Footer -->
 <?php
