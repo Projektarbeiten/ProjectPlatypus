@@ -33,7 +33,8 @@
         # todo: Bestellungsmail versenden #
         $_SESSION['produkt_array'] = Null;
         unset($_SESSION['produkt_array']);
-        header("location: ../thankYou");
+		$_SESSION['order_array'] = $orderDataArray;
+        header("location: ../orderConfirmation");
         }
     }else{
         header("Location: ../login");
@@ -69,6 +70,7 @@
 
     function saveOrderData($conn,$orderDataArray): bool  {
        $bestellId = insertOrder($conn,$orderDataArray);
+	   $_SESSION['bid'] = $bestellId;
        $return = insertOrderPos($conn,$orderDataArray,$bestellId);
        if(!$return){
         #header('Location: Error') # TODO: Error Seite erstellen.
