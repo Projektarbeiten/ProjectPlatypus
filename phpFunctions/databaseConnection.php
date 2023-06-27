@@ -1,9 +1,9 @@
 <?php
 // Creates a connection to the Database
 // Zum Debuggen Zeile 4-6 auskommentieren
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+#ini_set('display_errors', 1);
+#ini_set('display_startup_errors', 1);
+#error_reporting(E_ALL);
 #print  (dirname(__FILE__,2)."/config/app.ini");
 function buildConnection()
 {

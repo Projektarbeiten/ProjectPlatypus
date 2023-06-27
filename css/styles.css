@@ -337,8 +337,8 @@ header .col-6 {
 
 .row>.kategorie {
 	width: 20%;
-	margin-left: 4%;
-	margin-right: 4%;
+	margin-left: 6.5%;
+	margin-right: 6%;
 	margin-bottom: 40px;
 	background-color: var(--cancer-color);
 	border: 4px solid var(--border-color);
@@ -385,8 +385,8 @@ header .col-6 {
 .row>.produkt {
 	border: 3px solid var(--border-color);
 	width: 20%;
-	margin-left: 4%;
-	margin-right: 4%;
+	margin-left: 6.5%;
+	margin-right: 6%;
 	margin-bottom: 40px;
 	background-color: var(--theme-color-4);
 	border-radius: 15px;
