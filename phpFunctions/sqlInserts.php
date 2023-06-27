@@ -144,8 +144,8 @@ function insertOrder($conn,$bestArray): int {
     try {
         $stmt_prep = $conn->prepare(
             '
-            Insert into bestellung (u_id_ref, gesamtkosten, zi_id_ref, bestell_datum, anzahl_bestellpos, lieferdatum)
-            values (:uid, :gesKosten , :zi_id, :bestell_datum, :anzahl_bestellpos, :lieferdatum)
+            Insert into bestellung (u_id_ref, gesamtkosten, zi_id_ref, bestell_datum, anzahl_bestellpos, lieferdatum, geliefert)
+            values (:uid, :gesKosten , :zi_id, :bestell_datum, :anzahl_bestellpos, :lieferdatum, :geliefert)
             ;'
         );
         $stmt_prep->bindValue(':uid', intval($bestArray['uid']));
@@ -154,6 +154,7 @@ function insertOrder($conn,$bestArray): int {
         $stmt_prep->bindValue(':anzahl_bestellpos', intval($bestArray['anzahlBestellpositionen']));
         $stmt_prep->bindValue(':bestell_datum', $bestArray['bestellDatum']);
         $stmt_prep->bindValue(':lieferdatum', $bestArray['lieferdatum']);
+		$stmt_prep->bindValue(':geliefert',0);
         $stmt_prep->execute();
         $lastRowID = $conn->lastInsertId();
         return $lastRowID;
@@ -171,8 +172,8 @@ function insertOrderPos($conn, $bestArray, $bestellId): bool {
         foreach ($bestArray['bestellPositionen'] as $bestellposArray) {
             $stmt_prep = $conn->prepare(
                 '
-                Insert into bestellposition (b_id_ref, p_id_ref, pos, menge, akt_preis, geliefert)
-                values (:b_id_ref, :p_id_ref , :pos, :menge, :akt_preis, :geliefert)
+                Insert into bestellposition (b_id_ref, p_id_ref, pos, menge, akt_preis)
+                values (:b_id_ref, :p_id_ref , :pos, :menge, :akt_preis)
                 ;'
             );
             $stmt_prep->bindValue(':b_id_ref', $bestellId);
@@ -180,7 +181,6 @@ function insertOrderPos($conn, $bestArray, $bestellId): bool {
             $stmt_prep->bindValue(':pos', $counter);
             $stmt_prep->bindValue(':menge', $bestellposArray['menge']);
             $stmt_prep->bindValue(':akt_preis', $bestellposArray['akt_preis']);
-			$stmt_prep->bindValue(':geliefert',0);
             $stmt_prep->execute();
             $counter += 1;
         }

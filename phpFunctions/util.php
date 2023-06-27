@@ -146,3 +146,23 @@ function loadAndPrintShoppingCartInformation($conn)
 	ob_end_flush();
 	ob_clean();
 }
+
+function loadOrderConfirmation($orderArray,$bid,$conn) {
+	$adressInfo = getUserAdresse($orderArray['uid'],$conn);
+	$userLand =  $adressInfo[0];
+    $userPlz = $adressInfo[1];
+    $userOrt = $adressInfo[2];
+    $userStrasse = $adressInfo[3];
+    $userHausnr = $adressInfo[4];
+    $userAdresszusatz = $adressInfo[5];
+	$produktAnzahl = $orderArray['produktAnzahl'];
+	$lieferdatum = $orderArray['lieferdatum'];
+	$lieferdatum = date_format(date_create($lieferdatum),'d.m.Y');
+	echo "<p><strong>Bestell_ID:</strong> {$bid}</p>
+	<p><strong>Artikelanzahl:</strong> {$produktAnzahl}</p>
+	<p><strong>Lieferdatum:</strong> {$lieferdatum}</p>
+	<p><strong>Lieferadresse:</strong> {$userStrasse} {$userHausnr} {$userAdresszusatz}, {$userPlz} {$userOrt}, {$userLand}</p>
+	<p><strong>Versandart:</strong> Standard DHL Versand</p>";
+}
+
+?>

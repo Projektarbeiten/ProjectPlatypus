@@ -122,7 +122,9 @@ $conn = buildConnection();
                             <button id='buy-more'>Weiter Einkaufen</button>
                         </div>
                         <div class='col-3'>
+						<a href='./phpScripts/createOrder.php'>
                             <button id='zur-kasse'>Zur Kasse</button>
+							</a>
                         </div>
                     </div>
                 </div>";

@@ -4,9 +4,9 @@
     require dirname(__FILE__,2) .'/phpFunctions/util.php';
     require dirname(__FILE__,2) .'/phpFunctions/sqlInserts.php';
 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    #ini_set('display_errors', 1);
+    #ini_set('display_startup_errors', 1);
+    #error_reporting(E_ALL);
 
     $conn = buildConnection();
     $debug = false;
@@ -33,7 +33,8 @@
         # todo: Bestellungsmail versenden #
         $_SESSION['produkt_array'] = Null;
         unset($_SESSION['produkt_array']);
-        header("location: ../thankYou");
+		$_SESSION['order_array'] = $orderDataArray;
+        header("location: ../orderConfirmation");
         }
     }else{
         header("Location: ../login");
@@ -69,6 +70,7 @@
 
     function saveOrderData($conn,$orderDataArray): bool  {
        $bestellId = insertOrder($conn,$orderDataArray);
+	   $_SESSION['bid'] = $bestellId;
        $return = insertOrderPos($conn,$orderDataArray,$bestellId);
        if(!$return){
         #header('Location: Error') # TODO: Error Seite erstellen.
