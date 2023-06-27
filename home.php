@@ -1,11 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-	header("Location: index");
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
 }
-require("./phpFunctions/databaseConnection.php");
-require("./phpFunctions/util.php");
-$conn = buildConnection(".");
+require(dirname(__FILE__) . "/phpFunctions/databaseConnection.php");
+require(dirname(__FILE__) ."/phpFunctions/util.php");
+$conn = buildConnection();
 $bestseller = getBestseller($conn);
 $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://$_SERVER[HTTP_HOST]" 
 ?>
@@ -16,6 +16,7 @@ $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./img/favicon/favicon-32x32.png">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Home</title>
 </head>
@@ -23,7 +24,7 @@ $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 <body>
     <!-- Header -->
     <?php
-    require("header.php");
+    require "header.php";
     ?>
     <main id="kategorien-und-produkte">
         <div id="kategorien">
@@ -57,7 +58,9 @@ $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
         <div id="produkt-bestseller">
             <div class="container">
                 <div class="row">
-                    <h1 id="bestseller-headline" class="col-6">Unsere Bestseller</h1>
+                    <div class="col-6">
+                        <h1 id="bestseller-headline">Unsere Bestseller</h1>
+                    </div>
                 </div>
                 <?php
                 $counter = 0;
@@ -75,6 +78,7 @@ $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
                             <img class='Produkt-bild' src='$picture' alt='Undefined picture'>
                         </a>
                         <p class='Produkt-text'><strong>{$produktPreis}€</strong></p>
+
                     </div>";
                     ++$counter;
                     if ($counter == 3) {
@@ -89,8 +93,9 @@ $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 
     <!-- Footer -->
     <?php
-    require("footer.php");
+    require "footer.php";
     ?>
 
 </body>
+
 </html>

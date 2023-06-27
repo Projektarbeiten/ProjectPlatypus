@@ -7,7 +7,7 @@
 		value varchar(100) not null,
 		insertDate date default sysdate(),
         PRIMARY Key(c_id)
-	)
+	);
 
 	create table if not exists passwort(
 		pw_id 		int AUTO_INCREMENT
@@ -138,13 +138,13 @@
 
 -- bestellung --
 
-	create table if not exists bestell_Historie(
+/*	create table if not exists bestell_Historie(
 		b_h_id			int AUTO_INCREMENT
 		,u_id_ref		int not null
 		,b_id_ref		int not null
 		,PRIMARY KEY(b_h_id)
 	);
-
+*/
 
 
 	create table if not exists bestellposition(
@@ -152,20 +152,22 @@
 		,b_id_ref		int not null
 		,p_id_ref		int not null
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
-		,menge			int not null
-		,akt_preis		int not null
+		,menge			int
+		,akt_preis		decimal(10,2)
 		,PRIMARY KEY(b_p_id)
 	);
 
 
 	create table if not exists bestellung(
 		b_id 						int AUTO_INCREMENT
-		,b_p_id_ref					int
+--		,b_p_id_ref					int
 		,u_id_ref					int
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
 		,bestell_datum				date
-		,anzahl_bestellpositionen	int
+		,anzahl_bestellpos			int
+		,lieferdatum				date
+		,geliefert					int
 		,PRIMARY KEY(b_id)
 	);
 	-- Foreign Keys
@@ -173,19 +175,20 @@
 			alter table bestellung
 			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen(zi_id);
 
-			alter table bestellung
-			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
+--			alter table bestellung
+--			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
 
 			alter table bestellung
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 		--
 
 		-- Foreign Keys for bestell_Historie
-			alter table bestell_Historie
+/*		alter table bestell_Historie
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 
 			alter table bestell_Historie
 			add FOREIGN KEY(b_id_ref) REFERENCES bestellung(b_id);
+*/
 		--
 
 		-- Foreign Keys for bestellposition

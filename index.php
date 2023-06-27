@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('./phpFunctions/databaseConnection.php');
-require("./phpFunctions/util.php");
-$conn = buildConnection("./");
+require dirname(__FILE__) . "/phpFunctions/databaseConnection.php";
+require dirname(__FILE__) . '/phpFunctions/util.php';
+$conn = buildConnection();
 
 ?>
 <!DOCTYPE html>
@@ -13,6 +13,7 @@ $conn = buildConnection("./");
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="icon" type="image/x-icon" href="./img/favicon/favicon-32x32.png">
 	<title>Authentifizieren</title>
 </head>
 
@@ -34,7 +35,7 @@ $conn = buildConnection("./");
 		</div>
 		<?php
 		if (isset($_POST['code'])) {
-			$conn = buildConnection('.');
+			$conn = buildConnection();
 			if (checkCode($_POST['code'], $conn)) {
 				$_SESSION['access_token'] = true;
 				header("Location: home");
@@ -47,8 +48,8 @@ $conn = buildConnection("./");
 		require("footer.php");
 		?>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	<script src="javascript/indexLogin.js"></script>
+	<script src="./javascript/jquery-3.6.1.min.js"></script>
+	<script src="./javascript/indexLogin.js"></script>
 </body>
 
 </html>

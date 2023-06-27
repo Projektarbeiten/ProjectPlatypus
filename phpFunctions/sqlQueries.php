@@ -33,12 +33,12 @@ function getAccountInformation($uid, $conn)
 
         $stmt_prep->bindParam(':uid', $uid);
         $stmt_prep->execute();
-		if($stmt_prep->rowCount()>0){
-			$row = $stmt_prep->fetch();
-			return $row;
-		}
+        if ($stmt_prep->rowCount() > 0) {
+            $row = $stmt_prep->fetch();
+            return $row;
+        }
     } catch (PDOException $e) {
-		error_log(date("Y-m-d H:i:s", time()) . "Datenbezug failed - getAccountInformation \n", 3, "my-errors.log");
+        error_log(date("Y-m-d H:i:s", time()) . "Datenbezug failed - getAccountInformation \n", 3, "my-errors.log");
         die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
     }
 }
@@ -88,7 +88,8 @@ function login($email, $conn)
 /* ---- getProduktInfos ----
     Gibt der productPage.php alle Produktinformationen um die Seite zu bauen
 */
-function getProduktInfos($produktID, $conn) {
+function getProduktInfos($produktID, $conn)
+{
     try {
         $stmt_prep = $conn->prepare("
         SELECT
@@ -117,18 +118,17 @@ function getProduktInfos($produktID, $conn) {
 
         // Sollte unter der ProduktID kein Eintrag gefunden werder, wird ein "Error" zurückgegeben um den User auf eine Errorpage umzuleiten.
         #print ("Type of:".gettype($result_set));
-        try{
+        try {
             if (!$stmt_prep->rowCount() > 0) {
-            $returns = "ERROR";
-        } else {
-            $row = $stmt_prep->fetch();
-            $returns = array($row['bezeichnung'], $row['eigenschaft_1'], $row['eigenschaft_2'], $row['eigenschaft_3'], $row['eigenschaft_4'], $row['eigenschaft_5'], $row['eigenschaft_6'], $row['details'], $row['menge'], $row['akt_preis'], $row['oem_bezeichnung']);
+                $returns = "ERROR";
+            } else {
+                $row = $stmt_prep->fetch();
+                $returns = array($row['bezeichnung'], $row['eigenschaft_1'], $row['eigenschaft_2'], $row['eigenschaft_3'], $row['eigenschaft_4'], $row['eigenschaft_5'], $row['eigenschaft_6'], $row['details'], $row['menge'], $row['akt_preis'], $row['oem_bezeichnung']);
+            }
+        } catch (Exception $e) {
+            echo ("ERROR:" . $e->getMessage());
         }
-        }catch (Exception $e){
-            echo ("ERROR:". $e->getMessage());
-        }
-    }
-    catch (PDOException $e) {
+    } catch (PDOException $e) {
         die("ERROR: Could nto able to execute $stmt_prep. " . $e->getMessage());
     }
     return $returns;
@@ -169,8 +169,9 @@ LIMIT 6
  * @param mixed $conn
  * @return array
  */
-function getUserAdresse($userID, $conn) {
-        try {
+function getUserAdresse($userID, $conn)
+{
+    try {
         $stmt_prep = $conn->prepare("
         Select
             land
@@ -189,16 +190,17 @@ function getUserAdresse($userID, $conn) {
         $row = $stmt_prep->fetch();
 
         return array($row['land'], $row['plz'], $row['ort'], $row['strasse'], $row['hausnr'], $row['adresszusatz']);
-        } catch (PDOException $e) {
-            die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
-        }
+    } catch (PDOException $e) {
+        die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
     }
+}
 
 
 
-	function getCode($conn, $code){
-		$stmt_prep = $conn->prepare(
-			'
+function getCode($conn, $code)
+{
+    $stmt_prep = $conn->prepare(
+        '
 			Select
 				valid,
 				insertDate,
@@ -208,27 +210,28 @@ function getUserAdresse($userID, $conn) {
 			where
 				code = :code;
 			'
-		);
-		$stmt_prep->bindParam(':code', $code);
-		$stmt_prep->execute();
-		$row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
-		$rowCount = $stmt_prep->rowCount();
-		if($rowCount >0){
-			return $row;
-		}else{
-			$rowErsatz = array('valid' => false);
-			return $rowErsatz;
-		}
-	}
-	/**
-	 * Summary of getProductImageData
-	 * @param mixed $produktNr
-	 * @param mixed $conn
-	 * @return mixed
-	 */
-	function getProductImageData($produktNr, $conn) {
-        // Statement for receiving Produkt - Produktbild shortcut
-		try {
+    );
+    $stmt_prep->bindParam(':code', $code);
+    $stmt_prep->execute();
+    $row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
+    $rowCount = $stmt_prep->rowCount();
+    if ($rowCount > 0) {
+        return $row;
+    } else {
+        $rowErsatz = array('valid' => false);
+        return $rowErsatz;
+    }
+}
+/**
+ * Summary of getProductImageData
+ * @param mixed $produktNr
+ * @param mixed $conn
+ * @return mixed
+ */
+function getProductImageData($produktNr, $conn)
+{
+    // Statement for receiving Produkt - Produktbild shortcut
+    try {
         $stmt_prep_produkt = $conn->prepare(
             "Select
                 p_b_id_ref
@@ -241,62 +244,92 @@ function getUserAdresse($userID, $conn) {
         $stmt_prep_produkt->execute();
         $row = $stmt_prep_produkt->fetch();
         $rowCount = $stmt_prep_produkt->rowCount();
-        if($rowCount>0){
-			try{ // Statement for receiving Image Data
-						$stmt_prep_image = $conn->prepare(
-							"Select
+        if ($rowCount > 0) {
+            try { // Statement for receiving Image Data
+                $stmt_prep_image = $conn->prepare(
+                    "Select
 								image
 							from
 								produktbild
 							where
 								p_b_id = :id"
-						);
-						$stmt_prep_image->bindParam(':id', $row['p_b_id_ref']);
-						$stmt_prep_image->execute();
-						$row = $stmt_prep_image->fetch();
-						$rowCount = $stmt_prep_produkt->rowCount();
-					}catch(PDOException $e) {
-						die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
-				}
-				if($rowCount>0){
-					return $binaryImage = $row['image'];
-				}else{
-					return getDefaultImage($conn);
-				}
-		}
-		else{
-			return getDefaultImage($conn);
-		}
-		} catch(PDOException $e) {
-			die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
-		}
+                );
+                $stmt_prep_image->bindParam(':id', $row['p_b_id_ref']);
+                $stmt_prep_image->execute();
+                $row = $stmt_prep_image->fetch();
+                $rowCount = $stmt_prep_produkt->rowCount();
+            } catch (PDOException $e) {
+                die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
+            }
+            if ($rowCount > 0) {
+                return $binaryImage = $row['image'];
+            } else {
+                return getDefaultImage($conn);
+            }
+        } else {
+            return getDefaultImage($conn);
+        }
+    } catch (PDOException $e) {
+        die("ERROR: Could not able to execute $stmt_prep_produkt. " . $e->getMessage());
     }
+}
 
-    function getPrice($conn,$produkt_id){
-        $stmt_prep = $conn->prepare(
-            '
+function getPrice($conn, $produkt_id)
+{
+    $stmt_prep = $conn->prepare(
+        '
             select
                 akt_preis
             from
                 produkt
             where
                 p_id = :id
-            ;');
-        $stmt_prep->bindParam(':id', $produkt_id);
-		$stmt_prep->execute();
-        $row = $stmt_prep->fetch();
-        return $row['akt_preis'];
-    }
+            ;'
+    );
+    $stmt_prep->bindParam(':id', $produkt_id);
+    $stmt_prep->execute();
+    $row = $stmt_prep->fetch();
+    return $row['akt_preis'];
+}
 
-	function getDefaultImage($conn){
-		$stmt_prep = $conn->prepare("
+function getDefaultImage($conn)
+{
+    $stmt_prep = $conn->prepare("
 		Select
 			image
 		from
 			produktbild
 		where
 			p_b_id = 100000");
-		$stmt_prep->execute();
-		$row = $stmt_prep->fetch();
-		return $row['image'];
-	}
+    $stmt_prep->execute();
+    $row = $stmt_prep->fetch();
+    return $row['image'];
+}
+
+function getZahlungsmittel($conn,$uid) : array {
+    $stmt_prep = $conn->prepare(
+        'select
+            zi_id
+            ,zi.banknamen
+            ,zi.land
+            ,zi.bic
+            ,zi.bezeichnung
+            ,zi.iban
+        from
+            zahlungsinformationen as zi
+        join zahlungsmethodexuser as zix
+            on zix.zi_id_ref = zi.zi_id
+        where
+            zix.u_id_ref = :uid
+        ;');
+        $stmt_prep->bindParam(':uid', $uid);
+        $stmt_prep->execute();
+        if ($stmt_prep->rowCount() > 0) {
+            $row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        }else{
+            return array('error'); # #INFO: Kann zu überprüfen genutzt werde (Also ob ZI hinterlegt wurde oder nicht)
+        }
+
+
+}

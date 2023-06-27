@@ -160,7 +160,7 @@ header .col-6 {
 @keyframes logout {
 	0% {
 		background: linear-gradient(90deg, #24dbff 0%, #ffb8ff 0%)
-	}
+  }
 
 	10% {
 		background: linear-gradient(90deg, #24dbff 10%, #ffb8ff 0%)
@@ -283,8 +283,11 @@ header .col-6 {
 }
 
 #footer-default img {
-	margin-top: 52px;
-	height: auto;
+	display: block;
+	margin: 20px auto 0 auto;
+	width: 90%;
+	max-width: 250px;
+	border-radius: 10px;
 }
 
 #footer-default a {
@@ -295,15 +298,33 @@ header .col-6 {
 	color: var(--theme-color-4);
 }
 
-.footer-links {
-	margin-top: 25px;
+.footer-links>a {
+	font-size: 1.5rem;
+	margin-top: 20px;
 	display: block;
 }
 
-#contact {
-	margin-top: 50px;
+@media (max-width: 1368px) {
+	#footer-default .col-1-5, 
+	#footer-default .col-0-5,
+	#footer-default .col-1
+	{
+		width: 100%;
+	}
+	#footer-default img {
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	.footer-links {
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
+	}
+	.footer-links>a {
+		text-align: center;
+		font-size: 1.5rem;
+	}
 }
-
 
 /* === MAIN-PAGE === */
 #kategorien>.container>.row {
@@ -790,6 +811,165 @@ header .col-6 {
 	margin-right: auto;
 }
 
+/* === KONTO-PAGE === */
+
+.konto-page-button {
+	margin-bottom: 50px;
+	text-align: center;
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: var(--theme-color-3);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: .4s ease-in-out;
+}
+
+.konto-page-button:hover {
+	background-color: var(--theme-color-5);
+	color: var(--theme-color-2);
+}
+
+.editable-field:hover {
+	cursor: pointer;
+}
+
+.in-edit-input {
+	display: block;
+	font-size: 16px;
+}
+
+#kontopage-personal-data {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#kontopage-personal-data p,
+#kontopage-personal-data input,
+#kontopage-personal-data select {
+	display: block;
+	background-color: unset;
+	text-align: center;
+	border: 2px solid var(--border-color);
+	border-radius: 3px;
+	padding: 15px 0;
+	width: 60%;
+	margin: 0 auto 15px;
+	transition: .2s ease-in-out;
+}
+
+#kontopage-personal-data label {
+	display: block;
+	text-align: center;
+}
+
+#password-change:hover {
+	cursor: pointer;
+}
+
+.lightbox {
+	background-color: var(--theme-color-1);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+}
+
+#lightbox__overlay {
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #000 !important;
+	opacity: 0.8;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	overflow: hidden;
+}
+
+#lightbox__overlay-container {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+}
+
+#password-change {
+	text-decoration: none;
+}
+
+#password-change:link,
+#theme-change:link {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:visited,
+#theme-change:visited {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:hover,
+#theme-change:hover {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#password-change:active,
+#theme-change:active {
+	color: var(--theme-color-2);
+	text-decoration: none;
+}
+
+#lightbox__overlay-password-change {
+	display: block;
+	width: 80%;
+	max-width: 600px;
+	height: 420px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#password-change-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 450px;
+	padding: 15px;
+}
+
+#password-change-form h1 {
+	text-align: center;
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+#password-change-form input {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 3px;
+	width: 80%;
+	max-width: 300px;
+	margin-bottom: 1.3rem;
+	border-radius: 3px;
+}
+
+#password-change-form label {
+	font-size: 1.1rem;
+	display: block;
+	margin-left: 16%;
+
 .arrow {
 	border: solid var(--font-color-3);
 	border-width: 0 8px 8px 0;
@@ -812,6 +992,15 @@ header .col-6 {
 .down {
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
+  
+#password-change-form button {
+	display: block;
+	width: 50%;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .7rem;
+	font-size: 1.1rem;
 }
 
 /* === GRID-SYSTEM === */
@@ -933,7 +1122,6 @@ header .col-6 {
 	font-weight: bold;
 	font-size: 1.1rem;
 }
-
 
 
 #buy-more,

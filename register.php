@@ -1,10 +1,11 @@
 <?php
 session_start();
-require_once('./phpFunctions/databaseConnection.php');
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
-	header("Location: index");
+require_once './phpFunctions/databaseConnection.php';
+require_once './phpFunctions/sqlInserts.php';
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
 }
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,74 +13,36 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./img/favicon/favicon-32x32.png">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Registrierung</title>
 </head>
 
 <body>
     <div>
-        <?php # TODO: Auslagern in eine php Funktion!
+        <?php
         if (!empty($_POST['pw'])) {
-            $titel = $_POST['titel'];
-            $anrede = $_POST['anrede'];
-            $vorname = $_POST['vorname'];
-            $nachname = $_POST['nachname'];
-            $email = $_POST['email'];
-            $bday = $_POST['geburtsdatum'];
-            $land = $_POST['land'];
-            $plz = $_POST['plz'];
-            $ort = $_POST['ort'];
-            $strasse = $_POST['strassse'];
-            $hausnr = $_POST['strasssenr'];
-            $adresszusatz = $_POST['adresszusatz'];
-            $passwort = $_POST['pw'];
-            $passwortw = $_POST['pwWiederholen'];
-            $agb = $_POST['agb'];
-            if ($passwort === $passwortw) {
-                $db = buildConnection('.');
-                $checkMailStmt = "SELECT u_id FROM user WHERE email = :mail";
-                $preparedMailCheck = $db->prepare($checkMailStmt);
-                $preparedMailCheck->bindParam(':mail', $email);
-                $preparedMailCheck->execute();
-                if ($preparedMailCheck->rowCount() > 0) {
-                    echo (
-                        "<script type='text/javascript' language='Javascript'>alert('E-Mail ist bereits vorhanden')</script>");
-
-                } else {
-                    $hashpw = password_hash($passwort, PASSWORD_DEFAULT);
-                    $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw)";
-                    $stmt = $db->prepare($SQL);
-                    $stmt->bindParam(':hashpw', $hashpw);
-                    echo ($stmt->queryString);
-                    $result = $stmt->execute();
-                    $preparedid = $db->lastInsertId();
-                    $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz)
-                        VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz)";
-                    $preparedinsert = $db->prepare($insertuser);
-                    $preparedinsert->bindParam(':titel', $titel);
-                    $preparedinsert->bindParam(':vorname', $vorname);
-                    $preparedinsert->bindParam(':nachname', $nachname);
-                    $preparedinsert->bindParam(':anrede', $anrede);
-                    $preparedinsert->bindParam(':pwref', $preparedid);
-                    $preparedinsert->bindParam(':email', $email);
-                    $preparedinsert->bindParam(':bday', $bday);
-                    $preparedinsert->bindParam(':land', $land);
-                    $preparedinsert->bindParam(':plz', $plz);
-                    $preparedinsert->bindParam(':ort', $ort);
-                    $preparedinsert->bindParam(':strasse', $strasse);
-                    $preparedinsert->bindParam(':hausnr', $hausnr);
-                    $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
-                    $resultprepuser = $preparedinsert->execute();
-                    if ($resultprepuser) {
-                        echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
-                        header("Location: login.php");
-                    } else {
-                        echo "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>";
-                    }
-                }
+            if ($_POST['pw'] === $_POST['pwWiederholen']) {
+                $conn = buildConnection('.');
+                $response = registerUser(
+                    $conn,
+                    $_POST['email'],
+                    $_POST['pw'],
+                    $_POST['titel'],
+                    $_POST['vorname'],
+                    $_POST['nachname'],
+                    $_POST['anrede'],
+                    $_POST['geburtsdatum'],
+                    $_POST['land'],
+                    $_POST['plz'],
+                    $_POST['ort'],
+                    $_POST['strasse'],
+                    $_POST['strassenr'],
+                    $_POST['adresszusatz']
+                );
+                echo $response;
             } else {
-                echo (
-                    "<script type='text/javascript' language='Javascript'>alert('Passwort stimmen nich überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
+                echo ("<script type='text/javascript' language='Javascript'>alert('Passwörter stimmen nicht überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
             }
         }
         ?>
@@ -93,12 +56,14 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     <div>
                         <h4>Anrede</h4>
                         <select name="anrede" form="register-form" required>
+                            <?php if (isset($_POST['anrede'])) echo "<option value='{$_POST['anrede']}'>{$_POST['anrede']}</option>"; ?>
                             <option value="Herr">Herr</option>
                             <option value="Frau">Frau</option>
                             <option value="Divers">Divers</option>
                         </select>
                         <h4>Titel</h4>
                         <select name="titel" form="register-form">
+                            <?php if (isset($_POST['titel'])) echo "<option value='{$_POST['titel']}'>{$_POST['titel']}</option>"; ?>
                             <option value=""></option>
                             <option value="Doktor">Doktor</option>
                             <option value="Professor">Professor</option>
@@ -109,16 +74,16 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     <br>
                     <div id="registername">
                         <label for="vorname">Vorname:</label>
-                        <input type="text" name="vorname" required>
+                        <input type="text" name="vorname" required value="<?php if (isset($_POST['vorname'])) echo $_POST['vorname']; ?>">
                         <label for="nachname">Nachname:</label>
-                        <input type="text" name="nachname" required>
+                        <input type="text" name="nachname" required value="<?php if (isset($_POST['nachname'])) echo $_POST['nachname']; ?>">
                     </div>
                     <br>
                     <label for="email">E-Mail Adresse</label>
-                    <input type="text" name="email" required>
+                    <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
                     <br>
                     <label for="geburtsdatum">Geburtsdatum: </label>
-                    <input type="date" id="geburtsdatum" name="geburtsdatum" style="max-width: 15%;" required>
+                    <input type="date" id="geburtsdatum" name="geburtsdatum" style="max-width: 15%;" required value="<?php if (isset($_POST['geburtsdatum'])) echo $_POST['geburtsdatum']; ?>">
                     <br>
                     <h3>Ihre Adresse</h3>
                     <hr>
@@ -127,16 +92,14 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                         <div>
                             <h4>Land</h4>
                             <select name="land" form="register-form" required>
-                                <option value="">Bitte Land auswählen</option>
+                                <?php if (isset($_POST['land'])) echo "<option value='{$_POST['land']}'>{$_POST['land']}</option>"; ?>
                                 <option value="Afghanistan">Afghanistan</option>
-                                <option value="Aland Islands">Aland Islands</option>
+                                <option value="Aland">Aland</option>
                                 <option value="Albania">Albanien</option>
                                 <option value="Algeria">Algerien</option>
-                                <option value="American Samoa">Amerikanischen Samoa-Inseln</option>
                                 <option value="Andorra">Andorra</option>
                                 <option value="Angola">Angola</option>
                                 <option value="Anguilla">Anguilla</option>
-                                <option value="Antarctica">Antarktis</option>
                                 <option value="Antigua and Barbuda">Antigua und Barbuda</option>
                                 <option value="Argentina">Argentinien</option>
                                 <option value="Armenia">Armenien</option>
@@ -148,21 +111,17 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Bahrain">Bahrain</option>
                                 <option value="Bangladesh">Bangladesch</option>
                                 <option value="Barbados">Barbados</option>
-                                <option value="Belarus">Weißrussland</option>
+                                <option value="Belarus">Belarus</option>
                                 <option value="Belgium">Belgien</option>
                                 <option value="Belize">Belize</option>
                                 <option value="Benin">Benin</option>
                                 <option value="Bermuda">Bermuda</option>
                                 <option value="Bhutan">Bhutan</option>
                                 <option value="Bolivia">Bolivien</option>
-                                <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius und Saba
-                                </option>
                                 <option value="Bosnia and Herzegovina">Bosnien und Herzegowina</option>
                                 <option value="Botswana">Botswana</option>
-                                <option value="Bouvet Island">Bouvet Island</option>
                                 <option value="Brazil">Brasilien</option>
-                                <option value="British Indian Ocean Territory">Britisches Territorium des Indischen
-                                    Ozeans</option>
+                                <option value="British Indian Ocean Territory">Britisches Territorium des Indischen Ozeans</option>
                                 <option value="Brunei Darussalam">Brunei Darussalam</option>
                                 <option value="Bulgaria">Bulgarien</option>
                                 <option value="Burkina Faso">Burkina Faso</option>
@@ -177,12 +136,10 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Chile">Chile</option>
                                 <option value="China">China</option>
                                 <option value="Christmas Island">Weihnachtsinsel</option>
-                                <option value="Cocos (Keeling) Islands">Kokosinseln (Keelinginseln)</option>
                                 <option value="Colombia">Kolumbien</option>
                                 <option value="Comoros">Komoren</option>
                                 <option value="Congo">Kongo</option>
-                                <option value="Congo, Democratic Republic of the Congo">Kongo, Demokratische Republik
-                                    Kongo</option>
+                                <option value="Democratic Republic of the Congo">Demokratische Republik Kongo</option>
                                 <option value="Cook Islands">Cookinseln</option>
                                 <option value="Costa Rica">Costa Rica</option>
                                 <option value="Cote D'Ivoire">Elfenbeinküste</option>
@@ -207,9 +164,6 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Fiji">Fidschi</option>
                                 <option value="Finland">Finnland</option>
                                 <option value="France">Frankreich</option>
-                                <option value="French Guiana">Französisch-Guayana</option>
-                                <option value="French Polynesia">Französisch Polynesien</option>
-                                <option value="French Southern Territories">Südfranzösische Territorien</option>
                                 <option value="Gabon">Gabun</option>
                                 <option value="Gambia">Gambia</option>
                                 <option value="Georgia">Georgia</option>
@@ -219,25 +173,20 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Greece">Griechenland</option>
                                 <option value="Greenland">Grönland</option>
                                 <option value="Grenada">Grenada</option>
-                                <option value="Guadeloupe">Guadeloupe</option>
-                                <option value="Guam">Guam</option>
                                 <option value="Guatemala">Guatemala</option>
                                 <option value="Guernsey">Guernsey</option>
                                 <option value="Guinea">Guinea</option>
                                 <option value="Guinea-Bissau">Guinea-Bissau</option>
                                 <option value="Guyana">Guyana</option>
                                 <option value="Haiti">Haiti</option>
-                                <option value="Heard Island and Mcdonald Islands">Heard Island und McDonald Islands
-                                </option>
-                                <option value="Holy See (Vatican City State)">Heiliger Stuhl (Staat der Vatikanstadt)
-                                </option>
+                                <option value="Vatican City">Vatikanstadt</option>
                                 <option value="Honduras">Honduras</option>
                                 <option value="Hong Kong">Hongkong</option>
                                 <option value="Hungary">Ungarn</option>
                                 <option value="Iceland">Island</option>
                                 <option value="India">Indien</option>
                                 <option value="Indonesia">Indonesien</option>
-                                <option value="Iran, Islamic Republic of">Iran, Islamische Republik</option>
+                                <option value="Iran">Iran</option>
                                 <option value="Iraq">Irak</option>
                                 <option value="Ireland">Irland</option>
                                 <option value="Isle of Man">Isle of Man</option>
@@ -250,9 +199,8 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Kazakhstan">Kasachstan</option>
                                 <option value="Kenya">Kenia</option>
                                 <option value="Kiribati">Kiribati</option>
-                                <option value="Korea, Democratic People's Republic of">Korea, Demokratische
-                                    Volksrepublik</option>
-                                <option value="Korea, Republic of">Korea, Republik von</option>
+                                <option value="North Korea">Nordkorea</option>
+                                <option value="South Korea">Südkorea</option>
                                 <option value="Kosovo">Kosovo</option>
                                 <option value="Kuwait">Kuwait</option>
                                 <option value="Kyrgyzstan">Kirgisistan</option>
@@ -267,8 +215,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Lithuania">Litauen</option>
                                 <option value="Luxembourg">Luxemburg</option>
                                 <option value="Macao">Macao</option>
-                                <option value="Macedonia, the Former Yugoslav Republic of">Mazedonien, die ehemalige
-                                    jugoslawische Republik</option>
+                                <option value="Macedonia">Mazedonien</option>
                                 <option value="Madagascar">Madagaskar</option>
                                 <option value="Malawi">Malawi</option>
                                 <option value="Malaysia">Malaysia</option>
@@ -276,10 +223,8 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Mali">Mali</option>
                                 <option value="Malta">Malta</option>
                                 <option value="Marshall Islands">Marshallinseln</option>
-                                <option value="Martinique">Martinique</option>
                                 <option value="Mauritania">Mauretanien</option>
                                 <option value="Mauritius">Mauritius</option>
-                                <option value="Mayotte">Mayotte</option>
                                 <option value="Mexico">Mexiko</option>
                                 <option value="Micronesia, Federated States of">Mikronesien, Föderierte Staaten von
                                 </option>
@@ -287,7 +232,6 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Monaco">Monaco</option>
                                 <option value="Mongolia">Mongolei</option>
                                 <option value="Montenegro">Montenegro</option>
-                                <option value="Montserrat">Montserrat</option>
                                 <option value="Morocco">Marokko</option>
                                 <option value="Mozambique">Mosambik</option>
                                 <option value="Myanmar">Myanmar</option>
@@ -296,31 +240,24 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Nepal">Nepal</option>
                                 <option value="Netherlands">Niederlande</option>
                                 <option value="Netherlands Antilles">Niederländische Antillen</option>
-                                <option value="New Caledonia">Neu-Kaledonien</option>
                                 <option value="New Zealand">Neuseeland</option>
                                 <option value="Nicaragua">Nicaragua</option>
                                 <option value="Niger">Niger</option>
                                 <option value="Nigeria">Nigeria</option>
                                 <option value="Niue">Niue</option>
-                                <option value="Norfolk Island">Norfolkinsel</option>
-                                <option value="Northern Mariana Islands">Nördliche Marianneninseln</option>
                                 <option value="Norway">Norwegen</option>
                                 <option value="Oman">Oman</option>
                                 <option value="Pakistan">Pakistan</option>
                                 <option value="Palau">Palau</option>
-                                <option value="Palestinian Territory, Occupied">Besetzte palästinensische Gebiete
-                                </option>
                                 <option value="Panama">Panama</option>
                                 <option value="Papua New Guinea">Papua Neu-Guinea</option>
                                 <option value="Paraguay">Paraguay</option>
                                 <option value="Peru">Peru</option>
                                 <option value="Philippines">Philippinen</option>
-                                <option value="Pitcairn">Pitcairn</option>
                                 <option value="Poland">Polen</option>
                                 <option value="Portugal">Portugal</option>
                                 <option value="Puerto Rico">Puerto Rico</option>
                                 <option value="Qatar">Katar</option>
-                                <option value="Reunion">Wiedervereinigung</option>
                                 <option value="Romania">Rumänien</option>
                                 <option value="Russian Federation">Russische Föderation</option>
                                 <option value="Rwanda">Ruanda</option>
@@ -364,7 +301,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="Tanzania, United Republic of">Tansania, Vereinigte Republik</option>
                                 <option value="Thailand">Thailand</option>
                                 <option value="Timor-Leste">Timor-Leste</option>
-                                <option value="Togo">Gehen</option>
+                                <option value="Togo">Togo</option>
                                 <option value="Tokelau">Tokelau</option>
                                 <option value="Tonga">Tonga</option>
                                 <option value="Trinidad and Tobago">Trinidad und Tobago</option>
@@ -378,17 +315,12 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                                 <option value="United Arab Emirates">Vereinigte Arabische Emirate</option>
                                 <option value="United Kingdom">Vereinigtes Königreich</option>
                                 <option value="United States">Vereinigte Staaten</option>
-                                <option value="United States Minor Outlying Islands">Kleinere abgelegene Inseln der
-                                    Vereinigten Staaten</option>
                                 <option value="Uruguay">Uruguay</option>
                                 <option value="Uzbekistan">Usbekistan</option>
                                 <option value="Vanuatu">Vanuatu</option>
                                 <option value="Venezuela">Venezuela</option>
                                 <option value="Viet Nam">Vietnam</option>
-                                <option value="Virgin Islands, British">Virgin Inseln, Britisch</option>
-                                <option value="Virgin Islands, U.s.">Jungferninseln, USA</option>
                                 <option value="Wallis and Futuna">Wallis und Futuna</option>
-                                <option value="Western Sahara">Westsahara</option>
                                 <option value="Yemen">Jemen</option>
                                 <option value="Zambia">Sambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
@@ -396,22 +328,22 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                         </div>
                         <br>
                         <label for="plz">Postleitzahl: </label>
-                        <input type="text" name="plz" style="width:20%" required></option>
+                        <input type="text" name="plz" style="width:20%" required value="<?php if (isset($_POST['plz'])) echo $_POST['plz']; ?>">
                         <label for="ort"> Ort: </label>
-                        <input type="text" name="ort" style="width:50%" required>
+                        <input type="text" name="ort" style="width:50%" required value="<?php if (isset($_POST['ort'])) echo $_POST['ort']; ?>">
                         <br>
-                        <label for="strassse">Straße:</label>
-                        <input type="text" name="strassse" style="width: 50%;" required>
-                        <label for="strasssenr">Nr.</label>
-                        <input type="text" name="strasssenr" style="width: 10%;" required>
+                        <label for="strasse">Straße:</label>
+                        <input type="text" name="strasse" style="width: 50%;" required value="<?php if (isset($_POST['strasse'])) echo $_POST['strasse']; ?>">
+                        <label for="strassenr">Nr.</label>
+                        <input type="text" name="strassenr" style="width: 10%;" required value="<?php if (isset($_POST['strassenr'])) echo $_POST['strassenr']; ?>">
                         <br>
                         <label for="adresszusatz">Adresszusatz</label>
-                        <input type="text" name="adresszusatz" style="width: 70%;">
+                        <input type="text" name="adresszusatz" style="width: 70%;" value="<?php if (isset($_POST['adresszusatz'])) echo $_POST['adresszusatz']; ?>">
                         <br>
                         <h3>Sicherheit</h3>
                         <hr>
                         <label for="pw">Passwort</label>
-                        <input type="password" name="pw" style="width: 70%;"title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
+                        <input type="password" name="pw" style="width: 70%;" title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
                         <br>
                         <label for="pwWiederholen">Passwort <br>wiederholen</label>
                         <input type="password" name="pwWiederholen" style="width: 67.5%;" required>
@@ -426,7 +358,7 @@ if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 </body>
 <div id="">
     <?php
-    require("footer.php");
+    require "footer.php";
     ?>
 </div>
 

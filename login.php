@@ -1,11 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 	header("Location: index");
 }
-require './phpFunctions/databaseConnection.php';
-require './phpFunctions/sqlQueries.php';
-$conn = buildConnection("./");
+require (dirname(__FILE__) . '/phpFunctions/databaseConnection.php');
+require (dirname(__FILE__) . '/phpFunctions/sqlQueries.php');
+$conn = buildConnection();
 
 
 ?>
@@ -16,6 +16,7 @@ $conn = buildConnection("./");
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel="icon" type="image/x-icon" href="./img/favicon/favicon-32x32.png">
 	<link rel="stylesheet" href="./css/styles.css">
 	<title>Anmelden</title>
 </head>
@@ -74,4 +75,5 @@ $conn = buildConnection("./");
 		?>
 	</div>
 </body>
+
 </html>
