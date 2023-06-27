@@ -4,9 +4,9 @@
     require dirname(__FILE__,2) .'/phpFunctions/util.php';
     require dirname(__FILE__,2) .'/phpFunctions/sqlInserts.php';
 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    #ini_set('display_errors', 1);
+    #ini_set('display_startup_errors', 1);
+    #error_reporting(E_ALL);
 
     $conn = buildConnection();
     $debug = false;
