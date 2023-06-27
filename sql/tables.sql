@@ -7,7 +7,7 @@
 		value varchar(100) not null,
 		insertDate date default sysdate(),
         PRIMARY Key(c_id)
-	)
+	);
 
 	create table if not exists passwort(
 		pw_id 		int AUTO_INCREMENT
@@ -153,6 +153,7 @@
 		,p_id_ref		int not null
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
 		,menge			int
+		,akt_preis		decimal(10,2)
 		,PRIMARY KEY(b_p_id)
 	);
 
@@ -164,7 +165,9 @@
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
 		,bestell_datum				date
-		,anzahl_bestellpositionen	int
+		,anzahl_bestellpos			int
+		,lieferdatum				date
+		,geliefert					int
 		,PRIMARY KEY(b_id)
 	);
 	-- Foreign Keys

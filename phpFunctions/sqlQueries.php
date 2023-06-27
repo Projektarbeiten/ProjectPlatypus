@@ -305,3 +305,31 @@ function getDefaultImage($conn)
     $row = $stmt_prep->fetch();
     return $row['image'];
 }
+
+function getZahlungsmittel($conn,$uid) : array {
+    $stmt_prep = $conn->prepare(
+        'select
+            zi_id
+            ,zi.banknamen
+            ,zi.land
+            ,zi.bic
+            ,zi.bezeichnung
+            ,zi.iban
+        from
+            zahlungsinformationen as zi
+        join zahlungsmethodexuser as zix
+            on zix.zi_id_ref = zi.zi_id
+        where
+            zix.u_id_ref = :uid
+        ;');
+        $stmt_prep->bindParam(':uid', $uid);
+        $stmt_prep->execute();
+        if ($stmt_prep->rowCount() > 0) {
+            $row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        }else{
+            return array('error'); # #INFO: Kann zu überprüfen genutzt werde (Also ob ZI hinterlegt wurde oder nicht)
+        }
+
+
+}

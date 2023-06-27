@@ -1,11 +1,11 @@
 <?php
 session_start();
-require "./phpFunctions/databaseConnection.php";
-require "./phpFunctions/util.php";
+require dirname(__FILE__) . '/phpFunctions/databaseConnection.php';
+require dirname(__FILE__) . '/phpFunctions/util.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$conn = buildConnection(".");
+$conn = buildConnection();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@ $conn = buildConnection(".");
                         <div class='col-1-5'>
                             <p>Preis</p>
                         </div>
-                    </div> 
+                    </div>
                 ";
             }
             # Produktkarte
@@ -79,7 +79,7 @@ $conn = buildConnection(".");
                             <div class='sc-price-information'>
                                 <p>Gutschein/Rabattcode:</p>
                                 <input type='text' id='sc-gutschein'/>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     <div class='row'>
@@ -99,7 +99,7 @@ $conn = buildConnection(".");
                         </div>
                     </div>
                     <hr />
-                    <div class='row'> 
+                    <div class='row'>
                         <div class='col-6'>
                             <div class='sc-price-information'>
                                 <p>Gesamtsumme: </p>
