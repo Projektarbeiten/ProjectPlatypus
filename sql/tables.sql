@@ -167,7 +167,7 @@
 		,bestell_datum				date
 		,anzahl_bestellpos			int
 		,lieferdatum				date
-		,geliefert					int
+		,geliefert					tinyint(1)
 		,PRIMARY KEY(b_id)
 	);
 	-- Foreign Keys
