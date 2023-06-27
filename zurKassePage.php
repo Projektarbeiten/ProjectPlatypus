@@ -66,7 +66,7 @@ $conn = buildConnection(".");
             </div>
         </div>
         <br>
-        <div class="col-5" style="display: flex;">
+        <div class="col-6" style="display: flex;">
             <div id="solid-box">
             <img src="[PRODUKTBILD-URL]" alt="Produktbild">
             </div>
