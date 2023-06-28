@@ -27,35 +27,41 @@ $conn = buildConnection(".");
 
 	<div class="container">
 		<br>
-		<div class="bestelldaten">
-			<h3>1 Versandadresse</h3>
-			<div id="box_versadd">
-				<p>Max Mustermann</p>
-				<p>Mustermannstr. 1</p>
-				<p>70173 Stuttgart, Baden-Württemberg </p>
-				<p>Deutschland</p>
+		<div class="row">
+			<div class="col-5 bestelldaten">
+				<h3>1 Versandadresse</h3>
+				<div id="box_versadd">
+					<p>Max Mustermann</p>
+					<p>Mustermannstr. 1</p>
+					<p>70173 Stuttgart, Baden-Württemberg </p>
+					<p>Deutschland</p>
+				</div>
 			</div>
 		</div>
 		<br>
 		<hr>
 		<br>
-		<div class="bestelldaten">
-			<h3>2 Zahlungsart</h3>
-			<div id="box_zahlart">
-				<p>Bankeinzugskonto endet auf ****</p>
+		<div class="row">
+			<div class="col-5 bestelldaten">
+				<h3>2 Zahlungsart</h3>
+				<div id="box_zahlart">
+					<p>Bankeinzugskonto endet auf ****</p>
+				</div>
 			</div>
 		</div>
 		<hr>
 		<br>
 
-		<div class="bestelldaten">
-			<h3>3 Artikel und Versand überprüfen</h3>
+		<div class="row">
+			<div class="col-5 bestelldaten">
+				<h3>3 Artikel und Versand überprüfen</h3>
+			</div>
 		</div>
 		<br>
 		<div class="box_check_art_vers">
 			<div class="row">
 				<div class="col-5 lief_vers">
-					<h4> voraussichtliche Lieferung:</h4>
+					<h4> Voraussichtliche Lieferung:</h4>
 					<p id="dotted-box-lief">Datum</p>
 					<div class='col-0-5 lief_vers'>
 						<p id="ch-box-preis">Menge:</p>
@@ -88,15 +94,17 @@ $conn = buildConnection(".");
 			</div>
 		</div>
 
-		<div class="box_check_art_vers">
-			<div id="box_check_art_vers_zent">
-				<a href="" id="checkout-btn" style="margin-left: 5%; width: 15%;">Jetzt kaufen</a><!-- TODO: Verlinkung einfügen -->
-				<h4 style="margin-left: 10%;">Gesamtbetrag:</h4>
-				<p id="dotted-box-summe" style="margin-left: 5%;">Summe</p>
-				<br>
-			</div>
-			<div style="text-align: center;">
-				<a href="" id="agb">Mit dem Klick auf "Zur Kasse" akzeptieren Sie unsere AGB.</a><!-- TODO: Verlinkung einfügen -->
+		<div class="row">
+			<div class="box_check_art_vers">
+				<div id="box_check_art_vers_zent">
+					<a href="" id="checkout-btn" style="margin-left: 5%; width: 15%;">Jetzt kaufen</a><!-- TODO: Verlinkung einfügen -->
+					<h4 style="margin-left: 10%;">Gesamtbetrag:</h4>
+					<p id="dotted-box-summe" style="margin-left: 5%;">Summe</p>
+					<br>
+				</div>
+				<div style="text-align: center;">
+					<a href="" id="agb">Mit dem Klick auf "Zur Kasse" akzeptieren Sie unsere AGB.</a><!-- TODO: Verlinkung einfügen -->
+				</div>
 			</div>
 		</div>
 		<br>
