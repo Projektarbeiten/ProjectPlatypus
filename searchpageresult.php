@@ -39,45 +39,48 @@ let singleProductProperty = [];
                     FROM produkt
                     WHERE bezeichnung LIKE '%{$search}%'
                     OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
+                if (!empty($kategorie)) {
+                   // Kategorie die bei der Filterung ausgewählt wurde
+                }
                 $preparedstmt = $db->prepare($stmt);
                 //$preparedstmt->bindParam(':search',$search);
                 $counter = 0;
-                $result = $preparedstmt->execute();
+                $preparedstmt->execute();
+                $eigenschaften = array();
+                $products = array();
+
+                if ($preparedstmt->rowCount() > 0)
+                {
+                    while ($row = $preparedstmt->fetch())
+                    {
+                        $eigenschaften[] = $row['eigenschaft_1'];
+                        $eigenschaften[] = $row['eigenschaft_2'];
+                        $eigenschaften[] = $row['eigenschaft_3'];
+                        $eigenschaften[] = $row['eigenschaft_4'];
+                        $eigenschaften[] = $row['eigenschaft_5'];
+                        $products[] = $row;
+                    }
+
+                }
+                var_dump($products);
+                var_dump($eigenschaften);
                 while ($row = $preparedstmt->fetch()) {
                     if ($counter == 0) {
                         echo "<div class=row>";
                     }
+                    $products = array_push($row);
                     echo"
                     <script>
                     singleProduct = []
                     singleProductProperty = []
-                    let ID = []
-                    ID.push('{$row['p_id']}')
-                    singleProduct.push(ID)
-                    let Bezeichnung = []
-                    Bezeichnung.push('{$row['bezeichnung']}')
-                    singleProduct.push(Bezeichnung)
-                    let Preis = []
-                    Preis.push('{$row['akt_preis']}')
-                    singleProduct.push(Preis)
-                    let Eigenschaft_1 = []
-                    Eigenschaft_1.push('{$row['eigenschaft_1']}')
-                    singleProduct.push(Eigenschaft_1)
-                    let Eigenschaft_2 = []
-                    Eigenschaft_2.push('{$row['eigenschaft_2']}')
-                    singleProduct.push(Eigenschaft_2)
-                    let Eigenschaft_3 = []
-                    Eigenschaft_3.push('{$row['eigenschaft_3']}')
-                    singleProduct.push(Eigenschaft_3)
-                    let Eigenschaft_4 = []
-                    Eigenschaft_4.push('{$row['eigenschaft_4']}')
-                    singleProduct.push(Eigenschaft_4)
-                    let Eigenschaft_5 = []
-                    Eigenschaft_5.push('{$row['eigenschaft_5']}')
-                    singleProduct.push(Eigenschaft_5)
-                    let Eigenschaft_6 = []
-                    Eigenschaft_6.push('{$row['eigenschaft_6']}')
-                    singleProduct.push(Eigenschaft_6)
+                    singleProduct.push('{$row['p_id']}')
+                    singleProduct.push('{$row['bezeichnung']}')
+                    singleProduct.push('{$row['akt_preis']}')
+                    singleProduct.push('{$row['eigenschaft_1']}')
+                    singleProduct.push('{$row['eigenschaft_2']}')
+                    singleProduct.push('{$row['eigenschaft_3']}')
+                    singleProduct.push('{$row['eigenschaft_4']}')
+                    singleProduct.push('{$row['eigenschaft_5']}')
                     products.push(singleProduct)
                     </script>";
                     $p_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/productpage?produkt_id={$row["p_id"]}";
@@ -95,6 +98,19 @@ let singleProductProperty = [];
                         $counter = 0;
                     }
                 }
+                $filterOptionen = array_unique($eigenschaften);
+                // Anzeigen der Filteroptionen
+                echo "<h2>Filter:</h2>";
+                echo "<form action='suchergebnisse.php' method='GET'>";
+                echo "<label for='options'>Eigenschaften</label>";
+                echo "<select id='options' name='options>'";
+                foreach ($filterOptionen as $option) {
+                    echo "<option value='$option'> $option</option>";
+                }
+                echo "</select>";
+                echo "<input type='submit' value='Filtern'>";
+                    echo "</form>";
+                var_dump($products);
                 echo "<script> console.log(products)</script>";
             }
             ?>
