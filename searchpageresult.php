@@ -26,9 +26,6 @@ let singleProductProperty = [];
     <main class="searchpage">
         <div class="container">
         <div class="filter-container">
-        <label class="filter-label">Filteroptionen:</label>
-        <div id="filter-options"></div>
-        <button onclick="applyFilters()">Anwenden</button>
     </div>
             <?php
             if (isset($_GET['search']))
