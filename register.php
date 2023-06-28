@@ -97,26 +97,24 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6"><label for="email">E-Mail Adresse</label></div>
+                    <div class="col-3"><label for="geburtsdatum">Geburtsdatum</label></div>
+                    <div class="col-3"><label for="email">E-Mail Adresse</label></div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
+                    <div class="col-3"> <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
                     </div>
-                </div>
-                <div class="row"><label for="geburtsdatum">Geburtsdatum: </label></div>
-                <div class="row">
-                    <div class="col-6">
+                    <div class="col-3"> 
                         <input type="date" id="geburtsdatum" name="geburtsdatum" required value="<?php if (isset($_POST['geburtsdatum'])) echo $_POST['geburtsdatum']; ?>">
                     </div>
                 </div>
-                <div class="col-6">
-                    <h3>Ihre Adresse</h3>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="register-country">Land</label>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>Land</h4>
-                        <select name="land" form="register-form" required>
+                        <select name="land" id="register-country" form="register-form" required>
                             <?php if (isset($_POST['land'])) echo "<option value='{$_POST['land']}'>{$_POST['land']}</option>"; ?>
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Aland">Aland</option>
@@ -386,24 +384,17 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                         <input type="text" name="adresszusatz" value="<?php if (isset($_POST['adresszusatz'])) echo $_POST['adresszusatz']; ?>">
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-6">
-                        <h3>Sicherheit</h3>
-                    </div>
+                    <div class="col-3"><label for="pw">Passwort</label></div>
+                    <div class="col-3"><label for="pwWiederholen">Passwort wiederholen</label></div>
                 </div>
                 <div class="row">
-                    <div class="col-6"><label for="pw">Passwort</label></div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
 
                         <input type="password" name="pw" title="Minimum 8 characters including 1 upper and lower case character + 1 special character or number" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&\d]).{8,128}$">
                     </div>
-                </div>
-                <div class="row"> <label for="pwWiederholen">Passwort wiederholen</label>
-                </div>
-                <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <input type="password" name="pwWiederholen" required>
                     </div>
                 </div>
