@@ -154,7 +154,29 @@
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
 		,menge			int
 		,akt_preis		decimal(10,2)
+		,v_id_ref       int
 		,PRIMARY KEY(b_p_id)
+	);
+
+	create table if not exists versandart(
+		v_id			int AUTO_INCREMENT
+		,bezeichnung	varchar(50)
+		,anbieter		varchar(20)
+		,preis			decimal(10,2)
+		,api_key		varchar(4000)
+		,PRIMARY KEY(v_id)
+	);
+
+	create table if not exists email (
+		e_id			int NOT NULL auto_increment
+		,u_id_ref		int NOT NULL
+		,header			varchar(4000)
+		,content		varchar(4000)
+		,attachments	Longblob
+		,mime_type		varchar(100)
+		,email_to		varchar(500)
+		,versendet		tinyint(1)
+		,PRIMARY KEY (e_id)
 	);
 
 
@@ -197,6 +219,14 @@
 
 			alter table bestellposition
 			add FOREIGN KEY(p_id_ref) REFERENCES produkt(p_id);
+
+			alter table bestellposition
+			add FOREIGN KEY(v_id_ref) REFERENCES produkt(v_id);
+		--
+
+		-- Foreign Keya for email
+			alter table email
+			add FOREIGN KEY(b_id_ref) REFERENCES user(b_id);
 		--
 	--
 --
