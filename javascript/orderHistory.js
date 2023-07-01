@@ -24,3 +24,20 @@ $(".order-dropdown-arrow").click(function (e) {
         $(this).parent().parent().parent().find($(".order-dropdown-open")).css("display", "none");
     }
 });
+
+$(".order-search").onChange(function (){
+	timespan = $(this).attr("value");
+	loadOrderHistorie()
+
+});
+
+function loadOrderHistorie(timespan) {
+	$.ajax({
+			type: "POST",
+            url: "loadOrderHistory.php",
+            success: function () {
+
+			}
+
+	});
+}

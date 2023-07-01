@@ -164,5 +164,4 @@ function loadOrderConfirmation($orderArray,$bid,$conn) {
 	<p><strong>Lieferadresse:</strong> {$userStrasse} {$userHausnr} {$userAdresszusatz}, {$userPlz} {$userOrt}, {$userLand}</p>
 	<p><strong>Versandart:</strong> Standard DHL Versand</p>";
 }
-
 ?>

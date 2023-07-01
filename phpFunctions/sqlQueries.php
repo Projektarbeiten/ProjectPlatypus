@@ -331,5 +331,8 @@ function getZahlungsmittel($conn,$uid) : array {
             return array('error'); # #INFO: Kann zu überprüfen genutzt werde (Also ob ZI hinterlegt wurde oder nicht)
         }
 
+function getOrderHistory($u_id){
+
+}
 
 }
