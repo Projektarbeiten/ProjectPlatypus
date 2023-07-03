@@ -25,18 +25,21 @@ $(".order-dropdown-arrow").click(function (e) {
     }
 });
 
-$(".order-search").onChange(function (){
+$(".order-search").change(function (){
 	timespan = $(this).attr("value");
-	loadOrderHistorie()
+	loadOrderHistory(timespan);
 
 });
 
-function loadOrderHistorie(timespan) {
+function loadOrderHistory(timespan) {
 	$.ajax({
 			type: "POST",
-            url: "loadOrderHistory.php",
-            success: function () {
-
+            url: "../phpScripts/loadOrderHistory.php",
+            data: {timespan: timespan},
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#orders").insertAfter(response.result);
 			}
 
 	});

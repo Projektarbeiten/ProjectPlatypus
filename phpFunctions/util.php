@@ -43,7 +43,7 @@ function getProductAmountOptions($lagermenge, $menge)
 	}
 }
 
-function getCustomBussinessDate($days)
+function getCustomBussinessDate($days = 0)
 {
 	while (date('N', strtotime(date(strtotime('+' . $days . ' day')))) >= 6){
 	$days += 1;
