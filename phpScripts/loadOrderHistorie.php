@@ -13,10 +13,7 @@
     }
     if (isset($_POST[''])) {
 		$orders = array();
-        $sql = "SELECT *
-        FROM bestellung, bestellposition
-        WHERE bestellung.b_id = bestellposition.b_id_ref
-        AND bestellung.u_id_ref = :uid";
+        $sql = ;
         $sql2 = "SELECT COUNT(*) FROM bestellung WHERE u_id_ref = :uid";
         $sqlstmtamount = $conn->prepare($sql2);
         $stmt =$conn->prepare($sql);
