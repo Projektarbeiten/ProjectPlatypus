@@ -39,7 +39,7 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 			</div>
 			<div class='row'>
 				<div class='col-1-5'>
-					<p>" . date_format(date_create( $bestellung['bestell_datum']),'d.m.Y') . "</p>
+					<p>" . date_format(date_create($bestellung['bestell_datum']), 'd.m.Y') . "</p>
 				</div>
 				<div class='col-1-5'>
 					<p>" . $bestellung['anzahl_bestellpos'] . " Stk.</p>
@@ -63,15 +63,15 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 			echo "<div class='order-dropdown-open' id='" . $bestellung['b_id'] . "' style='display:none'> <!-- ID wird von order in der Datenbank bestimmt -->
 					<div class='row'>
 						<div class='col-2'>";
-			if ( date_format(date_create( $bestellung['bestell_datum']),'d.m.Y') == getCustomBussinessDate()) {
-				echo "<p><strong>ausstehender Versand am </strong></p>";
+			if (date_format(date_create($bestellung['bestell_datum']), 'd.m.Y') == getCustomBussinessDate()) {
+				echo "<p><strong>Ausstehender Versand am </strong></p>";
 			} else {
 				echo "<p><strong>Versand am </strong></p>";
 			}
 			echo "</div>
 						<div class='col-2'>";
-			if ( date_format(date_create( $bestellung['lieferdatum']),'d.m.Y') >= getCustomBussinessDate()) {
-				echo "<p><strong>voraussichtliche Zustellung am</strong></p>";
+			if (date_format(date_create($bestellung['lieferdatum']), 'd.m.Y') >= getCustomBussinessDate()) {
+				echo "<p><strong>Voraussichtliche Zustellung am</strong></p>";
 			} else {
 				echo "<p><strong>Zugestellt am</strong></p>";
 			}
@@ -79,10 +79,10 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 					</div>
 					<div class='row'>
 						<div class='col-2'>
-							<p>" . date_format(date_create( $bestellung['bestell_datum']),'d.m.Y'). "</p>
+							<p>" . date_format(date_create($bestellung['bestell_datum']), 'd.m.Y') . "</p>
 						</div>
 						<div class='col-2'>
-							<p>" . date_format(date_create( $bestellung['lieferdatum']),'d.m.Y') . "</p>
+							<p>" . date_format(date_create($bestellung['lieferdatum']), 'd.m.Y') . "</p>
 						</div>
 						<div class='col-2'>";
 			if ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) {
