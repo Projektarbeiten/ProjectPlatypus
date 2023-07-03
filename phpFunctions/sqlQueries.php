@@ -330,9 +330,26 @@ function getZahlungsmittel($conn,$uid) : array {
         }else{
             return array('error'); # #INFO: Kann zu überprüfen genutzt werde (Also ob ZI hinterlegt wurde oder nicht)
         }
+	}
 
-function getOrderHistory($u_id){
-
+function getOrderHistory($conn,$u_id){
+	$stmt_prep_select = $conn->prepare(
+		"
+		select
+			b.b_id
+			,b.gesamtkosten
+			,b.bestell_datum
+			,b.anzahl_bestellpos
+		from
+			bestellung b
+		join
+			bestellposition bpos
+		on
+			b.b_id = bpos.b_id_ref
+		where
+			b.u_id_ref = :uid;
+		");
+	$stmt_prep_select->bindParam(':uid', $u_id);
 }
 
-}
+?>
