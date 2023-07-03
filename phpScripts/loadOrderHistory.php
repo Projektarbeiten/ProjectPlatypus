@@ -1,26 +1,26 @@
 <?php
-	session_start();
-	require dirname(__FILE__,2) . '/phpFunctions/databaseConnection.php';
-	require dirname(__FILE__,2) .'/phpFunctions/util.php';
+session_start();
+require dirname(__FILE__, 2) . '/phpFunctions/databaseConnection.php';
+require dirname(__FILE__, 2) . '/phpFunctions/util.php';
 
-	$conn = buildConnection();
-    $debug = false;
-    $debug2= false;
-    if($debug){
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-    }
-    if (isset($_SESSION['uid']) && isset($_SESSION['access_token']) || $_SESSION['access_token'] == true) {
-		$pageContent = loadOrderHistory($conn,$_SESSION['uid']);
-		$pageContent = "TEST";
-		return $pageContent;
-	}
+$conn = buildConnection();
+$debug = false;
+$debug2 = false;
+if ($debug) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+}
+if (isset($_SESSION['uid']) && isset($_SESSION['access_token']) || $_SESSION['access_token'] == true) {
+	$pageContent = loadOrderHistory($conn, $_SESSION['uid']);
+	echo $pageContent;
+}
 
-function loadOrderHistory($conn,$u_id,$timespan = 0){
-	$results = getOrderHistory($conn,$u_id);
+function loadOrderHistory($conn, $u_id, $timespan = 0)
+{
+	$results = getOrderHistory($conn, $u_id);
 	ob_start();
-	foreach($results as $bestellung){
+	foreach ($results as $bestellung) {
 		echo "
 		<div class='order-card'>
 			<div class='row'>
@@ -39,18 +39,18 @@ function loadOrderHistory($conn,$u_id,$timespan = 0){
 			</div>
 			<div class='row'>
 				<div class='col-1-5'>
-					<p>".date_create_from_format('d.m.Y',$bestellung['bestell_datum'])."</p>
+					<p>" . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</p>
 				</div>
 				<div class='col-1-5'>
-					<p>".$bestellung['anzahl_bestellpos']."</p>
+					<p>" . $bestellung['anzahl_bestellpos'] . "</p>
 				</div>
 				<div class='col-1-5'>
-					<p>".$bestellung['gesamtkosten']."</p> <!-- Gesamtpreis -->
+					<p>" . $bestellung['gesamtkosten'] . "</p> <!-- Gesamtpreis -->
 				</div>
 				<div class='col-1-5'>";
-					$value = ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) ? "<button type='button' id='order-refund'>Gesamte Bestellung stornieren </button> <!-- Wert wird dynmaisch ermittelt -->" : "";
-				echo $value;
-				echo"</div>
+		$value = ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) ? "<button type='button' id='order-refund'>Gesamte Bestellung stornieren </button> <!-- Wert wird dynmaisch ermittelt -->" : "";
+		echo $value;
+		echo "</div>
 			</div>
 			<div class='trennlinie' style='width: 100%; border-color: black'></div>
 			<div class='order-dropdown'>
@@ -59,38 +59,38 @@ function loadOrderHistory($conn,$u_id,$timespan = 0){
 						<p>...</p>
 					</div>
 				</div>";
-			foreach ($bestellung['Bestellpositionen'] as $bestellposition) {
-				echo "<div class='order-dropdown-open' id='".$bestellung['b_id']."' style='display:none'> <!-- ID wird von order in der Datenbank bestimmt -->
+		foreach ($bestellung['Bestellpositionen'] as $bestellposition) {
+			echo "<div class='order-dropdown-open' id='" . $bestellung['b_id'] . "' style='display:none'> <!-- ID wird von order in der Datenbank bestimmt -->
 					<div class='row'>
 						<div class='col-2'>";
-							if($bestellung['bestell_datum'] == getCustomBussinessDate()){
-								echo "<p><strong>ausstehender Versand am ".date_create_from_format('d.m.Y',$bestellung['bestell_datum'])."</strong></p>";
-							}else {
-								echo "<p><strong>Versand am ".date_create_from_format('d.m.Y',$bestellung['bestell_datum'])."</strong></p>";
-							}
-						echo"</div>
+			if ($bestellung['bestell_datum'] == getCustomBussinessDate()) {
+				echo "<p><strong>ausstehender Versand am " . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</strong></p>";
+			} else {
+				echo "<p><strong>Versand am " . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</strong></p>";
+			}
+			echo "</div>
 						<div class='col-2'>";
-						if($bestellung['lieferdatum'] == getCustomBussinessDate()){
-							echo"<p><strong>voraussichtliche Zustellung am</strong></p>";
-						}else {
-							echo"<p><strong>Zugestellt am</strong></p>";
-						}
-						echo"</div>
+			if ($bestellung['lieferdatum'] == getCustomBussinessDate()) {
+				echo "<p><strong>voraussichtliche Zustellung am</strong></p>";
+			} else {
+				echo "<p><strong>Zugestellt am</strong></p>";
+			}
+			echo "</div>
 					</div>
 					<div class='row'>
 						<div class='col-2'>
-							<p>".$bestellung['bestell_datum']."</p>
+							<p>" . $bestellung['bestell_datum'] . "</p>
 						</div>
 						<div class='col-2'>
-							<p>".$bestellung['lieferdatum']."</p>
+							<p>" . $bestellung['lieferdatum'] . "</p>
 						</div>
 						<div class='col-2'>";
-						if($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null){
-							echo "<button type='button' class='article-refund'>Artikel zurückschicken</button>";
-						}else {
-							echo "<button type='button' class='article-refund'>Artikel stornieren</button>";
-						}
-						echo "</div>
+			if ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) {
+				echo "<button type='button' class='article-refund'>Artikel zurückschicken</button>";
+			} else {
+				echo "<button type='button' class='article-refund'>Artikel stornieren</button>";
+			}
+			echo "</div>
 					</div>
 					<div class='trennlinie' style='width: 100%; border-color: black'></div>
 					<div class='row'>
@@ -109,34 +109,34 @@ function loadOrderHistory($conn,$u_id,$timespan = 0){
 					</div>
 					<div class='row'>
 						<div class='col-1-5'>
-							<a href='./productPage?produkt_id=".$bestellposition['p_id_ref']."'>
-								<p>".$bestellposition['bezeichnung']."</p>
+							<a href='./productPage?produkt_id=" . $bestellposition['p_id_ref'] . "'>
+								<p>" . $bestellposition['bezeichnung'] . "</p>
 							</a>
 						</div>
 						<div class='col-1-5'>
-							<p>".$bestellposition['akt_preis']."</p>
+							<p>" . $bestellposition['akt_preis'] . "</p>
 						</div>
 						<div class='col-1-5'>
-							<p>".$bestellposition['menge']."</p>
+							<p>" . $bestellposition['menge'] . "</p>
 						</div>
 						<div class='col-1-5'>
-							<p>". ($bestellposition['akt_preis'] * $bestellposition['menge']). "</p>
+							<p>" . ($bestellposition['akt_preis'] * $bestellposition['menge']) . "</p>
 						</div>
 					</div>
 					<div class='row'>
 						<div class='col-2'>
-							<img src='".getImage($bestellposition['p_id_ref'],$conn)."' alt='Produktbild'>
+							<img src='" . getImage($bestellposition['p_id_ref'], $conn) . "' alt='Produktbild'>
 						</div>
 						<div class='col-4'>
-							<p> ".$bestellposition['details']."</p>
+							<p> " . $bestellposition['details'] . "</p>
 						</div>
 					</div>
 				</div>";
-			}
-			echo"</div>
-		</div>";
 		}
-		$result = ob_get_clean();
-		return $result;
+		echo "</div>
+		</div>";
+	}
+	$result = ob_get_clean();
+	return $result;
 }
 ?>

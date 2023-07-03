@@ -26,7 +26,7 @@ $(".order-dropdown-arrow").click(function (e) {
 });
 
 $(".order-search").change(function (){
-	timespan = $(this).attr("value");
+	let timespan = $(this).attr("value");
 	loadOrderHistory(timespan);
 
 });
@@ -38,8 +38,7 @@ function loadOrderHistory(timespan) {
             data: {timespan: timespan},
             async: false,
             success: function (response) {
-                console.log(response);
-                $("#orders").insertAfter(response.result);
+                $("#orders").append($.parseHTML(response));
 			}
 
 	});
