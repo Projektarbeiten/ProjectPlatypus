@@ -39,13 +39,13 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 			</div>
 			<div class='row'>
 				<div class='col-1-5'>
-					<p>" . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</p>
+					<p>" . date_format(date_create( $bestellung['bestell_datum']),'d.m.Y') . "</p>
 				</div>
 				<div class='col-1-5'>
-					<p>" . $bestellung['anzahl_bestellpos'] . "</p>
+					<p>" . $bestellung['anzahl_bestellpos'] . " Stk.</p>
 				</div>
 				<div class='col-1-5'>
-					<p>" . $bestellung['gesamtkosten'] . "</p> <!-- Gesamtpreis -->
+					<p>" . $bestellung['gesamtkosten'] . " €</p> <!-- Gesamtpreis -->
 				</div>
 				<div class='col-1-5'>";
 		$value = ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) ? "<button type='button' id='order-refund'>Gesamte Bestellung stornieren </button> <!-- Wert wird dynmaisch ermittelt -->" : "";
@@ -63,14 +63,14 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 			echo "<div class='order-dropdown-open' id='" . $bestellung['b_id'] . "' style='display:none'> <!-- ID wird von order in der Datenbank bestimmt -->
 					<div class='row'>
 						<div class='col-2'>";
-			if ($bestellung['bestell_datum'] == getCustomBussinessDate()) {
-				echo "<p><strong>ausstehender Versand am " . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</strong></p>";
+			if ( date_format(date_create( $bestellung['bestell_datum']),'d.m.Y') == getCustomBussinessDate()) {
+				echo "<p><strong>ausstehender Versand am </strong></p>";
 			} else {
-				echo "<p><strong>Versand am " . date_create_from_format('d.m.Y', $bestellung['bestell_datum']) . "</strong></p>";
+				echo "<p><strong>Versand am </strong></p>";
 			}
 			echo "</div>
 						<div class='col-2'>";
-			if ($bestellung['lieferdatum'] == getCustomBussinessDate()) {
+			if ( date_format(date_create( $bestellung['lieferdatum']),'d.m.Y') >= getCustomBussinessDate()) {
 				echo "<p><strong>voraussichtliche Zustellung am</strong></p>";
 			} else {
 				echo "<p><strong>Zugestellt am</strong></p>";
@@ -79,10 +79,10 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 					</div>
 					<div class='row'>
 						<div class='col-2'>
-							<p>" . $bestellung['bestell_datum'] . "</p>
+							<p>" . date_format(date_create( $bestellung['bestell_datum']),'d.m.Y'). "</p>
 						</div>
 						<div class='col-2'>
-							<p>" . $bestellung['lieferdatum'] . "</p>
+							<p>" . date_format(date_create( $bestellung['lieferdatum']),'d.m.Y') . "</p>
 						</div>
 						<div class='col-2'>";
 			if ($bestellung['geliefert'] == 1 && $bestellung['geliefert'] != null) {
@@ -114,13 +114,13 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 							</a>
 						</div>
 						<div class='col-1-5'>
-							<p>" . $bestellposition['akt_preis'] . "</p>
+							<p>" . $bestellposition['akt_preis'] . " €</p>
 						</div>
 						<div class='col-1-5'>
-							<p>" . $bestellposition['menge'] . "</p>
+							<p>" . $bestellposition['menge'] . " Stk.</p>
 						</div>
 						<div class='col-1-5'>
-							<p>" . ($bestellposition['akt_preis'] * $bestellposition['menge']) . "</p>
+							<p>" . ($bestellposition['akt_preis'] * $bestellposition['menge']) . " €</p>
 						</div>
 					</div>
 					<div class='row'>

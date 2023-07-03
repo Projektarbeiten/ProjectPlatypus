@@ -26,7 +26,7 @@ if (!isset($_SESSION['uid'])) {
     <title>Bestellhistorie</title>
 </head>
 
-<body onload="loadOrderHistory()">
+<body>
     <!-- Header -->
     <?php
     require "header.php";
@@ -49,6 +49,8 @@ if (!isset($_SESSION['uid'])) {
             </div>
         </div>
         <div class="container" id="orders">
+            <div id="loader" class="center" style="display: none;">
+            </div>
         </div>
     </main>
 

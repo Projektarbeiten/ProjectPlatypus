@@ -346,10 +346,6 @@ function getOrderHistory($conn,$u_id,$timespan = null){
                 ,b.geliefert
             from
                 bestellung b
-            join
-                bestellposition bpos
-            on
-                b.b_id = bpos.b_id_ref
             where
                 b.u_id_ref = :uid;
             "); //TODO: Datums anpassung, wenn Filter umgsetzt
