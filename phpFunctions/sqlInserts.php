@@ -91,7 +91,7 @@ function setZahlungsmittel($uid, $infoArray, $conn)
             return 2;
         }
     } catch (PDOException $e) {
-        error_log(date("Y-m-d H:i:s", time()) . "Setzten der Zahlungsbedingung ist gescheitert - setZahlungsmittel() - sqlInserts.php \n"
+        error_log(date("Y-m-d H:i:s", time()) . " Setzten der Zahlungsbedingung ist gescheitert - setZahlungsmittel() - sqlInserts.php \n"
             . "SQL Fehler: \n " . $e . "\n", 3, "my-errors-phpFuctions.log");
         return 3;
     }
@@ -101,9 +101,9 @@ function updateUserEntry($uid, $target, $value, $conn)
 {
     try {
         $stmt_prep = $conn->prepare("
-    UPDATE 
+    UPDATE
         `user`
-    SET $target = :value 
+    SET $target = :value
     WHERE u_id = :uid;
     ");
         $stmt_prep->bindParam(':value', $value);
@@ -111,7 +111,7 @@ function updateUserEntry($uid, $target, $value, $conn)
         $stmt_prep->execute();
         echo "$target erfolgreich gespeichert";
     } catch (PDOException $e) {
-        error_log(date("Y-m-d H:i:s", time()) . "Updaten von Wert $target gescheitert - updateUserEntry() - sqlInserts.php \n
+        error_log(date("Y-m-d H:i:s", time()) . " Updaten von Wert $target gescheitert - updateUserEntry() - sqlInserts.php \n
         SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
     }
 }
@@ -120,26 +120,103 @@ function updateUserPassword($uid, $password, $conn)
 {
     try {
         $stmt_prep = $conn->prepare("
-        UPDATE 
-        passwort 
+        UPDATE
+            passwort
         LEFT JOIN user
-        on passwort.pw_id = user.pw_id_ref
-        SET 
-        pw = :newPassword 
-        WHERE passwort.pw_id = :uid
+            on passwort.pw_id = user.pw_id_ref
+        SET
+            pw = :newPassword
+        WHERE
+            passwort.pw_id = :uid
         ");
         $stmt_prep->bindValue(':newPassword', $password);
         $stmt_prep->bindValue(':uid', $uid);
         $stmt_prep->execute();
         return true;
     } catch (PDOException $e) {
-        error_log(date("Y-m-d H:i:s", time()) . "Updaten von Passwort gescheitert - updateUserPassword() - sqlInserts.php \n
+        error_log(date("Y-m-d H:i:s", time()) . " Updaten von Passwort gescheitert - updateUserPassword() - sqlInserts.php \n
         SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
         return false;
     }
 }
 
-function registerUser($conn, $email, $passwort, $titel, $vorname, 
+function insertOrder($conn,$bestArray): int {
+    try {
+        $stmt_prep = $conn->prepare(
+            '
+            Insert into bestellung (u_id_ref, gesamtkosten, zi_id_ref, bestell_datum, anzahl_bestellpos, lieferdatum, geliefert)
+            values (:uid, :gesKosten , :zi_id, :bestell_datum, :anzahl_bestellpos, :lieferdatum, :geliefert)
+            ;'
+        );
+        $stmt_prep->bindValue(':uid', intval($bestArray['uid']));
+        $stmt_prep->bindValue(':gesKosten', floatval($bestArray['gesamtkosten']));
+        $stmt_prep->bindValue(':zi_id', intval($bestArray['zi_id']));
+        $stmt_prep->bindValue(':anzahl_bestellpos', intval($bestArray['anzahlBestellpositionen']));
+        $stmt_prep->bindValue(':bestell_datum', $bestArray['bestellDatum']);
+        $stmt_prep->bindValue(':lieferdatum', $bestArray['lieferdatum']);
+		$stmt_prep->bindValue(':geliefert',0);
+        $stmt_prep->execute();
+        $lastRowID = $conn->lastInsertId();
+        return $lastRowID;
+    } catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . " Anlegen der Bestellung ist gescheitert - insertOrder() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+        return -1;
+    };
+}
+
+function insertOrderPos($conn, $bestArray, $bestellId): bool {
+
+    try{
+        $counter = 1;
+        foreach ($bestArray['bestellPositionen'] as $bestellposArray) {
+            $stmt_prep = $conn->prepare(
+                '
+                Insert into bestellposition (b_id_ref, p_id_ref, pos, menge, akt_preis)
+                values (:b_id_ref, :p_id_ref , :pos, :menge, :akt_preis)
+                ;'
+            );
+            $stmt_prep->bindValue(':b_id_ref', $bestellId);
+            $stmt_prep->bindValue(':p_id_ref', $bestellposArray['produkt']);
+            $stmt_prep->bindValue(':pos', $counter);
+            $stmt_prep->bindValue(':menge', $bestellposArray['menge']);
+            $stmt_prep->bindValue(':akt_preis', $bestellposArray['akt_preis']);
+            $stmt_prep->execute();
+            $counter += 1;
+        }
+        return true;
+    }catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . " Anlegen der Bestellungspositionen ist gescheitert - insertOrderPos() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+        return false;
+    };
+}
+
+function updateProduktMenge($conn,$bestArray): bool {
+    try{
+        foreach ($bestArray['bestellPositionen'] as $bestellposArray) {
+            $stmt_prep = $conn->prepare(
+                '
+                    update produkt
+                    set
+                        menge = :menge
+                    where
+                        p_id = :pid
+                ;');
+                $stmt_prep->bindValue(':menge', intval($bestellposArray['lagermenge']) - intval($bestellposArray['menge']));
+                $stmt_prep->bindValue(':pid', $bestellposArray['produkt']);
+                $stmt_prep->execute();
+        }
+        return true;
+    }catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . " Updaten der Warenbestände ist gescheitert - updateWarehouseData() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+        return false;
+    };
+}
+
+
+function registerUser($conn, $email, $passwort, $titel, $vorname,
 $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
 {
     $checkMailStmt = "SELECT u_id FROM user WHERE email = :mail";
@@ -181,3 +258,4 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
         }
     }
 }
+?>

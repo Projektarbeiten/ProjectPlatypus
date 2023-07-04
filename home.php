@@ -3,10 +3,11 @@ session_start();
 if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
     header("Location: index");
 }
-require "./phpFunctions/databaseConnection.php";
-require "./phpFunctions/util.php";
-$conn = buildConnection(".");
+require(dirname(__FILE__) . "/phpFunctions/databaseConnection.php");
+require(dirname(__FILE__) ."/phpFunctions/util.php");
+$conn = buildConnection();
 $bestseller = getBestseller($conn);
+$baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://$_SERVER[HTTP_HOST]" 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +59,7 @@ $bestseller = getBestseller($conn);
             <div class="container">
                 <div class="row">
                     <div class="col-6">
-                        <h1 id="bestseller-headline">Bestseller Shit</h1>
+                        <h1 id="bestseller-headline">Unsere Bestseller</h1>
                     </div>
                 </div>
                 <?php
@@ -72,11 +73,12 @@ $bestseller = getBestseller($conn);
                         echo "<div class='row'>";
                     }
                     echo "<div class='col-2 produkt'>
-                        <h2 class='produkt-name' style='font-size: 1.2rem'>$produktName</h2>
-                        <a href='./productPage?produkt_id=$product'>
-                            <img class='produkt-bild' src='$picture' alt='Undefined picture'>
+                        <h2 class='Produkt-name' style='font-size: 1.2rem'>$produktName</h2>
+                        <a href='$baseURL/productPage?produkt_id=$product'>
+                            <img class='Produkt-bild' src='$picture' alt='Undefined picture'>
                         </a>
-                        <p class='produkt-text'><strong>{$produktPreis}€</strong></p>
+                        <p class='Produkt-text'><strong>{$produktPreis}€</strong></p>
+
                     </div>";
                     ++$counter;
                     if ($counter == 3) {

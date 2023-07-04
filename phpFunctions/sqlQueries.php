@@ -305,3 +305,92 @@ function getDefaultImage($conn)
     $row = $stmt_prep->fetch();
     return $row['image'];
 }
+
+function getZahlungsmittel($conn,$uid) : array {
+    $stmt_prep = $conn->prepare(
+        'select
+            zi_id
+            ,zi.banknamen
+            ,zi.land
+            ,zi.bic
+            ,zi.bezeichnung
+            ,zi.iban
+        from
+            zahlungsinformationen as zi
+        join zahlungsmethodexuser as zix
+            on zix.zi_id_ref = zi.zi_id
+        where
+            zix.u_id_ref = :uid
+        ;');
+        $stmt_prep->bindParam(':uid', $uid);
+        $stmt_prep->execute();
+        if ($stmt_prep->rowCount() > 0) {
+            $row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        }else{
+            return array('error'); # #INFO: Kann zu überprüfen genutzt werde (Also ob ZI hinterlegt wurde oder nicht)
+        }
+	}
+
+function getOrderHistory($conn,$u_id,$timespan = null){
+    try {
+        $i=0;
+        $stmt_prep_select = $conn->prepare(
+            "
+            select
+                b.b_id
+                ,b.gesamtkosten
+                ,b.bestell_datum
+                ,b.anzahl_bestellpos
+                ,b.lieferdatum
+                ,b.geliefert
+            from
+                bestellung b
+            where
+                b.u_id_ref = :uid;
+            "); //TODO: Datums anpassung, wenn Filter umgsetzt
+        $stmt_prep_select->bindParam(':uid', $u_id);
+        $stmt_prep_select->execute();
+        if ($stmt_prep_select->rowCount() > 0) {
+            $results = $stmt_prep_select->fetchAll(PDO::FETCH_ASSOC);
+            foreach($results as &$array){
+                $bestellpositionen = getBestellposition($conn ,$array['b_id']);
+                foreach($bestellpositionen as &$bestPosArray){
+                    $produktArray = getProduktInfos($bestPosArray['p_id_ref'],$conn);
+                    $bestPosArray['bezeichnung'] = $produktArray[0];
+                    $bestPosArray['details'] = $produktArray[7];
+                }
+                $array['Bestellpositionen']= $bestellpositionen;
+                $i++;
+            }
+            return $results;
+        }
+        } catch (PDOException $e) {
+            die("ERROR: Could not able to execute $stmt_prep_select. " . $e->getMessage());
+        }
+}
+
+function getBestellposition($conn,$b_id){
+    try {
+        $stmt_prep_select = $conn->prepare("
+        select
+            p_id_ref
+            ,pos
+            ,menge
+            ,akt_preis
+        from
+            bestellposition
+        where
+            b_id_ref = :bid;");
+        $stmt_prep_select->bindParam(':bid',$b_id);
+        $stmt_prep_select->execute();
+        if ($stmt_prep_select->rowCount() > 0) {
+            $results = $stmt_prep_select->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        }
+    } catch (PDOException $e) {
+        die("ERROR: Could not able to execute $stmt_prep_select. " . $e->getMessage());
+    }
+}
+
+?>

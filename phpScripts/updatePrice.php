@@ -1,14 +1,14 @@
 <?php
     session_start();
-    require('../phpFunctions/sqlQueries.php');
-    require('../phpFunctions/databaseConnection.php');
+    require dirname(__FILE__,2) .'/phpFunctions/sqlQueries.php';
+    require dirname(__FILE__,2) .'/phpFunctions/databaseConnection.php';
     $debug = true;
     $debug2= false;
     $shoppingCartArray = array();
 
     if(isset($_SESSION['produkt_array'])){
 
-        $conn = buildConnection('../');
+        $conn = buildConnection();
         if($debug){
             ini_set('log_errors', TRUE);
             ini_set('display_errors', 1);

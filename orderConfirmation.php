@@ -1,3 +1,21 @@
+<?php
+session_start();
+require dirname(__FILE__) .'/phpFunctions/util.php';
+require dirname(__FILE__) .'/phpFunctions/databaseConnection.php';
+#print dirname(__FILE__) .'/phpFunctions/util.php';
+#ini_set('display_errors', 1);
+#ini_set('display_startup_errors', 1);
+#error_reporting(E_ALL);
+
+$conn = buildConnection();
+if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
+    header("Location: index");
+}elseif(!isset($_SESSION['uid'])){
+    header("Location: login");
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,11 +39,11 @@
 			schnell wie möglich bearbeiten.</p>
 		<div class="box">
 			<h2>Ihre Bestelldetails:</h2>
-			<p><strong>Bestell_ID:</strong> [ID EINFÜGEN]</p>
-			<p><strong>Artikelanzahl:</strong> [ANZAHL EINFÜGEN]</p>
-			<p><strong>Lieferdatum:</strong> [DATUM EINFÜGEN]</p>
-			<p><strong>Lieferadresse:</strong> [ADRESSE EINFÜGEN]</p>
-			<p><strong>Versandart:</strong> [VERSANDART EINFÜGEN]</p>
+				<?php
+				loadOrderConfirmation($_SESSION['order_array'],$_SESSION['bid'],$conn);
+				unset($_SESSION['order_array']);
+				unset($_SESSION['bid']);
+				?>
 		</div>
 	</div>
 
