@@ -400,7 +400,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label for="agb">Hiermit aktzeptieren Sie unsere Nutzungsbedingungen sowie AGB´s</label>
+                        <label for="agb">Hiermit aktzeptieren Sie unsere Nutzungsbedingungen sowie die AGB´s</label>
                         <input type="checkbox" name="agb" required>
                     </div>
                 </div>
