@@ -1,5 +1,5 @@
 <?php
-require("Classes.php");
+
 function getAccountInformation($uid, $conn)
 {
     try {

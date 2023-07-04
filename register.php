@@ -355,6 +355,8 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     <button type="submit" class="login-button">Registrieren</button>
             </form>
     </div>
+    <script src="./javascript/jquery-3.6.1.min.js"></script>
+    <script src="./javascript/register.js"></script>
 </body>
 <div id="">
     <?php
