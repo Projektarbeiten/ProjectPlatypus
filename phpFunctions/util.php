@@ -53,8 +53,12 @@ function getCustomBussinessDate($days = 0)
 	return $result;
 }
 
+function checkVerification($token){
+
+}
 function createVerificationToken(){
-	
+	$uniqueId = uniqid(true);
+	return $uniqueId;
 }
 
 function loadShoppingCartInformation($conn): array

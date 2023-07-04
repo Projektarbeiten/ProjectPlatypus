@@ -49,6 +49,8 @@
 		,hausnr			VARCHAR(10)
 		,adresszusatz	VARCHAR(100)
 		,z_id_ref		int not null
+		,verificationCode VARCHAR(200)
+		,verified		tinyint(1)
 		,PRIMARY KEY(u_id)
 	);
 

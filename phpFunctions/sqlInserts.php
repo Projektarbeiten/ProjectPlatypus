@@ -215,6 +215,22 @@ function updateProduktMenge($conn,$bestArray): bool {
     };
 }
 
+function setVerified($token,$conn): bool {
+    try {
+        $stmt_prep = $conn->prepare(
+            'insert into user(verified)
+            values(1)
+            where verificationCode = :token;'
+        );
+        $stmt_prep->bindValue(':token',$token);
+        $stmt_prep->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . " Updaten des Verified Status ist gescheitert - setVerified() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+        return false;
+    }
+}
 
 function registerUser($conn, $email, $passwort, $titel, $vorname,
 $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
@@ -233,8 +249,8 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
         echo ($stmt->queryString);
         $stmt->execute();
         $preparedid = $conn->lastInsertId();
-        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz)
-            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz)";
+        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz,verificationCode,verified)
+            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz,:verificationCode,:verified)";
         $preparedinsert = $conn->prepare($insertuser);
         $preparedinsert->bindParam(':titel', $titel);
         $preparedinsert->bindParam(':vorname', $vorname);
@@ -248,6 +264,8 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
         $preparedinsert->bindParam(':ort', $ort);
         $preparedinsert->bindParam(':strasse', $strasse);
         $preparedinsert->bindParam(':hausnr', $hausnr);
+        $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
+        $preparedinsert->bindParam(':verificationCode', createVerificationToken());
         $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
         $resultprepuser = $preparedinsert->execute();
         if ($resultprepuser) {

@@ -393,4 +393,28 @@ function getBestellposition($conn,$b_id){
     }
 }
 
+function getVerifiedStatus($conn,$uid) {
+    try {
+        $stmt_prep_select = $conn->prepare("
+            select
+                verified
+            from
+                user
+            where
+            u_id = :uid;
+        ");
+        $stmt_prep_select->bindValue(":uid",$uid);
+        $stmt_prep_select->execute();
+        $row = $stmt_prep_select->fetch();
+        if($row['verified'] == 1) {
+            return true;
+        }else {
+            return false;
+        }
+    } catch (\Throwable $th) {
+        error_log(date("Y-m-d H:i:s", time()) . "getVerifiedStatus - getVerifiedStatus \n", 3, "my-errors.log");
+        return false;
+    }
+}
+
 ?>
