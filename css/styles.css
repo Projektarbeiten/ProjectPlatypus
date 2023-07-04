@@ -1311,6 +1311,22 @@ header .col-6 {
 	transform: translate(0, -50%);
 }
 
+#loader {
+	border: 12px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 12px solid #444444;
+	width: 70px;
+	height: 70px;
+	animation: spin 1s linear infinite;
+}
+
+.center {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
 
 /* === Authentication === */
 
@@ -1345,6 +1361,13 @@ header .col-6 {
 .access-code-button:focus {
 	background-color: var(--theme-color-3);
 	color: var(--font-color);
+}
+
+/* ==== Animation for Loader =====*/
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 

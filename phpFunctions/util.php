@@ -43,7 +43,7 @@ function getProductAmountOptions($lagermenge, $menge)
 	}
 }
 
-function getCustomBussinessDate($days)
+function getCustomBussinessDate($days = 0)
 {
 	while (date('N', strtotime(date(strtotime('+' . $days . ' day')))) >= 6){
 	$days += 1;
@@ -164,5 +164,4 @@ function loadOrderConfirmation($orderArray,$bid,$conn) {
 	<p><strong>Lieferadresse:</strong> {$userStrasse} {$userHausnr} {$userAdresszusatz}, {$userPlz} {$userOrt}, {$userLand}</p>
 	<p><strong>Versandart:</strong> Standard DHL Versand</p>";
 }
-
 ?>
