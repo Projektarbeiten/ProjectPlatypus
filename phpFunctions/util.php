@@ -53,6 +53,10 @@ function getCustomBussinessDate($days = 0)
 	return $result;
 }
 
+function createVerificationToken(){
+	
+}
+
 function loadShoppingCartInformation($conn): array
 { // INFO: Kann für die Main Page und dessen ShoppingCart Info genutzt werden.
 	$shoppingCartProductAmount = 0;
