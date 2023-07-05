@@ -334,6 +334,33 @@ header .col-6 {
   #footer-default .col-1 {
     width: 100%;
   }
+  #footer-default img {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  .footer-links {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+  .footer-links > a {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+.footer-links > a {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  display: block;
+}
+
+@media (max-width: 1368px) {
+  #footer-default .col-1-5,
+  #footer-default .col-0-5,
+  #footer-default .col-1 {
+    width: 100%;
+  }
 
   #footer-default img {
     margin: 0 auto;
@@ -351,6 +378,7 @@ header .col-6 {
     font-size: 1.5rem;
   }
 }
+
 
 /* === MAIN-PAGE === */
 #kategorien > .container > .row {

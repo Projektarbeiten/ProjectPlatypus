@@ -101,7 +101,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     <div class="col-3"><label for="email">E-Mail Adresse</label></div>
                 </div>
                 <div class="row">
-                    <div class="col-3"> <input type="text" id="email" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
+                    <div class="col-3"> <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
                     </div>
                     <div class="col-3"> 
                         <input type="date" id="geburtsdatum" name="geburtsdatum" required value="<?php if (isset($_POST['geburtsdatum'])) echo $_POST['geburtsdatum']; ?>">
