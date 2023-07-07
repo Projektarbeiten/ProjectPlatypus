@@ -219,10 +219,11 @@ function setVerified($token,$conn): bool {
     try {
         $stmt_prep = $conn->prepare(
             'insert into user(verified)
-            values(1)
+            values(:1)
             where verificationCode = :token;'
         );
         $stmt_prep->bindValue(':token',$token);
+        $stmt_prep->bindValue(':1',1);
         $stmt_prep->execute();
         return true;
     } catch (PDOException $e) {
@@ -230,6 +231,54 @@ function setVerified($token,$conn): bool {
         SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
         return false;
     }
+}
+
+function updateVerificationCode($token = '',$updateValue,$email = '',$conn){
+    try {
+        $stmt_prep = null;
+        if(strlen($email) == 0 && strlen($token) != 0) {
+            $stmt_prep = $conn->prepare(
+            'update user
+            set verificationCode = :1
+            where verificationCode = :token;'
+            );
+            $stmt_prep->bindValue(':token',$token);
+        }elseif( strlen($email) != 0 &&  strlen($token) == 0){
+            $stmt_prep = $conn->prepare(
+                'update user
+                set verificationCode = :1
+                where email = :email;'
+                );
+            $stmt_prep->bindValue(':email',$email);
+        }
+        $stmt_prep->bindValue(':1',$updateValue);
+        $stmt_prep->execute();
+    } catch (PDOException $e) {
+        error_log(date("Y-m-d H:i:s", time()) . " Updaten des VerificationCode ist gescheitert - updateVerificationCode() - sqlInserts.php \n
+        SQL Fehler: \n $e \n", 3, "my-errors-phpFuctions.log");
+
+    }
+}
+
+function invokeEmailRequest($email,$type) {
+   $url = 'http://host.docker.internal/phpScripts/sendEmail';
+   $fields = array(
+        'email' => $email,
+        'type' => $type
+    );
+    $postvars = http_build_query($fields);
+    $streamVerboseHandle = fopen('./temp.txt', 'w+');
+    $curlOptions = array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postvars,
+            CURLOPT_VERBOSE => true,
+            CURLOPT_STDERR => $streamVerboseHandle
+    );
+    $connection = curl_init();
+    curl_setopt_array($connection, $curlOptions);
+    $result = curl_exec($connection);
+    curl_close($connection);
 }
 
 function registerUser($conn, $email, $passwort, $titel, $vorname,
@@ -242,15 +291,15 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
     if ($preparedMailCheck->rowCount() > 0) {
         return "<script type='text/javascript'>alert('E-Mail ist bereits vorhanden')</script>";
     } else {
+        $verified = 1;
         $hashpw = password_hash($passwort, PASSWORD_DEFAULT);
-        $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw)";
+        $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw);";
         $stmt = $conn->prepare($SQL);
         $stmt->bindParam(':hashpw', $hashpw);
-        echo ($stmt->queryString);
         $stmt->execute();
         $preparedid = $conn->lastInsertId();
-        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz,verificationCode,verified)
-            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz,:verificationCode,:verified)";
+        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz,verified)
+            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz,:verified);";
         $preparedinsert = $conn->prepare($insertuser);
         $preparedinsert->bindParam(':titel', $titel);
         $preparedinsert->bindParam(':vorname', $vorname);
@@ -265,14 +314,14 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
         $preparedinsert->bindParam(':strasse', $strasse);
         $preparedinsert->bindParam(':hausnr', $hausnr);
         $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
-        $preparedinsert->bindParam(':verificationCode', createVerificationToken());
-        $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
+        $preparedinsert->bindParam(':verified', $verified);
         $resultprepuser = $preparedinsert->execute();
         if ($resultprepuser) {
             echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
-            header("Location: login.php");
+            invokeEmailRequest($email,'verificationEmail');
         } else {
-            return "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>";
+            return "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>
+            <script type='text/javascript'>alert('E-Mail ist bereits vorhanden')</script>";
         }
     }
 }

@@ -24,7 +24,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
         <?php
         if (!empty($_POST['pw'])) {
             if ($_POST['pw'] === $_POST['pwWiederholen']) {
-                $conn = buildConnection('.');
+                $conn = buildConnection();
                 $response = registerUser(
                     $conn,
                     $_POST['email'],
@@ -42,6 +42,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     $_POST['adresszusatz']
                 );
                 echo $response;
+                sleep(10);
             } else {
                 echo ("<script type='text/javascript' language='Javascript'>alert('Passwörter stimmen nicht überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
             }
@@ -97,11 +98,12 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3"><label for="geburtsdatum">Geburtsdatum</label></div>
                     <div class="col-3"><label for="email">E-Mail Adresse</label></div>
+                    <div class="col-3"><label for="geburtsdatum">Geburtsdatum</label></div>
                 </div>
                 <div class="row">
-                    <div class="col-3"> <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
+                    <div class="col-3"> 
+                        <input type="text" name="email" required value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
                     </div>
                     <div class="col-3"> 
                         <input type="date" id="geburtsdatum" name="geburtsdatum" required value="<?php if (isset($_POST['geburtsdatum'])) echo $_POST['geburtsdatum']; ?>">
@@ -400,8 +402,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label for="agb">Hiermit aktzeptieren Sie unsere Nutzungsbedingungen sowie die AGB´s</label>
-                        <input type="checkbox" name="agb" required>
+                        <label for="agb">Hiermit aktzeptieren Sie unsere Nutzungsbedingungen sowie die AGB´s</label> <input type="checkbox" name="agb" required>
                     </div>
                 </div>
                 <div class="row">

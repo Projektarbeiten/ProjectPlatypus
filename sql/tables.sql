@@ -51,6 +51,7 @@
 		,z_id_ref		int not null
 		,verificationCode VARCHAR(200)
 		,verified		tinyint(1)
+		,token_validity_date date
 		,PRIMARY KEY(u_id)
 	);
 
@@ -228,7 +229,7 @@
 
 		-- Foreign Keya for email
 			alter table email
-			add FOREIGN KEY(b_id_ref) REFERENCES user(b_id);
+			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 		--
 	--
 --

@@ -1404,11 +1404,12 @@ header .col-6 {
 }
 
 .center {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   margin: auto;
+  display:block;
+}
+
+.text-center{
+  text-align: center;
 }
 
 /* === Authentication === */

@@ -1,5 +1,6 @@
 <?php
 require dirname(__FILE__) .'/sqlQueries.php';
+require dirname(__FILE__) .'/sqlInserts.php';
 function getImage($artikelNr, $conn)
 {
 	$mime = 'image/jpg';
@@ -53,9 +54,23 @@ function getCustomBussinessDate($days = 0)
 	return $result;
 }
 
-function checkVerification($token){
-
+function checkVerification($token, $conn){
+	$date = getValidityDate($token,$conn);
+	if(!is_bool($date)){
+		$date = date_format(date_create($date),"d.m.Y");
+		$today = date("d.m.Y",time());
+		if($date <= $today){
+			return true;
+		}
+	}
 }
+
+
+function deleteVerificationeCode($token, $conn){
+	setVerified($token, $conn);
+	updateVerificationCode($token,NULL,$conn);
+}
+
 function createVerificationToken(){
 	$uniqueId = uniqid(true);
 	return $uniqueId;
