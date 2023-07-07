@@ -22,7 +22,7 @@ function CreateVerificationEmail($email, $conn)
     updateVerificationCode(updateValue: $token, email: $email, conn: $conn);
     $uid = getUidBasedOnEmail($conn, $email);
     $returns = getAccountInformation($uid, $conn);
-
+    //TODO: HTML fehlt
     $html = "<!DOCTYPE html>
     <html lang='de'>
     <head>
@@ -94,68 +94,7 @@ function createThanksForOrderEmail($conn,$email)
     $uid = getUidBasedOnEmail($conn, $email);
     $returns = getAccountInformation($uid, $conn);
 
-    $html = "<!DOCTYPE html>
-    <html lang='de'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Ihre Test-E-Mail</title>
-        <style>
-            /* Styles hier einfügen */
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                background-color: #f7f7f7;
-                margin: 0;
-                padding: 0;
-            }
-    
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #ffffff;
-            }
-    
-            h1 {
-                color: #333333;
-            }
-    
-            p {
-                color: #555555;
-            }
-    
-            .button {
-                display: inline-block;
-                background-color: #007bff;
-                color: #ffffff;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 20px;
-            }
-    
-            .footer {
-                margin-top: 40px;
-                text-align: center;
-                color: #999999;
-            }
-        </style>
-    </head>
-    <body>
-        <div class='container'>
-            <h1>Registrierung Efolgreich</h1>
-            <p>Sehr geehrte/r " . $returns['anrede'] . " " . $returns['nachname'] . "</p>
-            <p>Dies ist eine Test-E-Mail-Vorlage. Sie können den Text und das Styling nach Ihren Bedürfnissen anpassen und neue Elemente hinzufügen.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit velit at felis tincidunt tincidunt. Ut sit amet purus euismod, fringilla tellus non, consequat sapien. Nullam ut suscipit elit, eu tincidunt mauris.</p>
-            <a class='button' href=''>Klicken Sie hier</a>
-            <p>Vielen Dank!</p>
-            <div class='footer'>
-                <p>Fragen? Kontaktieren Sie uns unter support@example.com.</p>
-            </div>
-        </div>
-    </body>
-    </html>";
+    $html = "";//TODO: HTML fehlt
     return $html;
 
 }
@@ -165,7 +104,7 @@ function startOfEmailProcess($type, $sendTo, $conn)
     $sendTo = rawurldecode($sendTo);
     switch ($type) {
         case 'verificationEmail':
-            $html = CreateVerificationEmail($sendTo, $conn);
+            $html = CreateVerificationEmail($sendTo, $conn);//TODO: HTML fehlt
             $emailInfos = array(
                 'VonEmail' => 'info@platyweb.de',
                 'VonName' => 'Platyweb Service-Team',
@@ -180,10 +119,32 @@ function startOfEmailProcess($type, $sendTo, $conn)
             sendMail($emailInfos);
             break;
         case 'thanksForOrder':
-            $html = createThanksForOrderEmail();
-        default:
-            # code...
-            break;
+            $html = createThanksForOrderEmail(); //TODO: HTML fehlt
+            $emailInfos = array(
+                'VonEmail' => 'info@platyweb.de',
+                'VonName' => 'Platyweb Service-Team',
+                'An' => $sendTo,
+                'CC' => null,
+                'Betreff' => 'Vielen Dank für Ihre Bestellung',
+                'AntwortenAnEmail' => 'info@platyweb.de',
+                'AntwortenAnName' => 'Platyweb Service-Team',
+                'Body' => $html
+
+            );
+            sendMail($emailInfos);
+       case 'requestUserInformation':
+            $html = createRequestUserInformationEmail(); //TODO: HTML fehlt
+            $emailInfos = array(
+                'VonEmail' => 'info@platyweb.de',
+                'VonName' => 'Platyweb Service-Team',
+                'An' => $sendTo,
+                'CC' => null,
+                'Betreff' => 'Ihre Userdaten',
+                'AntwortenAnEmail' => 'info@platyweb.de',
+                'AntwortenAnName' => 'Platyweb Service-Team',
+                'Body' => $html
+
+            );
     }
 }
 function sendMail($emailInfos)
