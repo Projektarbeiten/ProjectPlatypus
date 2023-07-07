@@ -1,4 +1,4 @@
-$(".login-button").click(function (){
+/*$(".login-button").click(function (){
     var formValuesText = {};
     var formValuesPasswords = {};
     var formValuesSelect = {};
@@ -48,4 +48,4 @@ $(".login-button").click(function (){
             }
           });
       });
-});
+});*/

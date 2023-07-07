@@ -65,10 +65,31 @@ function checkVerification($token, $conn){
 	}
 }
 
+function invokeEmailRequest($email,$type,$conn) {
+	$url = 'http://host.docker.internal/phpScripts/sendEmail'; // TODO: Angepasst werden bei Deployment
+	$fields = array(
+		 'email' => $email,
+		 'type' => $type,
+		 'conn' => $conn
+	 );
+	 $postvars = http_build_query($fields);
+	 $streamVerboseHandle = fopen('./temp.txt', 'w+');
+	 $curlOptions = array(
+			 CURLOPT_URL => $url,
+			 CURLOPT_POST => true,
+			 CURLOPT_POSTFIELDS => $postvars,
+			 //CURLOPT_VERBOSE => false,
+			 //CURLOPT_STDERR => $streamVerboseHandle
+	 );
+	 $connection = curl_init();
+	 curl_setopt_array($connection, $curlOptions);
+	 $result = curl_exec($connection);
+	 curl_close($connection);
+ }
 
 function deleteVerificationeCode($token, $conn){
 	setVerified($token, $conn);
-	updateVerificationCode($token,NULL,$conn);
+	updateVerificationCode($token,NULL,conn:$conn);
 }
 
 function createVerificationToken(){

@@ -41,10 +41,15 @@ $conn = buildConnection();
 							try {
 								if ($result = login($_POST['t_username'], $conn)) {
 									if (password_verify($_POST['t_password'], $result[0])) {
-										session_regenerate_id();
-										$_SESSION['loggedin'] = true;
-										$_SESSION['uid'] = $result[1];
-										header("Location: home");
+										if($result['verified'] == 1){
+											session_regenerate_id();
+											$_SESSION['loggedin'] = true;
+											$_SESSION['uid'] = $result[1];
+											header("Location: home");
+										}else {
+											echo "<p style='color:red'>Sie müssen Ihr Benutzerkonto erst aktivieren</p>";
+											echo "<p><a href='emailVerify'> Keine Email erhalten?</a></p>";
+										}
 									} else {
 										echo "<p style='color:red'>Incorrect E-Mail and/or password!</p>";
 									}

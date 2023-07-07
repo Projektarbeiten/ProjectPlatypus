@@ -7,10 +7,7 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
 }
 $verification = false;
 $conn = buildConnection();
-if (!isset($_GET["verificationCode"])) {
-    $conn = null;
-    header("Location: index");
-} else {
+if (isset($_GET["verificationCode"])) {
     $verification = checkVerification($_GET['verificationCode'], $conn);
 }
 
@@ -40,11 +37,11 @@ if (!isset($_GET["verificationCode"])) {
                     <?php
                     if ($verification) {
                         echo "<p id='verify-message'>Ihre E-Mail wurde Erfolgreich bei Platyweb.de verifiziert</p>";
-                        deleteVerificationeCode($conn, $_GET['verificationCode']);
+                        deleteVerificationeCode($_GET['verificationCode'], $conn);
                     } else {
                         echo "<p id='verify-message'>Ihre E-Mail konnte nicht bestätigt werden.</p></div></div>";
                         echo "
-                        <form>
+                        
                         <div class='row'>
                             <div class='col-6'>
                                 <label  class='text-center center' for='email'>Enter your Email</label>
@@ -56,7 +53,7 @@ if (!isset($_GET["verificationCode"])) {
                                 <a href='index'></a><button class='button' id='verify-button' value=''>Verifizierungs Email erneut anfordern</button></a>
                             </div>
                         </div>
-                        </form>
+                        
                         ";
                     }
                     ?>

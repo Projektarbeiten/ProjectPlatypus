@@ -62,6 +62,7 @@ function login($email, $conn)
             'Select
                 u.u_id
                 ,pw.pw
+                ,verified
             FROM
                 user u
             JOIN passwort pw
@@ -76,7 +77,7 @@ function login($email, $conn)
             $returns = array(0, 0);
         } else {
             $row = $stmt_prep->fetch();
-            $returns = array($row['pw'], $row['u_id']);
+            $returns = array($row['pw'], $row['u_id'],$row['verified']);
         }
     } catch (PDOException $e) {
         die("ERROR: Could not able to execute $stmt_prep. " . $e->getMessage());
@@ -474,6 +475,8 @@ function getUidBasedOnEmail($conn, $email)
         if ($stmt_prep_select->rowCount() > 0 && $stmt_prep_select->rowCount() < 2) {
             $row = $stmt_prep_select->fetch();
             return $row['u_id'];
+        }else{
+            return false;
         }
     } catch (PDOException $e) {
         error_log(date("Y-m-d H:i:s", time()) . "getUidBasedOnEmail - getUidBasedOnEmail  - $e\n", 3, "my-errors.log");

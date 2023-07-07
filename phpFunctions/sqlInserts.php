@@ -218,8 +218,8 @@ function updateProduktMenge($conn,$bestArray): bool {
 function setVerified($token,$conn): bool {
     try {
         $stmt_prep = $conn->prepare(
-            'insert into user(verified)
-            values(:1)
+            'update user
+            set verified = :1
             where verificationCode = :token;'
         );
         $stmt_prep->bindValue(':token',$token);
@@ -260,26 +260,6 @@ function updateVerificationCode($token = '',$updateValue,$email = '',$conn){
     }
 }
 
-function invokeEmailRequest($email,$type) {
-   $url = 'http://host.docker.internal/phpScripts/sendEmail';
-   $fields = array(
-        'email' => $email,
-        'type' => $type
-    );
-    $postvars = http_build_query($fields);
-    $streamVerboseHandle = fopen('./temp.txt', 'w+');
-    $curlOptions = array(
-            CURLOPT_URL => $url,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $postvars,
-            CURLOPT_VERBOSE => true,
-            CURLOPT_STDERR => $streamVerboseHandle
-    );
-    $connection = curl_init();
-    curl_setopt_array($connection, $curlOptions);
-    $result = curl_exec($connection);
-    curl_close($connection);
-}
 
 function registerUser($conn, $email, $passwort, $titel, $vorname,
 $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
@@ -291,15 +271,15 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
     if ($preparedMailCheck->rowCount() > 0) {
         return "<script type='text/javascript'>alert('E-Mail ist bereits vorhanden')</script>";
     } else {
-        $verified = 1;
+        $verified = 0;
         $hashpw = password_hash($passwort, PASSWORD_DEFAULT);
         $SQL = "INSERT INTO passwort(pw) VALUES(:hashpw);";
         $stmt = $conn->prepare($SQL);
         $stmt->bindParam(':hashpw', $hashpw);
         $stmt->execute();
         $preparedid = $conn->lastInsertId();
-        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz,verified)
-            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz,:verified);";
+        $insertuser = "INSERT INTO user(titel,vorname,nachname,anrede,pw_id_ref,email,geburtsdatum,land,plz,ort,strasse,hausnr,adresszusatz,verified, token_validity_date)
+            VALUES(:titel, :vorname, :nachname,:anrede,:pwref,:email,:bday,:land,:plz,:ort,:strasse,:hausnr,:adresszusatz,:verified, :validity_date);";
         $preparedinsert = $conn->prepare($insertuser);
         $preparedinsert->bindParam(':titel', $titel);
         $preparedinsert->bindParam(':vorname', $vorname);
@@ -315,10 +295,12 @@ $nachname, $anrede, $bday, $land, $plz, $ort, $strasse, $hausnr, $adresszusatz)
         $preparedinsert->bindParam(':hausnr', $hausnr);
         $preparedinsert->bindParam(':adresszusatz', $adresszusatz);
         $preparedinsert->bindParam(':verified', $verified);
+        $preparedinsert->bindParam(':validity_date', date('Y-m-d'));
         $resultprepuser = $preparedinsert->execute();
         if ($resultprepuser) {
-            echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>";
-            invokeEmailRequest($email,'verificationEmail');
+            invokeEmailRequest($email,'verificationEmail',$conn);
+            echo "<p style='text-align: center; color: ForestGreen'>Erfolgreich abgespeichert</p>
+            <script type='text/javascript'>alert('Sie erhalten in kürze eine Bestätigungs-Email')</script>";
         } else {
             return "<p style='text-align: center; color: red'>Es sind Fehler entstanden</p>
             <script type='text/javascript'>alert('E-Mail ist bereits vorhanden')</script>";

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once './phpFunctions/databaseConnection.php';
-require_once './phpFunctions/sqlInserts.php';
+require_once './phpFunctions/util.php';
 if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
     header("Location: index");
 }
@@ -42,7 +42,8 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     $_POST['adresszusatz']
                 );
                 echo $response;
-                sleep(10);
+                sleep(5);
+                header('Location: login');
             } else {
                 echo ("<script type='text/javascript' language='Javascript'>alert('Passwörter stimmen nicht überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)
             }
