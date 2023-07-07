@@ -1366,6 +1366,33 @@ header .col-6 {
 	margin: auto;
 }
 
+/* === ORDER CONFIRMATION === */
+
+#order-confirmation p {
+	margin: 0;
+	font-size: 1.1rem;
+	text-align: center;
+}
+
+#order-confirmation h2 {
+	text-align: center;
+	margin-top: 0;
+}
+
+#order-details {
+	margin-top: 30px;
+	background-color: var(--theme-color-6);
+	width: 60%;
+	max-width: 500px;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+#order-details p {
+	color: var(--theme-color-2);
+}
+
+
 /* === Authentication === */
 
 #code-login-form {
