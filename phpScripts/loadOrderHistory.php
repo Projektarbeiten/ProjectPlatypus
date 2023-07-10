@@ -39,7 +39,7 @@ function loadOrderHistory($conn, $u_id, $timespan = 0)
 			</div>
 			<div class='row'>
 				<div class='col-1-5'>
-					<p>" . date_format(date_create($bestellung['bestell_datum']), 'd.m.Y') . "</p>
+					<p class='order-date'>" . date_format(date_create($bestellung['bestell_datum']), 'd.m.Y') . "</p>
 				</div>
 				<div class='col-1-5'>
 					<p>" . $bestellung['anzahl_bestellpos'] . " Stk.</p>

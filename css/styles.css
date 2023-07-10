@@ -811,6 +811,40 @@ header .col-6 {
 	padding-bottom: 5px;
 }
 
+#order-filter-section {
+	width: 40%;
+	background-color: var(--theme-color-4);
+	padding: 20px;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+#order-filter-section input {
+	width: 30px;
+	height: 30px;
+	margin-bottom: -15px;
+	margin: 0 auto;
+	display: block;
+}
+
+#order-filter-section .col-1-5 {
+	padding: 0 0 10px 0;
+}
+
+#order-filter-section select {
+	display: block;
+	margin: 0 auto;
+	width: 130px;
+	height: 30px;
+	border-radius: 5px;
+	font-size: 1.1rem;
+}
+#order-filter-section label {
+	font-size: 1.1rem;
+	text-align: center;
+	display: block;
+}
+
 .order-dropdown-closed p {
 	width: 100%;
 	text-align: center;
@@ -1031,6 +1065,10 @@ header .col-6 {
 	float: right;
 	display: block;
 	margin-right: 15px;
+}
+
+#orders .order-dropdown-arrow:hover {
+	cursor: pointer;
 }
 
 .left {

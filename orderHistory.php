@@ -47,6 +47,56 @@ if (!isset($_SESSION['uid'])) {
                     </div>
                 </div>
             </div>
+            <div class='container' id='order-filter-section' style="display:none">
+                <div class='row'>
+                    <div class='col-1-5'>
+                        <label for='neueste'>Neueste</label>
+
+                    </div>
+                    <div class='col-1-5'>
+                        <label for='aelteste'>Älteste</label>
+                    </div>
+                    <div class='col-1-5'>
+                        <label for='jahr'>Jahr</label>
+
+                    </div>
+                    <div class='col-1-5'>
+                        <label for='monat'>Monat</label>
+
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-1-5'>
+                        <input type='checkbox' id='neueste'>
+                    </div>
+                    <div class='col-1-5'>
+                        <input type='checkbox' id='aelteste'>
+
+                    </div>
+                    <div class='col-1-5'>
+                        <select id='jahr'>
+                            <option value='2023'>2023</option>
+                        </select>
+                    </div>
+                    <div class='col-1-5'>
+
+                        <select id='monat'>
+                            <option value='1'>Januar</option>
+                            <option value='2'>Februar</option>
+                            <option value='3'>März</option>
+                            <option value='4'>April</option>
+                            <option value='5'>Mai</option>
+                            <option value='6'>Juni</option>
+                            <option value='7'>Juli</option>
+                            <option value='8'>August</option>
+                            <option value='9'>September</option>
+                            <option value='10'>Oktober</option>
+                            <option value='11'>November</option>
+                            <option value='12'>Dezember</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="container" id="orders">
             <div id="loader" class="center" style="display: none;">
