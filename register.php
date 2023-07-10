@@ -42,7 +42,6 @@ if (!isset($_SESSION['access_token']) || $_SESSION['access_token'] != true) {
                     $_POST['adresszusatz']
                 );
                 echo $response;
-                sleep(5);
                 header('Location: login');
             } else {
                 echo ("<script type='text/javascript' language='Javascript'>alert('Passwörter stimmen nicht überein')</script>"); # TODO: An Alert von Product Page anpassen (addToShoppingCart.js)

@@ -11,6 +11,8 @@
     $conn = buildConnection();
     $debug = false;
     $debug2= false;
+    $putArrayToFile = true;
+
     if($debug){
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
@@ -40,6 +42,7 @@
         header("Location: ../login");
     }
     function getOrderData($conn){
+        global $putArrayToFile;
         $counter = 0;
         $endprice = 0.00;
         $amountOfProducts = 0;
@@ -65,6 +68,11 @@
             'lieferdatum' => date_format(date_create(getCustomBussinessDate(5)),"Y-m-d"),
 			'anzahlBestellpositionen' => $counter
         );
+        if($putArrayToFile){
+            $data = json_encode($orderArray);
+            $file = 'order_array_data.json';
+            file_put_contents($file, $data);
+        }
         return $orderArray;
     }
 

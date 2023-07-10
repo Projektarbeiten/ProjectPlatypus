@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bestellung>
+    <Bestellkopf>
+        <kunden_adresse>
+            <kunden_name attribute="Value">Wert</kunden_name>
+            <kunden_straße attribute="Value">Wert</kunden_straße>
+            <kunden_ort attribute="Value">Wert</kunden_ort>
+            <kunden_land attribute="Value">Wert</kunden_land>
+       </kunden_adresse>
+       <rechnung_daten_allgemein>
+            <rechnung_nr attribute="Value">Wert</rechnung_nr>
+            <kunden_nr attribute="Value">Wert</kunden_nr>
+            <rechnung_datum attribute="Value">Wert</rechnung_datum>
+       </rechnung_daten_allgemein>
+       <Bestell_Adressen>
+            <Rechnungsadresse>
+                <Rechnungsadressen_name attribute="Value">Wert</Rechnungsadressen_name>
+                <Rechnungsstrasse attribute="Value">Wert</Rechnungsstrasse>
+                <Rechnungsort attribute="Value">Wert</Rechnungsort>
+                <Rechnungsland attribute="Value">Wert</Rechnungsland>
+            </Rechnungsadresse>
+            <Lieferadresse>
+                <Lieferadressen_name attribute="Value">Wert</Lieferadressen_name>
+                <Lieferstrasse attribute="Value">Wert</Lieferstrasse>
+                <Lieferort attribute="Value">Wert</Lieferort>
+                <Lieferland attribute="Value">Wert</Lieferland>
+            </Lieferadresse>
+       </Bestell_Adressen>
+    </Bestellkopf>
+    <Bestellinformationen>
+        <Bestellnummern>
+            <Bestelldatum attribute="Value">Wert</Bestelldatum>
+            <Bestellnummer attribute="Value">Wert</Bestellnummer>
+        </Bestellnummern>
+        <Rechungsdetails>
+            <bestellpositionen>
+            </bestellpositionen>
+            <gesamtpreis>
+                <preis attribute="Value">Wert</preis>
+            </gesamtpreis>
+        </Rechnungsdetails>
+    </Bestellinformationen>
+</Bestellung>
