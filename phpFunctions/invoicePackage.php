@@ -1,7 +1,8 @@
 <?php
 session_start();
-use fpdf;
+use TCPDF;
 require_once dirname(__FILE__,2).'/phpFunctions/util.php';
+require_once dirname(__FILE__,2).'/phpClasses/tcpdf.php';
 
 $OrderArray = null;
 
@@ -31,9 +32,22 @@ function startInvoiceCreation($OrderArray,$conn){
 
     // Transformierte XML-Daten erhalten
     $transformedXml = $proc->transformToXML($xml);
-    echo $transformedXml;
 
     // PDF generierung
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', true);
+    $pdf->SetCreator('Platyweb Invoice Generator');
+    $pdf->setAuthor('John Doe');
+    $pdf->SetTitle('Ihre Bestellung Nr:' . $OrderArray['bestellid']);
+    $pdf->SetMargins(10, 10, 10);
+    $pdf->SetAutoPageBreak(TRUE, 10);
+    $pdf->AddPage('P','A4');
+    $pdf->SetDisplayMode('fullpage', 'SinglePage', 'UseNone');
+    $pdf->setPrintHeader(false);
+    $pdf->setPrintFooter(false);
+    $pdf->SetX(10); // Horizontale Ausrichtung
+    $pdf->SetFont(PDF_FONT_NAME_MAIN, '', 12);
+    $pdf->WriteHTML($transformedXml);
+    $pdf->Output(dirname(__FILE__).'/output.pdf', 'F'); //_getrawstream()
 
 }
 
@@ -86,9 +100,9 @@ function fillInvoiceBody($dom,$OrderArray) {
             $bestellposition->addChild('bezeichnung',$bestPosArray[$i]['bezeichnung']);
             $bestellposition->addChild('menge',$bestPosArray[$i]['menge']);
             $bestellposition->addChild('einzelpreis',$bestPosArray[$i]['akt_preis']."€");
-            $bestellposition->addChild('gesamtpreis',$bestPosArray[$i]['akt_preis'] * $bestPosArray[$i]['menge']."€");
+            $bestellposition->addChild('gesamtpreis',floatval($bestPosArray[$i]['akt_preis']) * intval($bestPosArray[$i]['menge'])."€");
     }
-    $dom->Bestellinformationen->Rechnungsdetails->gesamtpreis->preis = $OrderArray['gesamtpreis'] ."€";
+    $dom->Bestellinformationen->Rechnungsdetails->gesamtpreis->preis = $OrderArray['gesamtkosten'] ."€";
     return $dom;
 }
 

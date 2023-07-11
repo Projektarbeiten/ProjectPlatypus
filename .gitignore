@@ -359,3 +359,5 @@ MigrationBackup/
 config/app.ini
 .vscode/launch.json
 temp.txt
+phpFunctions/output.pdf
+phpScripts/xml_output.xml
