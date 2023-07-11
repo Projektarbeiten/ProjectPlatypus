@@ -2,16 +2,15 @@
     session_start();
     require dirname(__FILE__,2) . '/phpFunctions/databaseConnection.php';
     require dirname(__FILE__,2) .'/phpFunctions/util.php';
-    require dirname(__FILE__,2) .'/phpFunctions/sqlInserts.php';
 
-    #ini_set('display_errors', 1);
-    #ini_set('display_startup_errors', 1);
-    #error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     $conn = buildConnection();
     $debug = false;
     $debug2= false;
-    $putArrayToFile = true;
+    
 
     if($debug){
         ini_set('display_errors', 1);
@@ -42,7 +41,6 @@
         header("Location: ../login");
     }
     function getOrderData($conn){
-        global $putArrayToFile;
         $counter = 0;
         $endprice = 0.00;
         $amountOfProducts = 0;
@@ -68,21 +66,24 @@
             'lieferdatum' => date_format(date_create(getCustomBussinessDate(5)),"Y-m-d"),
 			'anzahlBestellpositionen' => $counter
         );
-        if($putArrayToFile){
-            $data = json_encode($orderArray);
-            $file = 'order_array_data.json';
-            file_put_contents($file, $data);
-        }
+        $orderArray['userData'] = getAccountInformation($orderArray['uid'],$conn);
         return $orderArray;
     }
 
     function saveOrderData($conn,$orderDataArray): bool  {
+    $putArrayToFile = true;
        $bestellId = insertOrder($conn,$orderDataArray);
 	   $_SESSION['bid'] = $bestellId;
        $return = insertOrderPos($conn,$orderDataArray,$bestellId);
        if(!$return){
         #header('Location: Error') # TODO: Error Seite erstellen.
        }else{
+        $orderDataArray['bestellid'] = $bestellId;
+        if($putArrayToFile){
+            $data = json_encode($orderDataArray);
+            $file = 'order_array_data.json';
+            file_put_contents($file, $data);
+        }
         updateProduktMenge($conn,$orderDataArray);
        }
        return $return;
