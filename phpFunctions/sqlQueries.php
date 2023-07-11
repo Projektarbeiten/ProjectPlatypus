@@ -34,7 +34,7 @@ function getAccountInformation($uid, $conn)
         $stmt_prep->bindParam(':uid', $uid);
         $stmt_prep->execute();
         if ($stmt_prep->rowCount() > 0) {
-            $row = $stmt_prep->fetch();
+            $row = $stmt_prep->fetch(PDO::FETCH_ASSOC);
             return $row;
         }
     } catch (PDOException $e) {

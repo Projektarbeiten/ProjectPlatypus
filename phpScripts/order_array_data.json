@@ -1,0 +1,59 @@
+{
+    "uid":"45",
+    "zi_id":null,
+    "gesamtkosten":273.99,
+    "produktAnzahl":12,
+    "bestellDatum":"2023-07-11",
+    "bestellPositionen":[
+       {
+          "produkt":"300",
+          "menge":"4",
+          "bezeichnung":"Babe G-Punkt-Vibrator - Passion Pink",
+          "akt_preis":"19.00",
+          "lagermenge":"5"
+       },
+       {
+          "produkt":"100",
+          "menge":"3",
+          "bezeichnung":"Cliff realistischer Dildo",
+          "akt_preis":"24.00",
+          "lagermenge":"11"
+       },
+       {
+          "produkt":"210",
+          "menge":"4",
+          "bezeichnung":"Aluna Lalita 2.0 - Pfirsich",
+          "akt_preis":"24.00",
+          "lagermenge":"7"
+       },
+       {
+          "produkt":"60",
+          "menge":"1",
+          "bezeichnung":"Tanga mit offenem Schritt Shibu - schwarz",
+          "akt_preis":"29.99",
+          "lagermenge":"1"
+       }
+    ],
+    "lieferdatum":"2023-07-16",
+    "anzahlBestellpositionen":4,
+    "userData":{
+       "titel":"",
+       "vorname":"Maximilian",
+       "nachname":"Teuber",
+       "anrede":"Herr",
+       "email":"maximilian.teuber03@gmail.com",
+       "geburtsdatum":"2023-12-29",
+       "userland":"Aland",
+       "plz":"74564",
+       "ort":"Crailsheim",
+       "strasse":"Zimmi",
+       "hausnr":"7",
+       "adresszusatz":"",
+       "banknamen":null,
+       "zahlland":null,
+       "bic":null,
+       "bezeichnung":null,
+       "iban":null
+    },
+    "bestellid":13
+ }

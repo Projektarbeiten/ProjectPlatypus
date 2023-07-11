@@ -1,42 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Bestellung>
     <Bestellkopf>
         <kunden_adresse>
-            <kunden_name attribute="Value">Wert</kunden_name>
-            <kunden_straße attribute="Value">Wert</kunden_straße>
-            <kunden_ort attribute="Value">Wert</kunden_ort>
-            <kunden_land attribute="Value">Wert</kunden_land>
-       </kunden_adresse>
-       <rechnung_daten_allgemein>
-            <rechnung_nr attribute="Value">Wert</rechnung_nr>
-            <kunden_nr attribute="Value">Wert</kunden_nr>
-            <rechnung_datum attribute="Value">Wert</rechnung_datum>
-       </rechnung_daten_allgemein>
-       <Bestell_Adressen>
+            <kunden_name></kunden_name>
+            <kunden_strasse></kunden_strasse>
+            <kunden_ort></kunden_ort>
+            <kunden_land></kunden_land>
+        </kunden_adresse>
+        <rechnung_daten_allgemein>
+            <rechnung_nr></rechnung_nr>
+            <kunden_nr></kunden_nr>
+            <rechnung_datum></rechnung_datum>
+        </rechnung_daten_allgemein>
+        <Bestell_Adressen>
             <Rechnungsadresse>
-                <Rechnungsadressen_name attribute="Value">Wert</Rechnungsadressen_name>
-                <Rechnungsstrasse attribute="Value">Wert</Rechnungsstrasse>
-                <Rechnungsort attribute="Value">Wert</Rechnungsort>
-                <Rechnungsland attribute="Value">Wert</Rechnungsland>
+                <Rechnungsadresse_name></Rechnungsadresse_name>
+                <Rechnungsstrasse></Rechnungsstrasse>
+                <Rechnungsort></Rechnungsort>
+                <Rechnungsland></Rechnungsland>
             </Rechnungsadresse>
             <Lieferadresse>
-                <Lieferadressen_name attribute="Value">Wert</Lieferadressen_name>
-                <Lieferstrasse attribute="Value">Wert</Lieferstrasse>
-                <Lieferort attribute="Value">Wert</Lieferort>
-                <Lieferland attribute="Value">Wert</Lieferland>
+                <Lieferadresse_name></Lieferadresse_name>
+                <Lieferstrasse></Lieferstrasse>
+                <Lieferort></Lieferort>
+                <Lieferland></Lieferland>
             </Lieferadresse>
-       </Bestell_Adressen>
+        </Bestell_Adressen>
     </Bestellkopf>
     <Bestellinformationen>
         <Bestellnummern>
-            <Bestelldatum attribute="Value">Wert</Bestelldatum>
-            <Bestellnummer attribute="Value">Wert</Bestellnummer>
+            <Bestelldatum></Bestelldatum>
+            <Bestellnummer></Bestellnummer>
         </Bestellnummern>
-        <Rechungsdetails>
+        <Rechnungsdetails>
             <bestellpositionen>
             </bestellpositionen>
             <gesamtpreis>
-                <preis attribute="Value">Wert</preis>
+                <preis></preis>
             </gesamtpreis>
         </Rechnungsdetails>
     </Bestellinformationen>

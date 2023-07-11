@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bestellung>
+    <Bestellkopf>
+        <kunden_adresse>
+            <kunden_name>Herr Maximilian Teuber</kunden_name>
+            <kunden_strasse>Zimmi 7</kunden_strasse>
+            <kunden_ort>74564Crailsheim</kunden_ort>
+            <kunden_land>Aland</kunden_land>
+        </kunden_adresse>
+        <rechnung_daten_allgemein>
+            <rechnung_nr/>
+            <kunden_nr>00345</kunden_nr>
+            <rechnung_datum>2023-07-11</rechnung_datum>
+        </rechnung_daten_allgemein>
+        <Bestell_Adressen>
+            <Rechnungsadresse>
+                <Rechnungsadresse_name>Herr Maximilian Teuber</Rechnungsadresse_name>
+                <Rechnungsstrasse>Zimmi 7</Rechnungsstrasse>
+                <Rechnungsort>74564Crailsheim</Rechnungsort>
+                <Rechnungsland>Aland</Rechnungsland>
+            </Rechnungsadresse>
+            <Lieferadresse>
+                <Lieferadresse_name>Herr Maximilian Teuber</Lieferadresse_name>
+                <Lieferstrasse>Zimmi 7</Lieferstrasse>
+                <Lieferort>74564Crailsheim</Lieferort>
+                <Lieferland>Aland</Lieferland>
+            </Lieferadresse>
+        </Bestell_Adressen>
+    </Bestellkopf>
+    <Bestellinformationen>
+        <Bestellnummern>
+            <Bestelldatum>2023-07-11</Bestelldatum>
+            <Bestellnummer>#13</Bestellnummer>
+        </Bestellnummern>
+        <Rechnungsdetails>
+            <bestellpositionen>
+            <bestellposition><pos>1</pos><bezeichnung>Babe G-Punkt-Vibrator - Passion Pink</bezeichnung><menge>4</menge><einzelpreis>19.00€</einzelpreis><gesamtpreis>76€</gesamtpreis></bestellposition><bestellposition><pos>2</pos><bezeichnung>Cliff realistischer Dildo</bezeichnung><menge>3</menge><einzelpreis>24.00€</einzelpreis><gesamtpreis>72€</gesamtpreis></bestellposition><bestellposition><pos>3</pos><bezeichnung>Aluna Lalita 2.0 - Pfirsich</bezeichnung><menge>4</menge><einzelpreis>24.00€</einzelpreis><gesamtpreis>96€</gesamtpreis></bestellposition><bestellposition><pos>4</pos><bezeichnung>Tanga mit offenem Schritt Shibu - schwarz</bezeichnung><menge>1</menge><einzelpreis>29.99€</einzelpreis><gesamtpreis>29.99€</gesamtpreis></bestellposition></bestellpositionen>
+            <gesamtpreis>
+                <preis>€</preis>
+            </gesamtpreis>
+        </Rechnungsdetails>
+    </Bestellinformationen>
+</Bestellung>

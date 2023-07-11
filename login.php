@@ -41,7 +41,7 @@ $conn = buildConnection();
 							try {
 								if ($result = login($_POST['t_username'], $conn)) {
 									if (password_verify($_POST['t_password'], $result[0])) {
-										if($result['verified'] == 1){
+										if(boolval($result[2])){
 											session_regenerate_id();
 											$_SESSION['loggedin'] = true;
 											$_SESSION['uid'] = $result[1];
