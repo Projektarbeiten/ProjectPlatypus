@@ -1,15 +1,15 @@
 <?php
 session_start();
-use fpdf;
+use TCPDF;
 require_once dirname(__FILE__).'./phpFunctions/util.php';
-require dirname(__FILE__, 2) . '/phpClasses/fpdf.php';
+require dirname(__FILE__, 2) . '/phpClasses/tcpdf.php';
 
 $OrderArray = null;
 $Test = false;
 
 if($Test){
     $file = dirname(__FILE__) . '/phpScripts/order_array_data.json';
-    $$OrderArray = json_decode(file_get_contents($file));
+    $OrderArray = json_decode(file_get_contents($file));
 }
 
 function startInvoiceCreation($OrderArray,$conn){
