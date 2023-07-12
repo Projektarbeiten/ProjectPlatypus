@@ -39,7 +39,6 @@ $db = buildConnection(".");
                     window.addEventListener('DOMContentLoaded', (event) => {
                         var minSliderValue = document.querySelector('input[name="minPrice"]').value;
                         var maxSliderValue = document.querySelector('input[name="maxPrice"]').value;
-                
                         document.getElementById('min-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
                         document.getElementById('max-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
                     });
@@ -51,7 +50,6 @@ $db = buildConnection(".");
     function applyFilters() {
         var selectedOptions = document.getElementsByClassName('filter-option');
         var filters = {};
-        
         for (var i = 0; i < selectedOptions.length; i++) {
             var attribute = selectedOptions[i].getAttribute('data-attribute');
             var value = selectedOptions[i].value;
