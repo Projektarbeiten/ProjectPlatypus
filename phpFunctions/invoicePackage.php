@@ -5,7 +5,9 @@ require_once dirname(__FILE__,2).'/phpFunctions/util.php';
 require_once dirname(__FILE__,2).'/phpClasses/tcpdf.php';
 
 $OrderArray = null;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 
@@ -20,6 +22,7 @@ function startInvoiceCreation($OrderArray,$conn){
     $xml = loadXMLTemplate();
     $xml = startInvoiceFilling($xml,$OrderArray);
     $xml->asXml('xml_output.xml');
+	$dom =
 
     // XSLT-Vorlage laden
     $xslString = file_get_contents(dirname(__FILE__,2) . '/xml/stylesheet.xsl');
@@ -34,19 +37,14 @@ function startInvoiceCreation($OrderArray,$conn){
     $transformedXml = $proc->transformToXML($xml);
 
     // PDF generierung
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', true);
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT,'UTF-8', false);
     $pdf->SetCreator('Platyweb Invoice Generator');
     $pdf->setAuthor('John Doe');
     $pdf->SetTitle('Ihre Bestellung Nr:' . $OrderArray['bestellid']);
     $pdf->SetMargins(10, 10, 10);
     $pdf->SetAutoPageBreak(TRUE, 10);
-    $pdf->AddPage('P','A4');
-    $pdf->SetDisplayMode('fullpage', 'SinglePage', 'UseNone');
-    $pdf->setPrintHeader(false);
-    $pdf->setPrintFooter(false);
-    $pdf->SetX(10); // Horizontale Ausrichtung
-    $pdf->SetFont(PDF_FONT_NAME_MAIN, '', 12);
-    $pdf->WriteHTML($transformedXml);
+    $pdf->AddPage();
+    $pdf->WriteHTML($transformedXml, true, false, true, false, '');
     $pdf->Output(dirname(__FILE__).'/output.pdf', 'F'); //_getrawstream()
 
 }
