@@ -22,6 +22,7 @@ if (isset($_GET["verificationCode"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email verify</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" type="image/x-icon" href="./img/favicon/favicon-32x32.png">
 </head>
 
 <body>
@@ -36,7 +37,8 @@ if (isset($_GET["verificationCode"])) {
                 <div class="col-6">
                     <?php
                     if ($verification) {
-                        echo "<p id='verify-message'>Ihre E-Mail wurde Erfolgreich bei Platyweb.de verifiziert</p>";
+                        echo "<p id='verify-message'>Ihre E-Mail wurde Erfolgreich bei Platyweb.de verifiziert</p>
+                        <a href='index'></a><button class='button' id='verify-button' value=''>Zurück zur Hauptseite</button></a>";
                         deleteVerificationeCode($_GET['verificationCode'], $conn);
                     } else {
                         echo "<p id='verify-message'>Ihre E-Mail konnte nicht bestätigt werden.</p></div></div>";
@@ -44,13 +46,12 @@ if (isset($_GET["verificationCode"])) {
                         
                         <div class='row'>
                             <div class='col-6'>
-                                <label  class='text-center center' for='email'>Enter your Email</label>
-                                <input class='center email' type='email' name='email' id='email-input'>
+                                <input class='center email' placeholder='Enter Email' type='email' name='email' id='email-input'>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col-6'>
-                                <a href='index'></a><button class='button' id='verify-button' value=''>Verifizierungs Email erneut anfordern</button></a>
+                                <a href='index'></a><button class='button' id='verify-button' value=''>Verifizierungsmail erneut anfordern</button></a>
                             </div>
                         </div>
                         
