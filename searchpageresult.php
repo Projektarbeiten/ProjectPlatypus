@@ -14,106 +14,36 @@ $db = buildConnection(".");
     <link rel="stylesheet" href="./css/styles.css">
     <title>Suchergebnis</title>
 </head>
-<script>
-let products = [];
-let singleProduct = [];
-let singleProductProperty = [];
-</script>
+
 <body>
     <!-- Header -->
     <?php
     require("header.php"); ?>
     <main class="searchpage">
         <div class="container">
-        <div class="filter-container">
-        <label class="filter-label">Filteroptionen:</label>
-        <div id="filter-options"></div>
-        <button onclick="applyFilters()">Anwenden</button>
-    </div>
+            <div class="filter-container">
+                <h3> Filteroptionen: </h3>
+                <div id="filter-options"></div>
+            </div>
             <?php
-            if (isset($_GET['search']))
-                ; {
-                $search = $_GET['search'];
-                $stmt =
-                    "SELECT p_id, bezeichnung, akt_preis, eigenschaft_1, eigenschaft_2, eigenschaft_3, eigenschaft_4, eigenschaft_5, eigenschaft_6
-                    FROM produkt
-                    WHERE bezeichnung LIKE '%{$search}%'
-                    OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
-                if (!empty($kategorie)) {
-                   // Kategorie die bei der Filterung ausgewählt wurde
-                }
-                $preparedstmt = $db->prepare($stmt);
-                //$preparedstmt->bindParam(':search',$search);
-                $counter = 0;
-                $preparedstmt->execute();
-                $eigenschaften = array();
-                $products = array();
-
-                if ($preparedstmt->rowCount() > 0)
-                {
-                    while ($row = $preparedstmt->fetch())
-                    {
-                        $eigenschaften[] = $row['eigenschaft_1'];
-                        $eigenschaften[] = $row['eigenschaft_2'];
-                        $eigenschaften[] = $row['eigenschaft_3'];
-                        $eigenschaften[] = $row['eigenschaft_4'];
-                        $eigenschaften[] = $row['eigenschaft_5'];
-                        $products[] = $row;
+            require_once("./phpFunctions/sqlQueries.php");
+            searchPageGenerator($db);
+                ?>
+                <script>
+                    function updateSliderValue(value, sliderId) {
+                        var sliderElement = document.getElementById(sliderId);
+                        var values = sliderElement.textContent.split(" ");
+                        values[1] = value;
+                        sliderElement.textContent = values.join(" ");
                     }
-
-                }
-                var_dump($products);
-                var_dump($eigenschaften);
-                while ($row = $preparedstmt->fetch()) {
-                    if ($counter == 0) {
-                        echo "<div class=row>";
-                    }
-                    $products = array_push($row);
-                    echo"
-                    <script>
-                    singleProduct = []
-                    singleProductProperty = []
-                    singleProduct.push('{$row['p_id']}')
-                    singleProduct.push('{$row['bezeichnung']}')
-                    singleProduct.push('{$row['akt_preis']}')
-                    singleProduct.push('{$row['eigenschaft_1']}')
-                    singleProduct.push('{$row['eigenschaft_2']}')
-                    singleProduct.push('{$row['eigenschaft_3']}')
-                    singleProduct.push('{$row['eigenschaft_4']}')
-                    singleProduct.push('{$row['eigenschaft_5']}')
-                    products.push(singleProduct)
-                    </script>";
-                    $p_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/productpage?produkt_id={$row["p_id"]}";
-                    $p_b = getImage($row['p_id'], $db);
-                    echo "<div class='col-1-2 .produkt'>
-                        <h2 class='Produkt-name' style='font-size: 1.2rem'>{$row["bezeichnung"]}</h2>
-                        <a href='$p_url'>
-                        <img class='Produkt-bild' src={$p_b} style='width:85%;height:25vh' alt='Undefined picture'>
-                        </a>
-                        <p class='Produkt-text'>{$row['akt_preis']}€</p>
-                        </div>";
-                    $counter++;
-                    if ($counter >= 4) {
-                        echo "</div>";
-                        $counter = 0;
-                    }
-                }
-                $filterOptionen = array_unique($eigenschaften);
-                // Anzeigen der Filteroptionen
-                echo "<h2>Filter:</h2>";
-                echo "<form action='suchergebnisse.php' method='GET'>";
-                echo "<label for='options'>Eigenschaften</label>";
-                echo "<select id='options' name='options>'";
-                foreach ($filterOptionen as $option) {
-                    echo "<option value='$option'> $option</option>";
-                }
-                echo "</select>";
-                echo "<input type='submit' value='Filtern'>";
-                    echo "</form>";
-                var_dump($products);
-                echo "<script> console.log(products)</script>";
-            }
-            ?>
+                    window.addEventListener('DOMContentLoaded', (event) => {
+                        var minSliderValue = document.querySelector('input[name="minPrice"]').value;
+                        var maxSliderValue = document.querySelector('input[name="maxPrice"]').value;
+                
+                        document.getElementById('min-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
+                        document.getElementById('max-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
+                    });
+                </script>
         </div>
     </main>
 </body>
@@ -121,31 +51,28 @@ let singleProductProperty = [];
     function applyFilters() {
         var selectedOptions = document.getElementsByClassName('filter-option');
         var filters = {};
-
+        
         for (var i = 0; i < selectedOptions.length; i++) {
             var attribute = selectedOptions[i].getAttribute('data-attribute');
             var value = selectedOptions[i].value;
-        if (value !== '') {
-            filters[attribute] = value;
-        }
+            if (value !== '') {
+                filters[attribute] = value;
+            }
         }
 
-      // Hier kannst du die Filterlogik implementieren und die Suchergebnisse aktualisieren
+        // Hier kannst du die Filterlogik implementieren und die Suchergebnisse aktualisieren
         console.log('Angewendete Filter: ', filters);
     }
 
     function generateFilterOptions() {
         var filterOptions = document.getElementById('filter-options');
 
-      var attributes = getUniqueAttributes(products); // Funktion zum Extrahieren eindeutiger Attribute
+        var attributes = getUniqueAttributes(products); // Funktion zum Extrahieren eindeutiger Attribute
         let firstone = true;
         for (var attr in attributes) {
-            if(firstone ==true)
-            {
+            if (firstone == true) {
 
-            }
-            else
-            {}
+            } else {}
             var select = document.createElement('select');
             select.className = 'filter-option';
             select.setAttribute('data-attribute', attr);
@@ -155,40 +82,40 @@ let singleProductProperty = [];
             defaultOption.text = '-- Alle ' + attr + ' --';
             select.appendChild(defaultOption);
 
-        for (var i = 0; i < attributes[attr].length; i++) {
-            var option = document.createElement('option');
-            option.value = attributes[attr][i];
-            option.text = attributes[attr][i];
-            select.appendChild(option);
-        }
+            for (var i = 0; i < attributes[attr].length; i++) {
+                var option = document.createElement('option');
+                option.value = attributes[attr][i];
+                option.text = attributes[attr][i];
+                select.appendChild(option);
+            }
 
             filterOptions.appendChild(select);
         }
     }
 
     function getUniqueAttributes(products) {
-    var attributes = {};
+        var attributes = {};
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-        for (var attr in product) {
-            if (product.hasOwnProperty(attr)) {
-                if (!attributes[attr]) {
-                attributes[attr] = [];
-            }
-            if (!attributes[attr].includes(product[attr])) {
-                attributes[attr].push(product[attr]);
+            for (var attr in product) {
+                if (product.hasOwnProperty(attr)) {
+                    if (!attributes[attr]) {
+                        attributes[attr] = [];
+                    }
+                    if (!attributes[attr].includes(product[attr])) {
+                        attributes[attr].push(product[attr]);
+                    }
+                }
             }
         }
-    }
-}
 
-    return attributes;
+        return attributes;
     }
     //window.onload = function() {
-      //  generateFilterOptions();
+    //  generateFilterOptions();
     //};
-    </script>
+</script>
 <!-- Footer -->
 <?php
 require("footer.php");
