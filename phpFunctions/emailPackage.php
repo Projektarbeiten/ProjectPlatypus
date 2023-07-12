@@ -12,8 +12,10 @@ require dirname(__FILE__, 2) . '/phpClasses/SMTP.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 function CreateVerificationEmail($email, $conn)
 {
+    $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://$_SERVER[HTTP_HOST]";
     $bool = getVerifiedStatus(conn: $conn, email: $email);
     if ($bool) {
         header("Location: index");
@@ -22,69 +24,97 @@ function CreateVerificationEmail($email, $conn)
     updateVerificationCode(updateValue: $token, email: $email, conn: $conn);
     $uid = getUidBasedOnEmail($conn, $email);
     $returns = getAccountInformation($uid, $conn);
-    //TODO: HTML fehlt
     $html = "<!DOCTYPE html>
     <html lang='de'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Ihre Test-E-Mail</title>
+      <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Platyweb Verifizierung</title>
         <style>
-            /* Styles hier einfügen */
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                background-color: #f7f7f7;
-                margin: 0;
-                padding: 0;
-            }
+          /* Styles hier einfügen */
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+          }
     
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #ffffff;
-            }
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fefdfb;
+          }
     
-            h1 {
-                color: #333333;
-            }
+          h1 {
+            color: #333333;
+          }
     
-            p {
-                color: #555555;
-            }
+          p {
+            color: #610e61;
+          }
     
-            .button {
-                display: inline-block;
-                background-color: #007bff;
-                color: #ffffff;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 20px;
-            }
+          button {
+            display: inline-block;
+            background-color: #960099;
+            color: #ffffff;
+            padding: 5px 10px;
+            height: 40px;
+            width: 200px;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: .2s ease-in-out;
+            font-weight: bold;
+            cursor: pointer;
+          }
+          button:hover {
+            background-color: #fcf4f4;
+            border: 1px solid black;
+            color: black;
     
-            .footer {
-                margin-top: 40px;
-                text-align: center;
-                color: #999999;
-            }
+          }
+          .footer {
+            margin-top: 40px;
+            text-align: center;
+          }
+          img {
+            float: right;
+            margin: -20px;
+            transition: .2s ease-in-out;
+          }
+          img:hover {
+            scale: 1.1;
+          }
         </style>
-    </head>
-    <body>
+      </head>
+      <body>
         <div class='container'>
-            <h1>Registrierung Efolgreich</h1>
-            <p>Sehr geehrte/r " . $returns['anrede'] . " " . $returns['nachname'] . "</p>
-            <p>Dies ist eine Test-E-Mail-Vorlage. Sie können den Text und das Styling nach Ihren Bedürfnissen anpassen und neue Elemente hinzufügen.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit velit at felis tincidunt tincidunt. Ut sit amet purus euismod, fringilla tellus non, consequat sapien. Nullam ut suscipit elit, eu tincidunt mauris.</p>
-            <a class='button' href='localhost/emailVerify?verificationCode={$token}'>Klicken Sie hier</a>
-            <p>Vielen Dank!</p>
-            <div class='footer'>
-                <p>Fragen? Kontaktieren Sie uns unter support@example.com.</p>
-            </div>
+          <h1 style='display: inline-block;'>Registrierung Efolgreich</h1>
+          <a href='https://platyweb.de'><img
+              src='http://localhost/img/platyweb.svg'
+              alt='Logo'
+              width='150px'
+            /></a>
+          <p>
+            Sehr geehrte/r " . $returns['anrede'] . " " . $returns['nachname'] . "
+          </p>
+          <p>
+            Vielen Dank das du dich bei Platyweb angemeldet hast. Um deine E-Mail zu bestätigen, klicke auf den Button.
+          </p>
+          <p>
+            Mit freundlichen Grüßen, <br> Ihr Platyweb Team
+          </p>
+          <a href='$baseURL/emailVerify?verificationCode={$token}'><button>Klicke zum Verifizieren</button></a
+          >
+          <p>Vielen Dank!</p>
+          <div class='footer'>
+            <p>Fragen? Kontaktieren Sie uns unter support@platyweb.com</p>
+          </div>
         </div>
-    </body>
-    </html>";
+      </body>
+    </html>
+    ";
     return $html;
 }
 
