@@ -301,6 +301,100 @@ function getDefaultImage($conn)
 			produktbild
 		where
 			p_b_id = 100000");
+		$stmt_prep->execute();
+		$row = $stmt_prep->fetch();
+		return $row['image'];
+	}
+
+ function searchPageGenerator($db)
+    {
+        if (isset($_GET['search']) || isset($_POST['search'])) {
+            $search = "";
+            if (isset($_GET['search'])) {
+                $search = $_GET['search'];
+            } else {
+                $search = $_POST['search'];
+            }
+            $stmt =
+                "SELECT p_id, bezeichnung, akt_preis, eigenschaft_1, eigenschaft_2, eigenschaft_3, eigenschaft_4, eigenschaft_5, eigenschaft_6
+                FROM produkt
+                WHERE (bezeichnung LIKE '%{$search}%'
+                OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%')";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $selectedMinPrice = $_POST["minPrice"];
+                $selectedMaxPrice = $_POST["maxPrice"];
+                $stmt = $stmt . " AND akt_preis BETWEEN $selectedMinPrice AND $selectedMaxPrice";
+            }
+            $maxminstmt =
+                "SELECT MAX(akt_preis) AS Maximal, MIN(akt_preis) AS Minimal
+            FROM produkt
+            WHERE bezeichnung LIKE '%{$search}%'
+            OR eigenschaft_1 LIKE '%{$search}%' OR eigenschaft_2 LIKE '%{$search}%' OR eigenschaft_3 LIKE '%{$search}%' OR eigenschaft_4 LIKE '%{$search}%' OR eigenschaft_5 LIKE '%{$search}%'OR eigenschaft_6 LIKE '%{$search}%'";
+            $preparedstmt = $db->prepare($stmt);
+            $preparedmaxmin = $db->prepare($maxminstmt);
+            $preparedmaxmin->execute();
+            $max = "";
+            $min = "";
+            while ($row = $preparedmaxmin->fetch()) {
+                $max = $row["Maximal"];
+                $min = $row["Minimal"];
+            }
+            $selectedMinPrice = $min;
+            $selectedMaxPrice = $max;
+            echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">';
+            echo '    <div class="slider-container">';
+            echo '        <h4>Minimumpreis</h4>';
+            echo '        <input type="range" name="minPrice" min="' . $min . '" max="' . $max . '" value="' . $selectedMinPrice . '" onchange="updateSliderValue(this.value, \'mincurrent\')">';
+            echo '        <div id="min-price-range">Min: ' . $selectedMinPrice . ' Max: ' . $selectedMaxPrice . '</div>';
+            echo '        <div id ="mincurrent">Aktuell: </div>';
+            echo '    </div>';
+            echo '    <div class="slider-container">';
+            echo '        <h4>Maximumpreis</h4>';
+            echo '        <input type="range" name="maxPrice" min="' . $min . '" max="' . $max . '" value="' . $selectedMaxPrice . '" onchange="updateSliderValue(this.value, \'maxcurrent\')">';
+            echo '        <div id="max-price-range">Min: ' . $selectedMinPrice . ' Max: ' . $selectedMaxPrice . '</div>';
+            echo '        <div id ="maxcurrent">Aktuell: </div>';
+            echo '    </div>';
+            echo '<input type="hidden" name="search" value="' . $search . '" id="search">';
+            echo '    <button type="submit">Filter anwenden</button>';
+            echo '</form>';
+            $counter = 0;
+            $preparedstmt->execute();
+            while ($row = $preparedstmt->fetch()) {
+                if ($counter == 0) {
+                    echo "<div class=row>";
+                }
+                // $products = array_push($row);
+                //echo "
+                // <script>
+                // singleProduct = []
+                // singleProductProperty = []
+                // singleProduct.push('{$row['p_id']}')
+                // singleProduct.push('{$row['bezeichnung']}')
+                // singleProduct.push('{$row['akt_preis']}')
+                // singleProduct.push('{$row['eigenschaft_1']}')
+                //  singleProduct.push('{$row['eigenschaft_2']}')
+                // singleProduct.push('{$row['eigenschaft_3']}')
+                //singleProduct.push('{$row['eigenschaft_4']}')
+                // singleProduct.push('{$row['eigenschaft_5']}')
+                // products.push(singleProduct)
+                // </script>";
+                $p_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/productpage?produkt_id={$row["p_id"]}";
+                $p_b = getImage($row['p_id'], $db);
+                echo "<div class='col-1-2 .produkt'>
+                <h2 class='Produkt-name' style='font-size: 1.2rem'>{$row["bezeichnung"]}</h2>
+                <a href='$p_url'>
+                <img class='Produkt-bild' src={$p_b} style='width:85%;height:25vh' alt='Undefined picture'>
+                </a>
+                    <p class='Produkt-text'>{$row['akt_preis']}€</p>
+                    </div>";
+                    $counter++;
+                    if ($counter >= 4) {
+                        echo "</div>";
+                        $counter = 0;
+                    }
+                }
+            }
+    }
     $stmt_prep->execute();
     $row = $stmt_prep->fetch();
     return $row['image'];

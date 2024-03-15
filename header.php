@@ -5,10 +5,10 @@ if (isset($_POST['logout'])) {
 }
 echo "
 	<header>
-        <div class='container'>
-            <div class='row'>
-                <div class='col-6'>
-					<div id='top-bar'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-6'>
+				  <div id='top-bar'>
 						<div id='header-logo'>
 							<a href='home'>
 								<img id='platyweb-logo' src='./img/platyweb.svg'/>
@@ -39,13 +39,18 @@ echo "
             </div>
             <div class='row'>
                 <div class='col-6'>
-	    	        <div id='bottom-bar'>
-	    		        <div class='search-box'>
-	    			        <input type='text' placeholder='Suche nach Produkt'>
-	    		        </div>
-	    	        </div>
+	    	          <div id='bottom-bar'>
+	    		          <div class='search-box'>
+							        <form action='searchpageresult.php' id='search-form' method='get'>
+	    			            <input name='search' type='text' id='search-bar' placeholder='Suche nach Produkt'>
+							        </form>
+	    		          </div>
+	    	          </div>
                 </div>    
+              </div>
             </div>
-        </div>
-	</header>
+	    </header>
+	<script src='./javascript/searchEnter.js'></script>
     ";
+?>
+

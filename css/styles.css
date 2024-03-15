@@ -715,6 +715,14 @@ header .col-6 {
   transform: translate(-50%, -50%);
 }
 
+.col-1-2{
+  width: 20%;
+}
+
+.col-1-5{
+    width: 25%;
+}
+
 #password-change-form {
   position: fixed;
   top: 50%;
