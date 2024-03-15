@@ -383,7 +383,7 @@ function getDefaultImage($conn)
                 echo "<div class='col-1-2 .produkt'>
                 <h2 class='Produkt-name' style='font-size: 1.2rem'>{$row["bezeichnung"]}</h2>
                 <a href='$p_url'>
-                <img class='Produkt-bild' src={$p_b} style='width:85%;height:25vh' alt='Undefined picture'>
+                <img class='Produkt-bild' src='{$p_b}' style='width:85%;height:25vh' alt='Undefined picture'>
                 </a>
                     <p class='Produkt-text'>{$row['akt_preis']}€</p>
                     </div>";
@@ -394,11 +394,11 @@ function getDefaultImage($conn)
                     }
                 }
             }
-    }
-    $stmt_prep->execute();
+    
+    /*$stmt_prep->execute();
     $row = $stmt_prep->fetch();
     return $row['image'];
-}
+        */}
 
 function getZahlungsmittel($conn,$uid) : array {
     $stmt_prep = $conn->prepare(

@@ -1,8 +1,8 @@
 <?php
-require_once("phpFunctions/databaseConnection.php");
-require("phpFunctions/util.php");
-require("phpFunctions/sqlQueries.php");
-$db = buildConnection(".");
+session_start();
+require_once "phpFunctions/databaseConnection.php";
+require "phpFunctions/util.php";
+$db = buildConnection();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,21 +28,21 @@ $db = buildConnection(".");
             <?php
             require_once("./phpFunctions/sqlQueries.php");
             searchPageGenerator($db);
-                ?>
-                <script>
-                    function updateSliderValue(value, sliderId) {
-                        var sliderElement = document.getElementById(sliderId);
-                        var values = sliderElement.textContent.split(" ");
-                        values[1] = value;
-                        sliderElement.textContent = values.join(" ");
-                    }
-                    window.addEventListener('DOMContentLoaded', (event) => {
-                        var minSliderValue = document.querySelector('input[name="minPrice"]').value;
-                        var maxSliderValue = document.querySelector('input[name="maxPrice"]').value;
-                        document.getElementById('min-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
-                        document.getElementById('max-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
-                    });
-                </script>
+            ?>
+            <script>
+                function updateSliderValue(value, sliderId) {
+                    var sliderElement = document.getElementById(sliderId);
+                    var values = sliderElement.textContent.split(" ");
+                    values[1] = value;
+                    sliderElement.textContent = values.join(" ");
+                }
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    var minSliderValue = document.querySelector('input[name="minPrice"]').value;
+                    var maxSliderValue = document.querySelector('input[name="maxPrice"]').value;
+                    document.getElementById('min-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
+                    document.getElementById('max-price-range').textContent = 'Min: ' + minSliderValue + ' Max: ' + maxSliderValue;
+                });
+            </script>
         </div>
     </main>
 </body>
@@ -118,6 +118,6 @@ $db = buildConnection(".");
 <?php
 require("footer.php");
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="./javascript/jquery-3.6.1.min.js"></script>
 
 </html>
