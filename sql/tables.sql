@@ -1,5 +1,14 @@
 -- user - Login - Registrierung --
 
+	create table if not exists codes(
+		c_id int not null auto_increment,
+		code varchar(255) not null,
+		valid boolean not null,
+		value varchar(100) not null,
+		insertDate date default sysdate(),
+        PRIMARY Key(c_id)
+	);
+
 	create table if not exists passwort(
 		pw_id 		int AUTO_INCREMENT
 		,pw		VARCHAR(2000)
@@ -129,13 +138,13 @@
 
 -- bestellung --
 
-	create table if not exists bestell_Historie(
+/*	create table if not exists bestell_Historie(
 		b_h_id			int AUTO_INCREMENT
 		,u_id_ref		int not null
 		,b_id_ref		int not null
 		,PRIMARY KEY(b_h_id)
 	);
-
+*/
 
 
 	create table if not exists bestellposition(
@@ -144,18 +153,43 @@
 		,p_id_ref		int not null
 		,pos			int				-- Info:  Muss vom Frontend mitgegeben werden | Am besten aus der Warenkorb Logik
 		,menge			int
+		,akt_preis		decimal(10,2)
+		,v_id_ref       int
 		,PRIMARY KEY(b_p_id)
+	);
+
+	create table if not exists versandart(
+		v_id			int AUTO_INCREMENT
+		,bezeichnung	varchar(50)
+		,anbieter		varchar(20)
+		,preis			decimal(10,2)
+		,api_key		varchar(4000)
+		,PRIMARY KEY(v_id)
+	);
+
+	create table if not exists email (
+		e_id			int NOT NULL auto_increment
+		,u_id_ref		int NOT NULL
+		,header			varchar(4000)
+		,content		varchar(4000)
+		,attachments	Longblob
+		,mime_type		varchar(100)
+		,email_to		varchar(500)
+		,versendet		tinyint(1)
+		,PRIMARY KEY (e_id)
 	);
 
 
 	create table if not exists bestellung(
 		b_id 						int AUTO_INCREMENT
-		,b_p_id_ref					int
+--		,b_p_id_ref					int
 		,u_id_ref					int
 		,gesamtkosten				decimal(10,2)
 		,zi_id_ref					int
 		,bestell_datum				date
-		,anzahl_bestellpositionen	int
+		,anzahl_bestellpos			int
+		,lieferdatum				date
+		,geliefert					tinyint(1)
 		,PRIMARY KEY(b_id)
 	);
 	-- Foreign Keys
@@ -163,19 +197,20 @@
 			alter table bestellung
 			add FOREIGN KEY(zi_id_ref) REFERENCES zahlungsinformationen(zi_id);
 
-			alter table bestellung
-			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
+--			alter table bestellung
+--			add FOREIGN KEY(b_p_id_ref) REFERENCES bestellposition(b_p_id);
 
 			alter table bestellung
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 		--
 
 		-- Foreign Keys for bestell_Historie
-			alter table bestell_Historie
+/*		alter table bestell_Historie
 			add FOREIGN KEY(u_id_ref) REFERENCES user(u_id);
 
 			alter table bestell_Historie
 			add FOREIGN KEY(b_id_ref) REFERENCES bestellung(b_id);
+*/
 		--
 
 		-- Foreign Keys for bestellposition
@@ -184,6 +219,14 @@
 
 			alter table bestellposition
 			add FOREIGN KEY(p_id_ref) REFERENCES produkt(p_id);
+
+			alter table bestellposition
+			add FOREIGN KEY(v_id_ref) REFERENCES produkt(v_id);
+		--
+
+		-- Foreign Keya for email
+			alter table email
+			add FOREIGN KEY(b_id_ref) REFERENCES user(b_id);
 		--
 	--
 --
