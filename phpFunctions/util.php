@@ -202,10 +202,10 @@ function loadOrderConfirmation($orderArray,$bid,$conn) {
 	$produktAnzahl = $orderArray['produktAnzahl'];
 	$lieferdatum = $orderArray['lieferdatum'];
 	$lieferdatum = date_format(date_create($lieferdatum),'d.m.Y');
-	echo "<p><strong>Bestell_ID:</strong> {$bid}</p>
-	<p><strong>Artikelanzahl:</strong> {$produktAnzahl}</p>
-	<p><strong>Lieferdatum:</strong> {$lieferdatum}</p>
-	<p><strong>Lieferadresse:</strong> {$userStrasse} {$userHausnr} {$userAdresszusatz}, {$userPlz} {$userOrt}, {$userLand}</p>
-	<p><strong>Versandart:</strong> Standard DHL Versand</p>";
+	echo "			
+	<div class='row'><div class='col-6'><p><strong>Bestell_ID:</strong> {$bid}</p></div></div>
+	<div class='row'><div class='col-6'><p><strong>Artikelanzahl:</strong> {$produktAnzahl}</p></div></div>
+	<div class='row'><div class='col-6'><p><strong>Lieferdatum:</strong> {$lieferdatum}</p></div></div>
+	<div class='row'><div class='col-6'><p><strong>Lieferadresse:</strong> {$userStrasse} {$userHausnr} {$userAdresszusatz}, {$userPlz} {$userOrt}, {$userLand}</p></div></div>
+	<div class='row'><div class='col-6'><p><strong>Versandart:</strong> Standard DHL Versand</p></div></div>";
 }
-?>
