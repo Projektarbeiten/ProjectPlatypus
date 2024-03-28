@@ -1414,6 +1414,70 @@ header .col-6 {
   margin-left: auto;
 }
 
+/* ====== FAQs Page ====== */
+
+.faq-item{
+  margin-bottom: 1%;
+  padding: 12px;
+  background-color: var(--theme-color-3);
+}
+
+.faq-link{
+  color: white;
+  font-size: 1.1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  background-color: var(--theme-color-3);
+}
+
+.faq-link i{
+  padding: 8px;
+}
+
+.faq-link .ion-md-close{
+  display: none;
+}
+
+.answer{
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 1s;
+  background-color: var(--theme-color-2);
+}
+
+.answer::before{
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 90%;
+  background-color: #8fc460;
+  top: 50%;
+  left:0;
+  transform: translateY(-50%);
+}
+
+.answer p{
+  font-size: 1.1rem;
+  color: white;
+  padding: 30px;
+}
+
+.faq-item:target .answer{
+  max-height: 300px;
+}
+
+.faq-item:target .faq-link .ion-md-add{
+  display: none;
+}
+
+.faq-item:target .faq-link .ion-md-close{
+  display: block;
+}
+
 /* ====== FLASH Green ====== */
 
 .flash_green {

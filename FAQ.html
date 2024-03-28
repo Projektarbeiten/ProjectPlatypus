@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/styles.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+	<title>FAQs</title>
+</head>
+
+<body>
+
+	<main>
+        <h1>FAQs</h1>
+        <br>
+        <div class="container">
+            <h2>Häufig gestellte Fragen:</h2>
+            <br>
+            <div class="accordion">
+                <div class="faq-item" id="question1">
+                    <a class="faq-link" href="#question1">
+                        Kann ich eine Bestellung ändern?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Leider ist es nicht möglich, bereits aufgegebene Bestellungen zu ändern. Wir können weder die Größe oder Farbe eines Artikels, die Lieferadresse oder Zahlungsart ändern, noch einen Artikel entfernen. Sollten Sie die Bestellung nicht annehmen, wird die Ware vom Versanddienstleister an uns zurückgesandt.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question2">
+                    <a class="faq-link" href="#question2">
+                        Gibt es ein Bestelllimit?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question3">
+                    <a class="faq-link" href="#question3">
+                        Warum ist ein Artikel später günstiger?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question4">
+                    <a class="faq-link" href="#question4">
+                        Wie kann ich bezahlen?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question5">
+                    <a class="faq-link" href="#question5">
+                        Wie ist der Status meiner Rücksendung?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question6">
+                    <a class="faq-link" href="#question6">
+                        Wie ist die Lieferzeit innerhalb Deutschlands?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question7">
+                    <a class="faq-link" href="#question7">
+                        Kann ich einen Artikel reservieren?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question8">
+                    <a class="faq-link" href="#question8">
+                        Wann erhalte ich meine Bestellung?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" id="question9">
+                    <a class="faq-link" href="#question9">
+                        Kann es sein, dass bereits vergriffene Produkte später wieder lieferbar sind?
+                        <i class="icon ion-md-add"></i>
+                        <i class="icon ion-md-close"></i>
+                    </a>
+                    <div class="answer">
+                        <p>
+                            Testetstetst
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var acc = document.getElementsByClassName("faq-link");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                this.parentElement.classList.toggle("active");
+
+                var answer = this.nextElementSibling;
+
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                }
+                else{
+                    answer.style.display = "block";
+                }
+                });
+            }
+        </script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </main>
+
+</body>
+
+</html>
