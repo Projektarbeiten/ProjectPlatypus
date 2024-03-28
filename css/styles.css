@@ -1416,31 +1416,37 @@ header .col-6 {
 
 /* ====== Kontakt Page ====== */
 
-.abstand {
-	margin-right: 15%;
-	margin-left: 15%;
+.abstandregions {
+	margin-right: 20%;
+	margin-left: 20%;
 }
 
 #send {
 	height: 38px;
 	width: 100%;
 	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 4%;
 }
 
 #contactinput {
 	border-radius: 5px;
 	font-size: 1.1rem;
+  margin-right: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
 }
 
 #textareaheight {
 	border-radius: 5px;
 	font-size: 1.1rem;
 	height: 150px;
+  padding-left: 5px;
+  padding-right: 9px;
 }
 
-.abstandtextfeld {
+.abstand {
 	margin-top: 2%;
 }
 
