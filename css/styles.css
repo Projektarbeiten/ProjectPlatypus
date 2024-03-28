@@ -1414,6 +1414,46 @@ header .col-6 {
   margin-left: auto;
 }
 
+/* ====== Kontakt Page ====== */
+
+.abstandregions {
+	margin-right: 20%;
+	margin-left: 20%;
+}
+
+#send {
+	height: 38px;
+	width: 100%;
+	max-width: 500px;
+	margin-left: 4%;
+}
+
+#contactinput {
+	border-radius: 5px;
+	font-size: 1.1rem;
+  margin-right: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+
+#textareaheight {
+	border-radius: 5px;
+	font-size: 1.1rem;
+	height: 150px;
+  padding-left: 5px;
+  padding-right: 9px;
+}
+
+.abstand {
+	margin-top: 2%;
+}
+
+.abstandbutton {
+	margin-top: 5%;
+}
+
 /* ====== FLASH Green ====== */
 
 .flash_green {
